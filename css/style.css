@@ -1,0 +1,358 @@
+/* RESET & BASE STYLES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Color Palette (Minimalist, Dark, High-End) */
+    --color-background-primary: #111111; /* Very dark grey / near black */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #aaaaaa;
+    /* CHANGED ACCENT FROM GOLD TO BLUE TO MATCH LOGO */
+    --color-accent-blue: #00BFFF; /* Bright Cyber Blue (Matches Logo) */ 
+    --color-border-subtle: #333333;
+    --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ADDED: Smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-background-primary);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* UTILITY CLASSES */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Updated hover color to the new blue accent */
+a:hover {
+    color: var(--color-accent-blue);
+}
+
+/* HEADER / NAVIGATION */
+header {
+    background-color: var(--color-background-primary);
+    border-bottom: 1px solid var(--color-border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 0; /* Slightly reduced padding to accommodate the logo image */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* NEW LOGO IMAGE STYLES */
+.logo-img {
+    height: 50px; /* Adjust size of logo for header */
+    width: auto;
+    display: block;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 40px;
+}
+
+nav ul li a {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Updated navigation CTA color to the new blue accent */
+.cta-nav {
+    color: var(--color-accent-blue) !important;
+}
+
+/* SECTION STYLES */
+section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+/* Updated section title color to the new blue accent */
+.section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-accent-blue);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+/* HERO SECTION */
+#hero {
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+.overline-text {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 15px;
+}
+
+.main-headline {
+    font-family: var(--font-heading);
+    font-size: 120px;
+    font-weight: 900;
+    letter-spacing: -5px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
+.sub-headline {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 60px;
+    color: var(--color-text-secondary);
+}
+
+.product-image-placeholder {
+    height: 500px; /* Placeholder for large product image */
+    background-color: var(--color-border-subtle);
+    margin: 0 auto 60px;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-text-secondary);
+}
+
+.hero-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.price-tag {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+}
+
+/* Updated price tag color to the new blue accent */
+.price-tag span {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    display: block;
+    line-height: 1;
+}
+
+/* Updated CTA button colors to the new blue accent */
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: var(--color-accent-blue);
+    color: var(--color-background-primary);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #00d7ff; /* Lighter blue on hover */
+    color: var(--color-background-primary);
+}
+
+.secondary-cta {
+    background: transparent;
+    border: 1px solid var(--color-accent-blue);
+    color: var(--color-accent-blue);
+}
+
+.secondary-cta:hover {
+    background-color: var(--color-accent-blue);
+    color: var(--color-background-primary);
+}
+
+/* FEATURES SECTION */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: left;
+}
+
+.feature-item {
+    padding: 30px;
+    border: 1px solid var(--color-border-subtle);
+}
+
+/* Updated feature item heading color to the new blue accent */
+.feature-item h3 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    color: var(--color-text-secondary);
+}
+
+/* TECHNOLOGY SECTION */
+#technology {
+    background-color: var(--color-background-primary);
+}
+
+.tech-content {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 80px;
+}
+
+.tech-text {
+    flex: 1;
+}
+
+.tech-text p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: var(--color-text-secondary);
+}
+
+.tech-text strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+
+.tech-image-placeholder {
+    flex: 1;
+    height: 400px;
+    background-color: var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-text-secondary);
+}
+
+/* FOOTER */
+footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--color-border-subtle);
+    background-color: var(--color-background-primary);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 20px;
+}
+
+/* NEW FOOTER LOGO STYLES */
+.footer-logo {
+    height: 25px; /* Slightly smaller logo for the footer */
+}
+
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links ul li a {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.copyright {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Slightly lighter background than primary, but still dark */
+    background-color: #1a1a1a; 
+    border-top: 1px solid var(--color-border-subtle);
+    padding: 15px 0;
+    z-index: 2000; /* Ensure it's above everything else */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#cookie-banner .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    max-width: 1300px;
+}
+
+#cookie-banner p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+/* Style for the internal cookie policy link */
+.cookie-link {
+    color: var(--color-accent-blue);
+    text-decoration: underline;
+}
+
+.cookie-accept-btn {
+    /* Inherits general cta-button style but ensures size is appropriate */
+    padding: 10px 20px;
+    margin-left: 30px;
+    white-space: nowrap; /* Prevents button text from wrapping */
+}
