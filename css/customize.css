@@ -172,3 +172,10 @@
     opacity: 0.6;
     background-color: #222222 !important; /* Slightly darker to indicate fixed option */
 }
+
+/* Styling for the Font Awesome Cart Icon in the Nav */
+.cta-nav .fa-cart-shopping {
+    font-size: 24px; /* Set a clean size for the icon */
+    line-height: 1; 
+    vertical-align: middle; /* Ensure it centers nicely with the nav bar */
+}
