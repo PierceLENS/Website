@@ -1,0 +1,63 @@
+/* Custom Styles for the Cookie Policy Page */
+
+.policy-main {
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.policy-container {
+    max-width: 900px; /* Narrower width for better text readability */
+    text-align: left;
+}
+
+.policy-container h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.last-updated {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 10px;
+}
+
+.policy-section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.policy-section h2 {
+    font-size: 32px;
+    color: var(--color-accent-blue);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.policy-section h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.policy-section p {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.policy-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 20px;
+    color: var(--color-text-secondary);
+}
+
+.policy-section li {
+    margin-bottom: 10px;
+}
