@@ -43,15 +43,15 @@
                     <h3>1. Body Finish</h3>
                     <div class="option-choices">
                         <label>
-                            <input type="radio" name="finish" value="matte-black" checked>
+                            <input type="radio" name="finish" value="matte-black" data-price="0" checked>
                             Matte Black (Standard)
                         </label>
                         <label>
-                            <input type="radio" name="finish" value="carbon-fiber">
+                            <input type="radio" name="finish" value="carbon-fiber" data-price="250">
                             Carbon Fiber ($250)
                         </label>
                         <label>
-                            <input type="radio" name="finish" value="titanium-gray">
+                            <input type="radio" name="finish" value="titanium-gray" data-price="400">
                             Titanium Gray ($400)
                         </label>
                     </div>
@@ -61,11 +61,11 @@
                     <h3>2. Hand Grip Material</h3>
                     <div class="option-choices">
                         <label>
-                            <input type="radio" name="grip" value="synthetic" checked>
+                            <input type="radio" name="grip" value="synthetic" data-price="0" checked>
                             Synthetic Rubber (Standard)
                         </label>
                         <label>
-                            <input type="radio" name="grip" value="leather">
+                            <input type="radio" name="grip" value="leather" data-price="150">
                             Italian Leather ($150)
                         </label>
                     </div>
@@ -75,11 +75,11 @@
                     <h3>3. Pro Filter Pack</h3>
                     <div class="option-choices">
                         <label>
-                            <input type="checkbox" name="filter" value="standard-15" checked disabled>
+                            <input type="checkbox" name="filter" value="standard-15" data-price="0" checked disabled>
                             Standard 15 Filters (Included)
                         </label>
                         <label>
-                            <input type="checkbox" name="filter" value="pro-expansion">
+                            <input type="checkbox" name="filter" value="pro-expansion" data-price="300">
                             Pro Cine-Tones Expansion (+$300)
                         </label>
                     </div>
@@ -87,7 +87,7 @@
 
                 <div class="config-summary">
                     <p class="base-price-line">Base Price: <span>$1,350</span></p>
-                    <h3 class="current-total">Current Total: <span>$1,350</span></h3>
+                    <h3 class="current-total">Current Total: <span id="current-price">$1,350</span></h3>
                     <a href="#" class="cta-button">Proceed to Checkout</a>
                 </div>
 
@@ -101,6 +101,8 @@
             <button id="accept-cookies" class="cta-button cookie-accept-btn">Accept</button>
         </div>
     </div>
+    
+    <script src="../js/configurator.js"></script>
 
 </body>
 </html>

@@ -163,3 +163,12 @@
     color: var(--color-accent-blue);
     font-size: 32px;
 }
+
+/* --- Additional CSS for Customization UX --- */
+
+/* Style for disabled/included elements */
+.option-choices input[disabled] + label {
+    cursor: default;
+    opacity: 0.6;
+    background-color: #222222 !important; /* Slightly darker to indicate fixed option */
+}
