@@ -88,9 +88,96 @@
 }
 
 /* Highlight selected radio/checkbox option */
-.option-choices input:checked + label {
+.option-choices label input:checked {
+    /* Apply the style to the input itself, or rely on the :after pseudo-element for the visual checkmark. */
+    /* If you want the label border/background to change, the CSS must look different */
+}
+
+/* CORRECTED RULE: Targets the parent label when the contained input is checked */
+.option-choices input:checked {
+    /* The input itself is visually hidden, but we can't use the parent selector in standard CSS. */
+    /* Let's adjust the structure of the previous rule slightly to fix this. */
+}
+
+/* Since the input is a child of the label, we must use a different structure */
+.option-choices label input:checked {
+    /* Nothing to do here if the input is hidden */
+}
+
+/* We must rely on the descendant selector or the custom indicator */
+
+/* --- FINAL CORRECTED CSS SNIPPET --- */
+/* The simplest fix is to adjust the CSS rules that style the custom radio indicator and the label background */
+
+.option-choices label {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, background-color 0.2s;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    position: relative; /* Ensure position is relative for pseudo-elements */
+    padding-left: 30px; 
+}
+
+/* Apply the border/background change to the label when the child input is checked */
+.option-choices label:has(input:checked) {
     border-color: var(--color-accent-blue);
     background-color: #2c2c2c;
+}
+
+/* Fallback for browsers that don't support :has() (e.g., older Safari/Firefox). 
+   The original sibling selector only works if the HTML is structured as:
+   <input><label>Content</label> 
+   Since your HTML is <label><input>Content</label>, we must use :has() or rely only on the pseudo-element checkmark. */
+
+/* Let's rely on the custom indicator and ensure the background/border works if :has is unavailable */
+
+/* If your browser doesn't support :has() (which is the cleanest fix):
+   1. The background/border of the label will NOT change.
+   2. The inner blue dot of the custom radio indicator SHOULD still appear.
+   
+   If the inner blue dot is missing, change the rule:
+*/
+
+/* Custom Radio Indicator: Inner blue dot for CHECKED state */
+.option-choices input[type="radio"]:checked + label::after,
+.option-choices label:has(input[type="radio"]:checked)::after { 
+    /* The first part of the selector above is redundant/incorrect for your HTML. 
+       The :has() selector is the modern, cleanest fix for your current HTML structure.
+       Let's stick to the modern solution for best maintainability: */
+}
+
+/* FINAL RECOMMENDED FIX: Use :has() for the container styling and fix the original custom indicator. 
+   Append this to your customize.css */
+
+/* --- Visual Selection Fix (Add to customize.css) --- */
+
+/* 1. Ensure the label itself changes visually */
+.option-choices label:has(input:checked) {
+    border-color: var(--color-accent-blue);
+    background-color: #2c2c2c;
+}
+
+/* 2. Fix the custom indicator dot to show up (if it wasn't) */
+.option-choices label::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: transparent; /* Default state */
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+/* Target the label's after pseudo-element when its child input is checked */
+.option-choices label:has(input[type="radio"]:checked)::after {
+    background-color: var(--color-accent-blue); /* Show the dot */
 }
 
 /* Hide native radio/checkbox elements for cleaner look */
@@ -171,4 +258,26 @@
     cursor: default;
     opacity: 0.6;
     background-color: #222222 !important; /* Slightly darker to indicate fixed option */
+}
+
+/* Styling for the product image inside the viewer box */
+.config-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole image is visible without cropping */
+    display: block;
+    transition: opacity 0.3s; /* Smooth transition for image swaps */
+}
+/* We can remove the placeholder text from the viewer box now */
+.product-viewer-box {
+    height: 600px;
+    background-color: var(--color-border-subtle);
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: 20px; /* Add some padding if needed */
 }
