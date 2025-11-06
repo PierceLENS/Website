@@ -15,6 +15,11 @@
     --color-border-subtle: #333333;
     --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     --font-body: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --header-height: 80px; /* Assuming your header height is around 80px */}
+
+main {
+    /* Remove any default top margin/padding */
+    padding-top: 0; 
 }
 
 /* ADDED: Smooth scrolling behavior */
@@ -52,6 +57,7 @@ a:hover {
 header {
     background-color: var(--color-background-primary);
     border-bottom: 1px solid var(--color-border-subtle);
+    height: var(--header-height, 80px);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -116,14 +122,15 @@ section {
 
 /* HERO SECTION */
 #hero {
-    padding-top: 150px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 80px;
+    text-align: center;
 }
 
 .overline-text {
     font-size: 18px;
     color: var(--color-text-secondary);
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Small gap above the main headline */
 }
 
 .main-headline {
@@ -143,18 +150,25 @@ section {
     color: var(--color-text-secondary);
 }
 
+/* Styling for the Home Page Camera Image (index.html) */
+
 .product-image-placeholder {
-    height: 500px; /* Placeholder for large product image */
-    background-color: var(--color-border-subtle);
-    margin: 0 auto 60px;
-    max-width: 90%;
+    /* Define a clear size for the area the image will occupy */
+    max-width: 800px; 
+    height: 700px; /* Give it a fixed height or max-height */
+    margin: 40px auto 30px auto; /* Center it below the headline */
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 20px;
-    color: var(--color-text-secondary);
+    align-items: center;
 }
 
+.hero-product-img {
+    /* Ensure the large image scales down to fit the container */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* CRITICAL: Prevents cropping and maintains aspect ratio */
+    display: block;
+}
 .hero-details {
     display: flex;
     justify-content: center;
@@ -355,4 +369,26 @@ footer .container {
     padding: 10px 20px;
     margin-left: 30px;
     white-space: nowrap; /* Prevents button text from wrapping */
+}
+
+/* Styling for the Store Hero Camera Image (store/index.html) */
+
+.product-feature-img-placeholder {
+    /* Define the dimensions for the store hero feature image container */
+    height: 400px; 
+    background-color: var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 30px;
+}
+
+.store-product-img {
+    /* Ensure the large image scales down to fit the container */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* CRITICAL: Prevents cropping and maintains aspect ratio */
+    display: block;
 }
