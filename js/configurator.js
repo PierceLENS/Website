@@ -3,19 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const BASE_PRICE = 999;
     const priceDisplay = document.getElementById('current-price');
     const configuratorForm = document.querySelector('.configurator-options');
-    const productImage = document.getElementById('product-image'); // NEW: Get the image element
+    const productImage = document.getElementById('product-image'); 
 
-    // 2. NEW: Function to update the product image based on the selected body finish
+    // 2. Function to update the product image based on the selected body finish
     function updateImage() {
-        // Find the currently selected body finish radio button
         const selectedFinish = configuratorForm.querySelector('input[name="finish"]:checked');
         
         if (selectedFinish) {
             const finishValue = selectedFinish.value; // e.g., 'matte-black', 'carbon-fiber'
             
-            // Assume image files are in ../images/config/ and named after the value
-            // e.g., ../images/config/matte-black.png
-            const newSrc = `../images/config/${finishValue}.png`;
+            // UPDATED: Image path now uses the 'camera_' prefix and assumes files are in ../images/
+            const newSrc = `../images/camera_${finishValue}.png`; 
             
             // Apply image path
             productImage.src = newSrc;
@@ -25,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Function to calculate the total price (unchanged)
     function calculateTotal() {
         let total = BASE_PRICE;
-        
+        // ... (price calculation logic remains the same) ...
         const options = configuratorForm.querySelectorAll('input[type="radio"], input[type="checkbox"]');
 
         options.forEach(input => {
@@ -45,15 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         priceDisplay.textContent = `$${total.toLocaleString()}`;
     }
 
-    // 4. Attach an event listener to the entire options container
-    // We now call both functions on change
+    // 4. Attach event listeners
     configuratorForm.addEventListener('change', () => {
         calculateTotal();
-        // NEW: Check if the change happened in the body-finish group to update the image
         updateImage();
     });
 
     // 5. Initial setup on load
     calculateTotal();
-    updateImage(); // NEW: Initial image setup
+    updateImage();
 });
