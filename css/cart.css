@@ -1,0 +1,114 @@
+/* -------------------------------------- */
+/* NEW: CART SIDEBAR STYLES */
+/* -------------------------------------- */
+
+#cart-overlay {
+    /* Full-screen overlay to catch clicks outside the cart */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    z-index: 3000; /* Ensure it is above the cookie banner (z-index 2000) */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+}
+
+#cart-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+#cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px; /* Standard sidebar width */
+    height: 100%;
+    background-color: var(--color-background-primary); /* Dark background */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    transform: translateX(100%); /* Slide off-screen initially */
+    transition: transform 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+#cart-overlay.visible #cart-sidebar {
+    transform: translateX(0); /* Slide on-screen */
+}
+
+/* Header and Close Button */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    margin-bottom: 20px;
+}
+
+.cart-header h2 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--color-accent-blue);
+}
+
+/* Cart Body (Items List) */
+.cart-body {
+    flex-grow: 1; /* Allows the list to take up available space */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+.placeholder-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #333333;
+    font-size: 14px;
+}
+
+.placeholder-item p {
+    margin: 0;
+}
+
+/* Cart Footer (Subtotal and Checkout) */
+.cart-footer {
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+#cart-subtotal {
+    color: var(--color-accent-blue);
+}
+
+.cart-checkout-btn {
+    width: 100%;
+    text-align: center;
+    /* Inherits cta-button styles */
+}
