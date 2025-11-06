@@ -392,3 +392,22 @@ footer .container {
     object-fit: contain; /* CRITICAL: Prevents cropping and maintains aspect ratio */
     display: block;
 }
+
+/* Update the accessory image container style */
+.accessory-img-placeholder {
+    height: 200px; /* Keep defined size */
+    background-color: transparent; /* Changed from #333333 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden; /* Ensure image doesn't break out */
+}
+
+/* New style for the accessory image */
+.accessory-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the whole image scales to fit */
+    display: block;
+}

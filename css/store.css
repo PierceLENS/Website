@@ -1,0 +1,288 @@
+/* Custom Styles for the Store Landing Page */
+
+/* Default Container Padding (used for reference in the carousel) */
+/* Assuming this is defined in style.css, but adding a fallback here for reliability */
+:root {
+    --container-padding: 40px; 
+     /* Color Palette (Minimalist, Dark, High-End) */
+    --color-background-primary: #111111; /* Very dark grey / near black */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #aaaaaa;
+    /* CHANGED ACCENT FROM GOLD TO BLUE TO MATCH LOGO */
+    --color-accent-blue: #00BFFF; /* Bright Cyber Blue (Matches Logo) */ 
+    --color-border-subtle: #333333;
+    --font-heading: 'Rajdhani', sans-serif;
+}
+
+/* -------------------------------------- */
+/* KEYFRAMES FOR ANIMATIONS */
+/* -------------------------------------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -------------------------------------- */
+/* FEATURED BANNER CAROUSEL STYLES */
+/* -------------------------------------- */
+#featured-banner {
+    /* Reduced padding for compactness */
+    padding: 60px 0; 
+    background-color: #1A1A1A;
+    border-bottom: 1px solid var(--color-border-subtle);
+    
+    /* CRITICAL: Must be relative to position the arrows absolutely */
+    position: relative; 
+    overflow: hidden; 
+}
+
+.carousel-container {
+    width: 100%;
+    /* CRITICAL UPDATE: Disable scrolling, JS will handle movement */
+    overflow-x: hidden; 
+    scroll-snap-type: none; 
+}
+
+.carousel-track {
+    /* CRITICAL: Must prevent wrapping */
+    display: flex;
+    flex-wrap: nowrap; 
+    /* 300% for 3 slides - MUST be updated if slide count changes */
+    width: 300%; 
+    
+    /* Smooth transition for JS scrolling */
+    transition: transform 0.4s ease-in-out; 
+}
+
+.banner-slide {
+    flex: 0 0 33.3333%; 
+    scroll-snap-align: start; 
+    
+    /* CRITICAL UPDATE: Change justification to center the content/image block */
+    display: flex;
+    /* justify-content: space-between; <-- REMOVE THIS */
+    justify-content: center; /* NEW: Centers the combined content/image block */
+    align-items: center;
+    gap: 50px;
+    padding: 0 var(--container-padding); 
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Arrow Navigation Styles */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 1px solid var(--color-border-subtle);
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.carousel-nav-btn:hover {
+    background-color: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+}
+
+.prev-btn {
+    left: var(--container-padding); 
+}
+
+.next-btn {
+    right: var(--container-padding);
+}
+
+.carousel-nav-btn i {
+    font-size: 18px;
+}
+
+.carousel-nav-btn[disabled] {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Slide Content Styles */
+.banner-content {
+    max-width: 45%;
+    /* CRITICAL UPDATE: Center the text block */
+    text-align: center; 
+}
+
+.banner-headline {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 700;
+    margin: 10px 0 15px 0;
+    letter-spacing: -2px;
+}
+
+.banner-sub-text {
+    font-size: 20px;
+    color: var(--color-text-secondary);
+    margin-bottom: 30px;
+}
+
+.banner-image {
+    max-width: 50%;
+}
+
+.banner-product-img,
+.product-img-placeholder { 
+    max-width: 100%;
+    /* Reduced height for compactness */
+    height: 300px; 
+    display: block;
+    object-fit: contain;
+    background-color: #333333; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    font-size: 18px;
+}
+
+
+/* -------------------------------------- */
+/* CATEGORIES GRID SECTION */
+/* -------------------------------------- */
+#categories {
+    padding: 100px 0;
+}
+
+.category-group {
+    margin-bottom: 80px;
+}
+
+.category-title {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--color-accent-blue);
+    padding-left: 15px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;
+}
+
+.product-item {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid var(--color-border-subtle);
+    background-color: #111;
+    transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+/* Hover Animation */
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.product-img-placeholder {
+    /* Reused for grid items */
+    height: 250px;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.product-img {
+    /* Reused for grid items */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.product-item h4 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 15px;
+}
+
+.secondary-cta {
+    /* Ensure secondary cta is styled if not defined in style.css */
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+/* ANIMATION CLASS: Apply to elements you want to fade in */
+.animate-fade-up {
+    animation: fadeInUp 0.7s ease-out both;
+}
+
+/* --- NEW: Style for the 'Add to Cart' buttons in the product grid --- */
+.product-cta-button {
+    /* Use the primary CTA colors/look */
+    background-color: var(--color-accent-blue);
+    color: var(--color-text-primary);
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 100%; /* Make them full width for better alignment */
+    margin-top: 10px; /* Space above the button */
+}
+
+.product-cta-button:hover {
+    background-color: #0099FF; /* Slightly lighter shade on hover */
+    transform: translateY(-1px);
+}
+
+.product-cta-button:active {
+    transform: translateY(0);
+}
+
+/* --- ADJUSTMENT: Ensure the 'Configure System' link is styled correctly --- */
+.secondary-grid-link {
+    /* Styles to make the link look like the new button */
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    /* The rest should inherit from the existing .cta-button style 
+       (which we assume is defined in style.css) */
+}
+
+/* --- REMOVE OLD STYLE (No longer needed) --- */
+/* You should remove or comment out this block if it exists:
+.secondary-cta {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+*/

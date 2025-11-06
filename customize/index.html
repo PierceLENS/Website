@@ -33,35 +33,63 @@
     <main class="customize-main">
         <div class="container customize-container">
             
-            <section class="configurator-display">
+<section class="configurator-display">
                 <p class="section-title">YOUR PIERCELENS P.L</p>
                 <h1 class="main-headline-small">The Custom P.L</h1>
                 
                 <div class="product-viewer-box">
-                    <img id="product-image" src="../images/camera_matte-black.png" alt="PierceLENS P.L Camera" class="config-product-img">
+                    
+                    <img id="product-image-back" src="../images/cameraPreviews/camera_black.png" 
+                         alt="PierceLENS P.L Camera Background" class="config-product-img base-layer">
+                         
+                    <img id="product-image-front" src="../images/cameraPreviews/camera_black.png" 
+                         alt="PierceLENS P.L Camera Active" class="config-product-img active-layer">
+                    
+                    <img id="preview-filter" src="../images/productPreviews/pro-cine-tones-pack.png" 
+                         alt="Pro Cine-Tones Expansion Preview" class="config-overlay-img">
+                         
+                    <img id="preview-nvme" src="../images/productPreviews/mini-nvme-module.png" 
+                         alt="Mini-NVMe Module Preview" class="config-overlay-img">
                 </div>
-            </section>
-            <aside class="configurator-options">
+            </section>            <aside class="configurator-options">
                 <h2>Configuration</h2>
 
                 <div class="option-group" id="body-finish">
-                    <h3>1. Body Finish</h3>
-                    <div class="option-choices">
-                        <label>
-                            <input type="radio" name="finish" value="matte-black" data-price="0" checked>
-                            Matte Black (Standard)
+                    <h3>1. Body Finish & Color</h3>
+                    <div class="color-swatch-container">
+                        
+                        <label title="Black (Standard)">
+                            <input type="radio" name="finish" value="black" data-price="0" checked> 
+                            <span class="color-dot" style="background-color: #111111;"></span>
                         </label>
-                        <label>
-                            <input type="radio" name="finish" value="carbon-fiber" data-price="250">
-                            Carbon Fiber ($250)
+                        
+                        <label title="Brown ($100)">
+                            <input type="radio" name="finish" value="brown" data-price="100">
+                            <span class="color-dot" style="background-color: #704214;"></span>
                         </label>
-                        <label>
-                            <input type="radio" name="finish" value="titanium-gray" data-price="400">
-                            Titanium Gray ($400)
-                        </label>
-                    </div>
-                </div>
 
+                        <label title="Teal ($100)">
+                            <input type="radio" name="finish" value="teal" data-price="100">
+                            <span class="color-dot" style="background-color: #008080;"></span>
+                        </label>
+
+                        <label title="Olive Green ($100)">
+                            <input type="radio" name="finish" value="olive-green" data-price="100">
+                            <span class="color-dot" style="background-color: #6B8E23;"></span>
+                        </label>
+
+                        <label title="Lilac ($150)">
+                            <input type="radio" name="finish" value="lilac" data-price="150">
+                            <span class="color-dot" style="background-color: #C8A2C8;"></span>
+                        </label>
+
+                        <label title="Pastel Pink ($150)">
+                            <input type="radio" name="finish" value="pastel-pink" data-price="150">
+                            <span class="color-dot" style="background-color: #F8BBD0;"></span>
+                        </label>
+                        
+                        </div>
+                </div>
                 <div class="option-group" id="hand-grip">
                     <h3>2. Hand Grip Material</h3>
                     <div class="option-choices">

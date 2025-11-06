@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PierceLENS | Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
     <link rel="stylesheet" href="../css/style.css"> 
     <link rel="stylesheet" href="../css/store.css"> 
     <link rel="stylesheet" href="../css/cart.css"> 
@@ -36,54 +34,110 @@
         </div>
     </header>
 
-    <main>
+<main>
         
-<section id="store-hero">
-            <div class="container">
-                <p class="section-title">THE FLAGSHIP</p>
-                <h1 class="store-headline">The P.L System</h1>
-                <p class="store-sub-text">Customize your integrated camera system with premium finishes and exclusive expansions.</p>
-                
-                <div class="product-feature-box">
-                    <div class="product-feature-img-placeholder">
-                        <img src="../images/camera_matte-black.png" alt="PierceLENS P.L Camera System" class="store-product-img">
+        <section id="featured-banner">
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                    
+                    <div class="banner-slide">
+                        <div class="banner-content">
+                            <p class="section-title overline-text">FEATURED</p>
+                            <h1 class="banner-headline">P.L Camera System</h1>
+                            <p class="banner-sub-text">Build your perfect integrated camera. Base Price: $999</p>
+                            <a href="../customize/index.html" class="cta-button">Configure & Buy</a>
+                        </div>
+                        <div class="banner-image">
+                            <img src="../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Camera System (Black)" class="banner-product-img">
+                        </div>
                     </div>
-                    <div class="product-feature-details">
-                        <p class="feature-price">$999 Base</p>
-                        <a href="../customize/index.html" class="cta-button">Configure Yours Now</a>
+                    
+                    <div class="banner-slide">
+                        <div class="banner-content">
+                            <p class="section-title overline-text">NEW FINISH</p>
+                            <h1 class="banner-headline">Carbon Fiber Body</h1>
+                            <p class="banner-sub-text">Upgrade to the aerospace-grade finish. From $250.</p>
+                            <a href="../customize/index.html" class="cta-button secondary-cta">Customize Now</a>
+                        </div>
+                        <div class="banner-image">
+                            <div class="product-img-placeholder"></div>
+                        </div>
                     </div>
+
+                    <div class="banner-slide">
+                        <div class="banner-content">
+                            <p class="section-title overline-text">PRO UPGRADE</p>
+                            <h1 class="banner-headline">Integrated 50mm Pro Lens</h1>
+                            <p class="banner-sub-text">The sharpest glass engineered for the P.L System.</p>
+                            <a href="#" class="cta-button secondary-cta">View Lens</a>
+                        </div>
+                        <div class="banner-image">
+                            <div class="product-img-placeholder"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <button class="carousel-nav-btn prev-btn" id="prev-slide" aria-label="Previous Slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-nav-btn next-btn" id="next-slide" aria-label="Next Slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </section>
 
-        <section id="accessories">
+        <section id="categories">
             <div class="container">
-                <p class="section-title">ACCESSORIES & MODULES</p>
-                <h2 class="section-heading">Enhance Your Workflow.</h2>
+                <h2 class="section-heading animate-fade-up">Shop By Category</h2>
 
-                <div class="accessory-grid">
-                    
-                    <div class="accessory-item">
-                        <div class="accessory-img-placeholder"></div>
-                        <h3>Mini-NVMe Module</h3>
-                        <p class="accessory-price">$120</p>
-                        <a href="#" class="secondary-cta">View Details</a>
+<div class="category-group animate-fade-up">
+                    <h3 class="category-title">Modules & Storage</h3>
+                    <div class="product-grid">
+                        
+                        <div class="product-item">
+                            <h4>Mini-NVMe Module</h4>
+                            <p class="product-price">$120</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
+                        <div class="product-item">
+                            <h4>High-Capacity Battery</h4>
+                            <p class="product-price">$80</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
+                        <div class="product-item">
+                            <h4>Wireless Uplink Module</h4>
+                            <p class="product-price">$150</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
                     </div>
+                </div>
 
-                    <div class="accessory-item">
-                        <div class="accessory-img-placeholder"></div>
-                        <h3>Pro Cine-Tones Pack</h3>
-                        <p class="accessory-price">$300</p>
-                        <a href="#" class="secondary-cta">View Details</a>
+                <div class="category-group animate-fade-up">
+                    <h3 class="category-title">Filters & Finishes</h3>
+                    <div class="product-grid">
+                        
+                        <div class="product-item">
+                            <h4>Pro Cine-Tones Pack</h4>
+                            <p class="product-price">$300</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
+                        <div class="product-item">
+                            <h4>Color Finish Upgrade</h4>
+                            <p class="product-price">From $100</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
+                        <div class="product-item">
+                            <h4>Premium Lens Cap Set</h4>
+                            <p class="product-price">$45</p>
+                            <button class="product-cta-button">Add to Cart</button>
+                        </div>
+                        
                     </div>
-
-                    <div class="accessory-item">
-                        <div class="accessory-img-placeholder"></div>
-                        <h3>Body Finish Upgrade</h3>
-                        <p class="accessory-price">From $250</p>
-                        <a href="../customize/index.html" class="secondary-cta">Configure System</a>
-                    </div>
-                    
                 </div>
             </div>
         </section>
@@ -136,6 +190,6 @@
     </div>
     <script src="../js/cookie_banner.js"></script> 
     <script src="../js/cart.js"></script>
-
+    <script src="../js/carousel.js"></script>
 </body>
 </html>
