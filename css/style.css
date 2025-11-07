@@ -1,53 +1,6 @@
 /* css/style.css */
 
 /* --- GENERAL MOBILE/TABLET STYLES (Max Width 768px) --- */
-@media (max-width: 768px) {
-    
-    /* Global Container Adjustment */
-    .container {
-        /* Reduce padding on the sides for smaller screens */
-        padding: 0 20px; 
-    }
-    
-    /* Header/Navbar Adjustments */
-    .nav-links {
-        /* Hide traditional navbar links on mobile/tablet */
-        display: none; 
-    }
-    
-    .nav-actions {
-        /* Ensure actions remain visible but are compact */
-        gap: 15px; 
-    }
-
-    .main-headline {
-        /* Reduce large headlines for better fit */
-        font-size: 56px; 
-    }
-    
-    /* Technology Section (Example Home Page) */
-    #technology .tech-content {
-        /* Stack the text and image vertically */
-        flex-direction: column;
-    }
-    
-    #technology .tech-text,
-    #technology .mini-nvme-module {
-        /* Allow them to take full width when stacked */
-        max-width: 100%; 
-        width: 100%;
-        text-align: center;
-    }
-    
-    .tech-text {
-        order: 2; /* Put text below the image on mobile */
-    }
-    
-    .mini-nvme-module {
-        order: 1; /* Put image above the text on mobile */
-        margin-bottom: 20px;
-    }
-}
 
 /* RESET & BASE STYLES */
 * {
@@ -505,4 +458,52 @@ footer .container {
     height: auto;
     display: block;
     object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    
+    /* Global Container Adjustment */
+    .container {
+        /* Reduce padding on the sides for smaller screens */
+        padding: 0 20px; 
+    }
+    
+    /* Header/Navbar Adjustments */
+    .nav-links {
+        /* Hide traditional navbar links on mobile/tablet */
+        display: none; 
+    }
+    
+    .nav-actions {
+        /* Ensure actions remain visible but are compact */
+        gap: 15px; 
+    }
+
+    .main-headline {
+        /* Reduce large headlines for better fit */
+        font-size: 56px; 
+    }
+    
+    /* Technology Section (Example Home Page) */
+    #technology .tech-content {
+        /* Stack the text and image vertically */
+        flex-direction: column;
+    }
+    
+    #technology .tech-text,
+    #technology .mini-nvme-module {
+        /* Allow them to take full width when stacked */
+        max-width: 100%; 
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tech-text {
+        order: 2; /* Put text below the image on mobile */
+    }
+    
+    .mini-nvme-module {
+        order: 1; /* Put image above the text on mobile */
+        margin-bottom: 20px;
+    }
 }

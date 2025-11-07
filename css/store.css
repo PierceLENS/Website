@@ -200,7 +200,7 @@
     height: 300px; 
     display: block;
     object-fit: contain;
-    background-color: #333333; 
+    background-color: #00000000; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,6 +262,7 @@
 
 .product-img {
     /* Reused for grid items */
+    height: 400px;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
