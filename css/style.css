@@ -1,3 +1,54 @@
+/* css/style.css */
+
+/* --- GENERAL MOBILE/TABLET STYLES (Max Width 768px) --- */
+@media (max-width: 768px) {
+    
+    /* Global Container Adjustment */
+    .container {
+        /* Reduce padding on the sides for smaller screens */
+        padding: 0 20px; 
+    }
+    
+    /* Header/Navbar Adjustments */
+    .nav-links {
+        /* Hide traditional navbar links on mobile/tablet */
+        display: none; 
+    }
+    
+    .nav-actions {
+        /* Ensure actions remain visible but are compact */
+        gap: 15px; 
+    }
+
+    .main-headline {
+        /* Reduce large headlines for better fit */
+        font-size: 56px; 
+    }
+    
+    /* Technology Section (Example Home Page) */
+    #technology .tech-content {
+        /* Stack the text and image vertically */
+        flex-direction: column;
+    }
+    
+    #technology .tech-text,
+    #technology .mini-nvme-module {
+        /* Allow them to take full width when stacked */
+        max-width: 100%; 
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tech-text {
+        order: 2; /* Put text below the image on mobile */
+    }
+    
+    .mini-nvme-module {
+        order: 1; /* Put image above the text on mobile */
+        margin-bottom: 20px;
+    }
+}
+
 /* RESET & BASE STYLES */
 * {
     box-sizing: border-box;
@@ -56,12 +107,20 @@ a:hover {
 /* HEADER / NAVIGATION */
 header {
     background-color: var(--color-background-primary);
-    border-bottom: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s ease-in-out;
     height: var(--header-height, 80px);
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 15px 0; /* Slightly reduced padding to accommodate the logo image */
+}
+
+.scrolled {
+    /* Reveal the line when this class is added by JavaScript */
+    border-bottom-color: var(--color-border-subtle); 
+    /* Optional: Slight shadow can make it pop more */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
 header .container {
@@ -122,7 +181,7 @@ section {
 
 /* HERO SECTION */
 #hero {
-    padding-top: 50px;
+    padding-top: 25px;
     padding-bottom: 80px;
     text-align: center;
 }
@@ -135,7 +194,7 @@ section {
 
 .main-headline {
     font-family: var(--font-heading);
-    font-size: 120px;
+    font-size: 90px;
     font-weight: 900;
     letter-spacing: -5px;
     margin-bottom: 0;
@@ -146,7 +205,7 @@ section {
     font-family: var(--font-heading);
     font-size: 32px;
     font-weight: 300;
-    margin-bottom: 60px;
+    margin-bottom: -100px;
     color: var(--color-text-secondary);
 }
 
@@ -410,4 +469,40 @@ footer .container {
     max-height: 100%;
     object-fit: contain; /* Ensures the whole image scales to fit */
     display: block;
+}
+
+/* Styling for the new Technology/Mini-NVMe Section on Home Page */
+#technology {
+    padding: 100px 0;
+}
+
+.tech-content {
+    /* Set up the container to align text and image side-by-side */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.tech-text {
+    flex: 1; /* Allows the text to take up available space */
+    max-width: 50%;
+}
+
+.mini-nvme-module {
+    /* Define a clear maximum size for the image container */
+    flex: 1; 
+    max-width: 1000px; /* Adjust this maximum width to control overall size */
+    margin: 0 auto; /* Center the module if there's extra space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-nvme-module .feature-product-img {
+    /* Ensure the image scales neatly within its container */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }

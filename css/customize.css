@@ -1,5 +1,54 @@
 /* Custom Styles for the Configuration Page */
 
+/* css/customize.css */
+
+@media (max-width: 768px) {
+    
+    .customize-main {
+        /* Switch from a two-column layout to a single column */
+        flex-direction: column; 
+        padding: 20px;
+    }
+
+    .configurator-options {
+        /* Ensure options block is full width and appears first (order 1) */
+        width: 100%;
+        order: 1; 
+        padding: 0;
+    }
+
+    .configurator-display {
+        /* Ensure display block is full width and appears second (order 2) */
+        width: 100%;
+        order: 2;
+        padding: 20px 0;
+        text-align: center;
+    }
+    
+    /* Adjust viewer box height to save vertical space */
+    .product-viewer-box {
+        height: 350px; 
+        max-width: 350px;
+        margin-top: 20px;
+    }
+
+    .main-headline-small {
+        font-size: 32px;
+    }
+    
+    /* Reduce padding/margin on options */
+    .option-group {
+        padding: 15px 0;
+    }
+
+    /* Make the color swatch container wrap properly */
+    .color-swatch-container {
+        /* Allow swatches to wrap into multiple rows */
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+}
+
 .customize-main {
     padding-top: 50px;
     padding-bottom: 100px;

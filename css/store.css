@@ -1,5 +1,62 @@
 /* Custom Styles for the Store Landing Page */
 
+/* css/store.css */
+
+@media (max-width: 768px) {
+    
+    /* --- FEATURED BANNER CAROUSEL --- */
+    
+    .banner-slide {
+        /* Stack content and image vertically */
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 40px 20px; /* Adjust vertical padding */
+    }
+    
+    .banner-content {
+        /* Allow content to take more space when stacked */
+        max-width: 100%; 
+        width: 100%;
+        order: 2; /* Move text below image */
+    }
+    
+    .banner-image {
+        /* Allow image to take more space when stacked */
+        max-width: 100%; 
+        width: 100%;
+        order: 1; /* Move image above text */
+    }
+    
+    .banner-headline {
+        /* Adjust large font size */
+        font-size: 40px; 
+        letter-spacing: -1px;
+    }
+    
+    .banner-sub-text {
+        font-size: 16px;
+    }
+    
+    .banner-product-img,
+    .product-img-placeholder {
+        /* Reduce the height of the large product images */
+        height: 250px; 
+    }
+    
+    /* --- CAROUSEL ARROWS --- */
+    .carousel-nav-btn {
+        /* Make buttons smaller and easier to tap */
+        padding: 10px 8px; 
+        font-size: 16px;
+    }
+    
+    /* Adjust grid category heading size */
+    .category-title {
+        font-size: 28px;
+    }
+}
+
 /* Default Container Padding (used for reference in the carousel) */
 /* Assuming this is defined in style.css, but adding a fallback here for reliability */
 :root {
