@@ -1,4 +1,81 @@
 /* New Updated main css, NO AI HERE!!! */
+/* Mobile Navigation Styles */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    z-index: 1100;
+}
+.hamburger {
+    width: 30px;
+    height: 3px;
+    background: var(--color-main-accent);
+    display: block;
+    position: relative;
+}
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: var(--color-main-accent);
+    transition: 0.3s;
+}
+.hamburger::before {
+    top: -10px;
+}
+.hamburger::after {
+    top: 10px;
+}
+.nav-toggle.open .hamburger {
+    background: transparent;
+}
+.nav-toggle.open .hamburger::before {
+    transform: rotate(45deg) translate(5px,5px);
+}
+.nav-toggle.open .hamburger::after {
+    transform: rotate(-45deg) translate(5px,-5px);
+}
+.nav-list {
+    transition: right 0.3s;
+}
+@media (max-width: 900px) {
+    .main-nav {
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+    .nav-toggle {
+        display: block;
+    }
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        width: 70vw;
+        height: 100vh;
+        background: var(--color-background-primary);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 30px 30px 30px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+        z-index: 1200;
+        display: flex;
+        gap: 30px;
+        transition: right 0.3s;
+    }
+    .nav-list.nav-open {
+        right: 0;
+    }
+    .main-nav ul {
+        margin-left: 0;
+    }
+    .main-nav .logo-link {
+        margin-right: auto;
+    }
+}
 
 * {
     box-sizing: border-box;
@@ -242,6 +319,15 @@ section {
     text-align: left;
 }
 
+@media (max-width: 900px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+
 .feature-item {
     padding: 30px;
     border: 1px solid var(--color-border-subtle);
@@ -317,6 +403,18 @@ footer .container {
     gap: 60px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 900px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 
 .footer-logo {
     height: 25px; /* Slightly smaller logo for the footer */
