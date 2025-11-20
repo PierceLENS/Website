@@ -49,6 +49,16 @@
     }
     .nav-toggle {
         display: block;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        z-index: 1300;
+    }
+    .nav-toggle.open {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 1301;
     }
     .nav-list {
         position: fixed;
