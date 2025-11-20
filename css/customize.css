@@ -1,4 +1,72 @@
 /* Custom Styles for the Configuration Page */
+@media (max-width: 600px) {
+    .customize-main {
+        padding: 10px;
+    }
+    .customize-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
+    .configurator-display {
+        padding: 10px 0;
+        margin-bottom: 10px;
+    }
+    .main-headline-small {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    .product-viewer-box {
+        height: 220px;
+        max-width: 220px;
+        margin: 0 auto 10px auto;
+    }
+    .configurator-options {
+        position: static;
+        width: 100%;
+        padding: 0;
+        border-left: none;
+        margin-top: 0;
+    }
+    .configurator-options h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+    .option-group {
+        margin-bottom: 20px;
+        padding: 10px 0;
+    }
+    .option-group h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+    .option-choices label {
+        font-size: 13px;
+        padding: 8px;
+    }
+    .color-dot {
+        width: 24px;
+        height: 24px;
+    }
+    .config-summary {
+        padding-top: 15px;
+    }
+    .base-price-line {
+        font-size: 13px;
+    }
+    .current-total {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .current-total span {
+        font-size: 20px;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
 
 /* css/customize.css */
 
