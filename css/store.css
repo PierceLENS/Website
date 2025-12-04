@@ -2,9 +2,51 @@
 
 /* css/store.css */
 
+/* --- FIX FOR CAROUSEL BANNER OVERFLOW --- */
+.hero-carousel .slide-content {
+    max-width: 90%;
+    padding: 20px;
+    padding-top: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hero-carousel .main-headline {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.hero-carousel .sub-headline {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
 @media (max-width: 768px) {
     
     /* --- FEATURED BANNER CAROUSEL --- */
+    
+    .hero-carousel .slide-content {
+        max-width: 95%;
+        padding: 15px;
+        padding-top: 60px;
+    }
+    
+    .hero-carousel .main-headline {
+        font-size: 28px;
+        margin: 8px 0 10px 0;
+    }
+    
+    .hero-carousel .sub-headline {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-carousel .cta-button {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
     
     .banner-slide {
         /* Stack content and image vertically */
@@ -88,67 +130,8 @@
 /* -------------------------------------- */
 /* FEATURED BANNER CAROUSEL STYLES */
 /* -------------------------------------- */
-#featured-banner {
-    /* Reduced padding for compactness */
-    padding: 60px 0; 
-    background-color: #1A1A1A;
-    border-bottom: 1px solid var(--color-border-subtle);
-    
-    /* CRITICAL: Must be relative to position the arrows absolutely */
-    position: relative; 
-    overflow: hidden; 
-}
-
-.carousel-container {
-    width: 100%;
-    /* CRITICAL UPDATE: Disable scrolling, JS will handle movement */
-    overflow-x: hidden; 
-    scroll-snap-type: none; 
-}
-
-.carousel-track {
-    /* CRITICAL: Must prevent wrapping */
-    display: flex;
-    flex-wrap: nowrap; 
-    /* 300% for 3 slides - MUST be updated if slide count changes */
-    width: 300%; 
-    
-    /* Smooth transition for JS scrolling */
-    transition: transform 0.4s ease-in-out; 
-}
-
-.banner-slide {
-    flex: 0 0 33.3333%; 
-    scroll-snap-align: start; 
-    
-    /* CRITICAL UPDATE: Change justification to center the content/image block */
-    display: flex;
-    /* justify-content: space-between; <-- REMOVE THIS */
-    justify-content: center; /* NEW: Centers the combined content/image block */
-    align-items: center;
-    gap: 50px;
-    padding: 0 var(--container-padding); 
-    animation: fadeInUp 0.8s ease-out;
-}
-
-/* Arrow Navigation Styles */
-.carousel-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: 1px solid var(--color-border-subtle);
-    padding: 15px 10px;
-    cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.carousel-nav-btn:hover {
-    background-color: var(--color-accent-blue);
-    border-color: var(--color-accent-blue);
-}
+/* The store page now uses the same hero carousel as the home page */
+/* No additional carousel styling needed beyond style.css */
 
 .prev-btn {
     left: var(--container-padding); 
@@ -213,7 +196,7 @@
 /* CATEGORIES GRID SECTION */
 /* -------------------------------------- */
 #categories {
-    padding: 100px 0;
+    padding: 100px 40px;
 }
 
 .category-group {
@@ -237,16 +220,18 @@
 
 .product-item {
     text-align: center;
-    padding: 20px;
+    padding: 24px;
     border: 1px solid var(--color-border-subtle);
-    background-color: #111;
-    transition: transform 0.2s, box-shadow 0.2s; 
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 /* Hover Animation */
 .product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 191, 255, 0.15);
+    border-color: var(--color-accent-blue);
 }
 
 .product-img-placeholder {
@@ -258,22 +243,25 @@
     justify-content: center;
     margin-bottom: 15px;
     overflow: hidden;
+    border-radius: 12px;
 }
 
 .product-img {
     /* Reused for grid items */
-    height: 400px;
+    height: 250px;
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
 .product-item h4 {
     font-family: var(--font-heading);
     font-size: 22px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .product-price {
@@ -301,25 +289,23 @@
     background-color: var(--color-accent-blue);
     color: var(--color-text-primary);
     border: none;
-    padding: 10px 20px;
+    padding: 12px 30px;
     font-size: 14px;
-    font-family: var(--font-heading);
+    border-radius: 20px;
     font-weight: 600;
-    cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: background-color 0.2s, transform 0.1s;
-    width: 100%; /* Make them full width for better alignment */
-    margin-top: 10px; /* Space above the button */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .product-cta-button:hover {
-    background-color: #0099FF; /* Slightly lighter shade on hover */
-    transform: translateY(-1px);
+    background-color: #00d7ff;
+    transform: scale(1.05);
 }
 
 .product-cta-button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
 /* --- ADJUSTMENT: Ensure the 'Configure System' link is styled correctly --- */

@@ -151,6 +151,8 @@ body {
     background-color: var(--color-background-primary);
     line-height: 1.6;
     scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
 }
 
 /* Main content */
@@ -175,8 +177,10 @@ header {
     border-bottom: 1px solid transparent;
     transition: background-color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
     height: auto;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     padding: 0;
 }
@@ -197,13 +201,14 @@ align-items: center;
     height: 40px;
     width: auto;
     display: block;
+    border-radius: 8px;
 }
 
 /* Layout for top navigation when not wrapped in .container */
 .main-nav {
     display: flex;
     align-items: center;
-    padding: 15px 40px;
+    padding: 0px 40px;
     height: 80px;
 }
 
@@ -239,7 +244,6 @@ nav ul li a {
 }
 
 section {
-    padding: 100px 0;
     text-align: center;
 }
 
@@ -257,8 +261,6 @@ section {
     height: 100vh;
     position: relative;
     overflow: hidden;
-    margin-top: -80px;
-    padding-top: 80px;
 }
 
 .carousel {
@@ -330,18 +332,21 @@ section {
     height: 100%;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .slide-content {
     color: var(--color-text-primary);
     max-width: 700px;
     padding: 40px 20px;
+    padding-top: 140px;
 }
 
 .hero-carousel .overline-text {
-    color: var(--color-main-accent);
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -354,6 +359,17 @@ section {
     font-size: 18px;
     margin-bottom: 18px;
     color: var(--color-text-secondary);
+}
+
+.hero-carousel .cta-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.hero-carousel .cta-button:hover {
+    background-color: #ffffff;
+    color: var(--color-background-primary);
 }
 
 /* Product single banners */
@@ -370,6 +386,9 @@ section {
     display: flex;
     align-items: center;
     position: relative;
+    border-radius: 20px;
+    margin: 20px 40px;
+    overflow: hidden;
 }
 
 .product-banner::before {
@@ -414,7 +433,7 @@ section {
 .product-card {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     padding: 24px;
-    border-radius: 8px;
+    border-radius: 16px;
     text-align: left;
 }
 
@@ -422,7 +441,7 @@ section {
     width: 100%;
     height: 220px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 12px;
     display: block;
     margin-bottom: 16px;
 }
@@ -450,8 +469,6 @@ section {
 
 /* Hero Section */
 #hero {
-    padding-top: 25px;
-    padding-bottom: 80px;
     text-align: center;
 }
 
@@ -513,6 +530,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -552,6 +570,7 @@ section {
 .feature-item {
     padding: 30px;
     border: 1px solid var(--color-border-subtle);
+    border-radius: 16px;
 }
 
 .feature-item h3 {

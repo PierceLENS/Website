@@ -6,105 +6,770 @@
     <title>PierceLENS | The P.L Camera System</title>
     <link rel="icon" type="image/png" href="../../images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* Scroll-based camera reveal animation */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Bottom Price Strip */
+        .price-strip {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 40px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .price-strip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .price-strip-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex: 1;
+        }
+
+        .price-strip-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price-strip-product h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--color-text-primary);
+        }
+
+        .price-strip-price {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        .price-strip-price strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .price-strip-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .price-strip .cta-button {
+            padding: 10px 28px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .price-strip .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--color-accent-blue);
+            color: var(--color-accent-blue);
+            padding: 8px 26px;
+        }
+
+        .price-strip .cta-button.secondary:hover {
+            background: var(--color-accent-blue);
+            color: var(--color-background-primary);
+        }
+
+        @media (max-width: 768px) {
+            .price-strip {
+                padding: 12px 20px;
+            }
+
+            .price-strip-content {
+                gap: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price-strip-product {
+                gap: 10px;
+            }
+
+            .price-strip-product h3 {
+                font-size: 16px;
+            }
+
+            .price-strip-price {
+                font-size: 14px;
+            }
+
+            .price-strip-actions {
+                width: 100%;
+                justify-content: stretch;
+                gap: 10px;
+            }
+
+            .price-strip .cta-button {
+                flex: 1;
+                text-align: center;
+                font-size: 13px;
+                padding: 8px 20px;
+            }
+
+            .price-strip .cta-button.secondary {
+                padding: 6px 18px;
+            }
+        }
+
+        .scroll-reveal-container {
+            position: relative;
+            height: 300vh;
+            background: linear-gradient(180deg, #111111 0%, #0a0a0a 50%, #111111 100%);
+            overflow: visible;
+        }
+
+        .camera-reveal-sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background: var(--color-background-primary);
+        }
+
+        .camera-reveal-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .camera-image {
+            position: absolute;
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            filter: drop-shadow(0 40px 100px rgba(0, 191, 255, 0.4));
+            opacity: 0;
+            transform: scale(0.3) rotateX(90deg) rotateZ(-45deg);
+        }
+
+        .camera-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.6) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+        }
+
+        .camera-text-overlay {
+            position: absolute;
+            text-align: center;
+            z-index: 15;
+            opacity: 0;
+            transform: translateY(50px);
+            pointer-events: none;
+        }
+
+        .camera-text-overlay h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin: 20px 0;
+            letter-spacing: -2px;
+            color: var(--color-text-primary);
+        }
+
+        .camera-text-overlay p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .camera-text-overlay .price {
+            font-size: 28px;
+            color: var(--color-accent-blue);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-accent-blue);
+            stroke-width: 2;
+            fill: none;
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            min-height: 100vh;
+            padding: 120px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-section:nth-child(odd) {
+            background: var(--color-background-primary);
+        }
+
+        .feature-section:nth-child(even) {
+            background: linear-gradient(180deg, #1A1A1A 0%, #111111 100%);
+        }
+
+        .feature-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .feature-content.reverse {
+            direction: rtl;
+        }
+
+        .feature-content.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-text {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .feature-text.in-view {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .feature-text h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: var(--color-text-primary);
+        }
+
+        .feature-text .feature-label {
+            color: var(--color-accent-blue);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0 0 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-accent-blue);
+        }
+
+        .feature-visual {
+            opacity: 0;
+            transform: scale(0.8) translateX(60px);
+        }
+
+        .feature-visual.in-view {
+            animation: scaleInRight 0.8s ease-out 0.2s forwards;
+        }
+
+        .feature-visual img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 30px 80px rgba(0, 191, 255, 0.2));
+            border-radius: 12px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleInRight {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .feature-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-content.reverse {
+                direction: ltr;
+            }
+
+            .feature-text h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feature-section {
+                padding: 80px 20px;
+            }
+
+            .feature-text h2 {
+                font-size: 28px;
+            }
+
+            .feature-text p {
+                font-size: 15px;
+            }
+
+            .feature-content {
+                gap: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .scroll-reveal-container {
+                height: 350vh;
+            }
+
+            .camera-image {
+                max-width: 90%;
+            }
+
+            .camera-glow {
+                width: 400px;
+                height: 400px;
+            }
+
+            .camera-text-overlay h1 {
+                font-size: 40px;
+            }
+
+            .camera-text-overlay p {
+                font-size: 16px;
+            }
+
+            .camera-text-overlay .price {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <a href="#" class="logo-link">
-                <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+        <nav class="main-nav">
+            <a href="../../index.html" class="logo-link">
+                <img src="../../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
             </a>
-            <nav>
-                <ul>
-                    <li><a href="#system">The Pierce Lens</a></li>
-                    <li><a href="#features">Key Features</a></li>
-                    <li><a href="#technology">Technology</a></li>
-                    <li><a href="store/index.html" class="cta-nav">Store</a></li>                </ul>
-        </div>
+            <ul class="nav-list">
+                <li><a href="../../store/index.html" class="cta-nav">Store</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Open navigation">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
     </header>
 
     <main>
-        <section id="product-hero" style="padding: 120px 0 80px; background-color: var(--color-background-primary);">
-            <div class="container" style="display: flex; gap: 80px; align-items: center;">
-                
-                <div class="product-image-viewer" style="flex: 1; max-width: 50%;">
-                    <img src="../../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Camera System" style="max-width: 100%; height: auto; display: block;">
+        <section class="scroll-reveal-container">
+            <div class="camera-reveal-sticky">
+                <div class="camera-reveal-wrapper">
+                    <div class="camera-glow" id="cameraGlow"></div>
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Camera" class="camera-image" id="cameraImage">
+                    <div class="camera-text-overlay" id="textOverlay">
+                        <p class="section-title">THE FLAGSHIP CAMERA</p>
+                        <h1>The Pierce Lens</h1>
+                        <div class="price">Starting at $999</div>
+                        <p>Engineered for uncompromising professionals.</p>
+                    </div>
                 </div>
-                
-                <div class="product-details" style="flex: 1; max-width: 50%;">
-                    <p class="section-title">FLAGSHIP SYSTEM</p>
-                    <h1 style="font-size: 64px; margin-bottom: 10px; font-family: var(--font-heading);">The PierceLENS P.L</h1>
-                    <p style="font-size: 24px; color: var(--color-accent-blue); margin-bottom: 20px;">Starting at $999</p>
-                    
-                    <p style="margin-bottom: 30px; line-height: 1.6; color: var(--color-text-secondary);">
-                        The P.L is engineered for uncompromising professionals. Featuring the next-generation Cyber Sensor, modular NVMe storage, and a personalized customization suite. This is the last camera you'll ever need.
-                    </p>
-                    
-                    <a href="../../customize/index.html" class="cta-button primary-cta">Build & Customize Yours</a>
-                    
+                <div class="scroll-indicator" id="scrollIndicator">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="12 5 12 19 M5 12 L12 19 L19 12"></polyline>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <section id="specifications" style="padding: 80px 0; background-color: #1A1A1A;">
-            <div class="container">
-                <h2 style="text-align: center; font-family: var(--font-heading); font-size: 40px; margin-bottom: 40px;">Core Specifications</h2>
-                
-                <div class="spec-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
-                    
-                    <div class="spec-item" style="padding: 20px; border: 1px solid var(--color-border-subtle);">
-                        <h4 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 5px;">Cyber Sensor</h4>
-                        <p style="color: var(--color-text-secondary);">48MP Full Frame, Low-Light Optimized</p>
-                    </div>
-                    
-                    <div class="spec-item" style="padding: 20px; border: 1px solid var(--color-border-subtle);">
-                        <h4 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 5px;">Storage</h4>
-                        <p style="color: var(--color-text-secondary);">Integrated Mini-NVMe Module, Up to 4TB</p>
-                    </div>
-                    
-                    <div class="spec-item" style="padding: 20px; border: 1px solid var(--color-border-subtle);">
-                        <h4 style="font-family: var(--font-heading); font-size: 24px; margin-bottom: 5px;">Battery</h4>
-                        <p style="color: var(--color-text-secondary);">10 Hour Continuous Shooting Life</p>
-                    </div>
-
-                    </div>
+        <!-- Feature Section 1: Cyber Sensor -->
+        <section class="feature-section">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <span class="feature-label">Advanced Imaging</span>
+                    <h2>Cyber Sensor</h2>
+                    <p>At the heart of the Pierce Lens lies the revolutionary Cyber Sensor—a 48-megapixel full-frame CMOS sensor engineered to capture unprecedented detail and clarity in every shot.</p>
+                    <p>With 14+ stops of dynamic range and ISO performance extending to 819,200, the Cyber Sensor performs flawlessly in any lighting condition. From bright sunlight to near-total darkness, every image emerges with stunning clarity and minimal noise.</p>
+                    <ul class="feature-list">
+                        <li>48MP Full-Frame Resolution</li>
+                        <li>14+ Stops of Dynamic Range</li>
+                        <li>Advanced Low-Light Performance</li>
+                        <li>Real-Time Image Processing</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Cyber Sensor Technology">
+                </div>
             </div>
         </section>
 
-        <section id="features" style="padding: 80px 0;">
-            <div class="container">
-                <h2 style="text-align: center; font-family: var(--font-heading); font-size: 40px; margin-bottom: 40px;">Built for the Future</h2>
-                <div class="feature-detail" style="max-width: 900px; margin: 0 auto 50px; text-align: center;">
-                    <h3 style="font-family: var(--font-heading); font-size: 32px; margin-bottom: 10px;">Modular Design</h3>
-                    <p style="color: var(--color-text-secondary); line-height: 1.6;">
-                        The P.L allows for easy swapping of grips, filters, and communication modules, ensuring your system evolves with your needs, not against them.
-                    </p>
+        <!-- Feature Section 2: Integrated Optics -->
+        <section class="feature-section">
+            <div class="feature-content reverse">
+                <div class="feature-text">
+                    <span class="feature-label">Precision Engineering</span>
+                    <h2>Integrated Optical System</h2>
+                    <p>Goodbye to lens swapping. The Pierce Lens features an integrated optical system with a 28-90mm equivalent focal range, delivering consistent optical excellence across every shot.</p>
+                    <p>Our custom-engineered glass elements and advanced autofocus system with 654-point AI-powered detection ensure razor-sharp focus in virtually any scenario. Whether you're capturing sweeping landscapes or intimate portraits, the integrated optics deliver perfection.</p>
+                    <ul class="feature-list">
+                        <li>28-90mm Equivalent Focal Range</li>
+                        <li>f/2.0 - f/11 Aperture Control</li>
+                        <li>654-Point AI Autofocus</li>
+                        <li>Superior Optical Elements</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Integrated Optics">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 3: 15-Filter Engine -->
+        <section class="feature-section">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <span class="feature-label">Creative Control</span>
+                    <h2>15-Filter Engine</h2>
+                    <p>Professional color grading, now instant. The Pierce Lens includes 15 distinct, high-fidelity filters built directly into the camera, allowing you to apply sophisticated looks in real-time without post-processing.</p>
+                    <p>Each filter is meticulously crafted by professional colorists and can be fine-tuned to your exact specifications. Capture the perfect aesthetic in-camera, then refine further in post if desired. Total creative control at your fingertips.</p>
+                    <ul class="feature-list">
+                        <li>15 Professional Color Filters</li>
+                        <li>Real-Time Filter Preview</li>
+                        <li>Customizable Filter Intensity</li>
+                        <li>Instant Look Creation</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Filter Engine">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 4: mini-NVMe Storage -->
+        <section class="feature-section">
+            <div class="feature-content reverse">
+                <div class="feature-text">
+                    <span class="feature-label">Speed & Security</span>
+                    <h2>mini-NVMe Storage</h2>
+                    <p>Ultra-fast removable storage that fits in your pocket. The Pierce Lens integrates a mini-NVMe module with capacities up to 4TB, delivering sustained read/write speeds of 7,400 MB/s.</p>
+                    <p>Enterprise-grade security and reliability meet professional performance. No more waiting for file transfers or worrying about data loss. Your most critical work is protected and instantly accessible wherever you go.</p>
+                    <ul class="feature-list">
+                        <li>Up to 4TB Capacity</li>
+                        <li>7,400 MB/s Sustained Speed</li>
+                        <li>Enterprise-Grade Encryption</li>
+                        <li>Hot-Swappable Design</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/productPreviews/mini-nvme-module.png" alt="mini-NVMe Storage">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 5: Built-in Projector -->
+        <section class="feature-section">
+            <div class="feature-content">
+                <div class="feature-text">
+                    <span class="feature-label">Collaboration Tool</span>
+                    <h2>Built-in Projector</h2>
+                    <p>Review, present, and collaborate instantly with the integrated micro-projector. Display your work in stunning detail without additional equipment, making on-location client reviews and presentations seamless.</p>
+                    <p>Perfect for location scouts, client meetings, or team reviews. The projector delivers sharp, vibrant imagery that showcases your work's true quality. One less piece of equipment to carry, one more tool in your creative arsenal.</p>
+                    <ul class="feature-list">
+                        <li>Integrated Micro-Projector</li>
+                        <li>Wireless Display Capability</li>
+                        <li>High-Brightness Output</li>
+                        <li>Instant Presentation Mode</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Built-in Projector">
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 6: Connectivity -->
+        <section class="feature-section">
+            <div class="feature-content reverse">
+                <div class="feature-text">
+                    <span class="feature-label">Wireless Ecosystem</span>
+                    <h2>Next-Gen Connectivity</h2>
+                    <p>Stay connected everywhere. The Pierce Lens features Wi-Fi 6E (802.11ax), Bluetooth 5.3, and Thunderbolt 4 connectivity, enabling instant sharing and seamless integration with your digital workflow.</p>
+                    <p>The companion app for iOS and Android puts full control in your pocket. Trigger shots remotely, review images in real-time, and share directly to cloud services—all wirelessly. Your camera is no longer isolated; it's part of your connected creative ecosystem.</p>
+                    <ul class="feature-list">
+                        <li>Wi-Fi 6E (802.11ax) Support</li>
+                        <li>Bluetooth 5.3 Connectivity</li>
+                        <li>Thunderbolt 4 Interface</li>
+                        <li>Companion Mobile App</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Wireless Connectivity">
                 </div>
             </div>
         </section>
     </main>
 
-<footer>
+    <!-- Bottom Price Strip -->
+    <div class="price-strip" id="priceStrip">
+        <div class="price-strip-content">
+            <div class="price-strip-product">
+                <h3>The Pierce Lens</h3>
+            </div>
+            <div class="price-strip-price">
+                From <strong>$999</strong>
+            </div>
+        </div>
+        <div class="price-strip-actions">
+            <a href="../../customize/index.html" class="cta-button">Buy Now</a>
+            <a href="#specs" class="cta-button secondary">Learn More</a>
+        </div>
+    </div>
+
+    <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="index.html" class="logo-link">
-                    <img src="images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
                 </a>
                 <ul>
-                    <li><a href="support/index.html">Support</a></li> 
-                    
-                    <li><a href="store/index.html">Find a Dealer</a></li> 
-                    
-                    <li><a href="press/index.html">Press</a></li> 
-                    
-                    <li><a href="privacy/index.html">Privacy</a></li> 
+                    <li><a href="../../support/index.html">Support</a></li>
+                    <li><a href="../../store/index.html">Find a Dealer</a></li>
+                    <li><a href="../../press/index.html">Press</a></li>
+                    <li><a href="../../privacy/index.html">Privacy</a></li>
                 </ul>
             </div>
             <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/cookie_banner.js"></script>
-    <script src="js/header.js"></script>
-    </body>
+    <script src="../../js/cookie_banner.js"></script>
+    <script src="../../js/header.js"></script>
+    <script>
+    // Mobile nav toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        var navToggle = document.querySelector('.nav-toggle');
+        var navList = document.querySelector('.nav-list');
+        navToggle.addEventListener('click', function() {
+            navList.classList.toggle('nav-open');
+            navToggle.classList.toggle('open');
+        });
+    });
+
+    // Scroll-based camera reveal animation
+    const cameraImage = document.getElementById('cameraImage');
+    const cameraGlow = document.getElementById('cameraGlow');
+    const textOverlay = document.getElementById('textOverlay');
+    const scrollContainer = document.querySelector('.scroll-reveal-container');
+    const scrollIndicator = document.getElementById('scrollIndicator');
+
+    function updateCameraReveal() {
+        // Get the position of the scroll container
+        const scrollContainerTop = scrollContainer.offsetTop;
+        const scrollContainerHeight = scrollContainer.offsetHeight;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how much of the container is visible
+        const scrollY = window.scrollY;
+        const elementStart = scrollContainerTop;
+        const elementEnd = scrollContainerTop + scrollContainerHeight;
+        
+        // Calculate scroll progress relative to when the container comes into view
+        let scrollProgress = (scrollY - elementStart) / (scrollContainerHeight - windowHeight);
+        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+        console.log('Scroll Progress:', scrollProgress); // Debug
+
+        // Phase 1: Scale in (0 - 0.3)
+        if (scrollProgress <= 0.3) {
+            const phase1 = scrollProgress / 0.3;
+            const scale = 0.3 + phase1 * 0.5; // 0.3 to 0.8
+            cameraImage.style.transform = `scale(${scale}) rotateX(${90 - phase1 * 70}deg) rotateZ(${-45 + phase1 * 35}deg)`;
+            cameraImage.style.opacity = phase1 * 0.7;
+        }
+        // Phase 2: Rotate and position (0.3 - 0.6)
+        else if (scrollProgress <= 0.6) {
+            const phase2 = (scrollProgress - 0.3) / 0.3;
+            const scale = 0.8 + phase2 * 0.2; // 0.8 to 1.0
+            const rotX = 20 - phase2 * 20; // 20 to 0
+            const rotZ = -10 + phase2 * 5; // -10 to -5
+            cameraImage.style.transform = `scale(${scale}) rotateX(${rotX}deg) rotateZ(${rotZ}deg)`;
+            cameraImage.style.opacity = 0.7 + phase2 * 0.3;
+        }
+        // Phase 3: Final position (0.6 - 1.0)
+        else {
+            const phase3 = (scrollProgress - 0.6) / 0.4;
+            cameraImage.style.transform = `scale(1) rotateX(0deg) rotateZ(-5deg)`;
+            cameraImage.style.opacity = 1;
+        }
+
+        // Glow animation
+        const glowOpacity = Math.sin(scrollProgress * Math.PI) * 0.8;
+        const glowScale = 0.5 + scrollProgress * 1.5;
+        cameraGlow.style.opacity = glowOpacity;
+        cameraGlow.style.transform = `scale(${glowScale})`;
+
+        // Text animation
+        if (scrollProgress <= 0.4) {
+            const textPhase = Math.max(0, (scrollProgress - 0.2) / 0.2);
+            textOverlay.style.opacity = textPhase;
+            textOverlay.style.transform = `translateY(${50 - textPhase * 50}px)`;
+        } else {
+            textOverlay.style.opacity = 1;
+            textOverlay.style.transform = `translateY(0)`;
+        }
+
+        // Scroll indicator fade
+        if (scrollProgress > 0.1) {
+            scrollIndicator.style.opacity = 0;
+            scrollIndicator.style.pointerEvents = 'none';
+        } else {
+            scrollIndicator.style.opacity = 1;
+            scrollIndicator.style.pointerEvents = 'auto';
+        }
+    }
+
+    window.addEventListener('scroll', updateCameraReveal);
+    // Also update on resize
+    window.addEventListener('resize', updateCameraReveal);
+    updateCameraReveal(); // Initial call
+
+    // Feature sections scroll animation
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const featureObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const textElement = entry.target.querySelector('.feature-text');
+                const visualElement = entry.target.querySelector('.feature-visual');
+                
+                if (textElement) textElement.classList.add('in-view');
+                if (visualElement) visualElement.classList.add('in-view');
+                
+                featureObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-section').forEach(section => {
+        featureObserver.observe(section);
+    });
+
+    // Price strip visibility on scroll
+    const priceStrip = document.getElementById('priceStrip');
+    
+    function updatePriceStrip() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Show price strip after scrolling past 50% of the initial camera reveal
+        if (scrollY > windowHeight * 0.5) {
+            priceStrip.classList.add('visible');
+        } else {
+            priceStrip.classList.remove('visible');
+        }
+    }
+    
+    window.addEventListener('scroll', updatePriceStrip);
+    updatePriceStrip(); // Initial check
+    </script>
+
+</body>
 </html>

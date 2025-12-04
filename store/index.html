@@ -16,70 +16,58 @@
 
     <header>
         <nav class="main-nav">
-            <a href="../#" class="logo-link">
+            <a href="../index.html" class="logo-link">
                 <img src="../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
             </a>
-                <ul>
-                    <!-- <li><a href="#system">Cameras</a></li> -->
-                    <li>
-                        <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </li>
-                </ul>
+            <ul class="nav-list">
+                <li>
+                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" aria-label="Open navigation">
+                <span class="hamburger"></span>
+            </button>
         </nav>
     </header>
 
 <main>
-        
-        <section id="featured-banner">
-            <div class="carousel-container">
-                <div class="carousel-track" id="carousel-track">
-                    
-                    <div class="banner-slide">
-                        <div class="banner-content">
-                            <p class="section-title overline-text">FEATURED</p>
-                            <h1 class="banner-headline">The Pierce Lens</h1>
-                            <p class="banner-sub-text">Build your perfect integrated camera. Starting at $999.</p>
+        <!-- Full-viewport hero banner carousel -->
+        <section id="hero" class="hero-carousel">
+            <div class="carousel" aria-roledescription="carousel">
+                <div class="carousel-controls">
+                    <div id="carousel-indicators" class="carousel-indicators" role="tablist" aria-label="Slide indicators"></div>
+                </div>
+                <div id="carousel-track" class="carousel-track" tabindex="0" aria-live="polite">
+                    <article class="carousel-slide" style="background-image: url('../images/cameraPreviews/camera_black.png')" aria-label="Pierce Lens - Featured">
+                        <div class="slide-content container">
+                            <p class="overline-text">Featured Product</p>
+                            <h2 class="main-headline">The Pierce Lens</h2>
+                            <p class="sub-headline">Build your perfect integrated camera. Starting at $999.</p>
                             <a href="../customize/index.html" class="cta-button">Configure & Buy</a>
                         </div>
-                        <div class="banner-image">
-                            <img src="../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Camera System (Black)" class="banner-product-img">
-                        </div>
-                    </div>
-                    
-                    <div class="banner-slide">
-                        <div class="banner-content">
-                            <p class="section-title overline-text">NEW FINISH</p>
-                            <h1 class="banner-headline">Carbon Fiber Body</h1>
-                            <p class="banner-sub-text">Upgrade to the aerospace-grade finish. From $250.</p>
-                            <a href="../customize/index.html" class="cta-button secondary-cta">Customize Now</a>
-                        </div>
-                        <div class="banner-image">
-                            <div class="product-img-placeholder"></div>
-                        </div>
-                    </div>
+                    </article>
 
-                    <div class="banner-slide">
-                        <div class="banner-content">
-                            <p class="section-title overline-text">PRO UPGRADE</p>
-                            <h1 class="banner-headline">Integrated 50mm Pro Lens</h1>
-                            <p class="banner-sub-text">The sharpest glass engineered for the P.L System.</p>
-                            <a href="#" class="cta-button secondary-cta">View Lens</a>
+                    <article class="carousel-slide" style="background-image: url('../images/cameraPreviews/camera_black.png')" aria-label="Carbon Fiber Body">
+                        <div class="slide-content container">
+                            <p class="overline-text">New Finish</p>
+                            <h2 class="main-headline">Carbon Fiber Body</h2>
+                            <p class="sub-headline">Upgrade to the aerospace-grade finish. From $250.</p>
+                            <a href="../customize/index.html" class="cta-button">Customize Now</a>
                         </div>
-                        <div class="banner-image">
-                            <div class="product-img-placeholder"></div>
-                        </div>
-                    </div>
+                    </article>
 
+                    <article class="carousel-slide" style="background-image: url('../images/cameraPreviews/camera_black.png')" aria-label="Pro Upgrade">
+                        <div class="slide-content container">
+                            <p class="overline-text">Pro Upgrade</p>
+                            <h2 class="main-headline">Integrated 50mm Pro Lens</h2>
+                            <p class="sub-headline">The sharpest glass engineered for the P.L System.</p>
+                            <a href="#" class="cta-button">View Lens</a>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <button class="carousel-nav-btn prev-btn" id="prev-slide" aria-label="Previous Slide">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-nav-btn next-btn" id="next-slide" aria-label="Next Slide">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </section>
 
         <section id="categories">
@@ -196,5 +184,17 @@
     <script src="../js/cookie_banner.js"></script> 
     <script src="../js/cart.js"></script>
     <script src="../js/carousel.js"></script>
+    <script src="../js/header.js"></script>
+    <script>
+    // Mobile nav toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        var navToggle = document.querySelector('.nav-toggle');
+        var navList = document.querySelector('.nav-list');
+        navToggle.addEventListener('click', function() {
+            navList.classList.toggle('nav-open');
+            navToggle.classList.toggle('open');
+        });
+    });
+    </script>
 </body>
 </html>
