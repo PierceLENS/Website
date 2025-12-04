@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
+    const heroBanner = document.getElementById('hero');
     
-    // Define the scroll threshold (how far down user must scroll before line appears)
-    const scrollThreshold = 50; // In pixels
-
     function checkScroll() {
-        // Check if the vertical scroll position is greater than the threshold
-        if (window.scrollY > scrollThreshold) {
+        if (!heroBanner) return;
+        
+        // Get the bottom edge of the hero banner
+        const heroBottom = heroBanner.offsetTop + heroBanner.offsetHeight;
+        
+        // If scrolled past the hero banner, add the scrolled class
+        if (window.scrollY > heroBottom) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');

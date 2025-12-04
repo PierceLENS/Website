@@ -171,17 +171,18 @@ a:hover {
 }
 
 header {
-    background-color: var(--color-background-primary);
+    background-color: rgba(17, 17, 17, 0);
     border-bottom: 1px solid transparent;
-    transition: border-bottom 0.3s ease-in-out;
-    height: var(--header-height, 80px);
+    transition: background-color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+    height: auto;
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 0;
 }
 
 .scrolled {
+    background-color: rgba(17, 17, 17, 0.95);
     border-bottom-color: var(--color-border-subtle);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -202,7 +203,8 @@ align-items: center;
 .main-nav {
     display: flex;
     align-items: center;
-    padding: 0 40px;
+    padding: 15px 40px;
+    height: 80px;
 }
 
 .main-nav .logo-link {
@@ -255,6 +257,8 @@ section {
     height: 100vh;
     position: relative;
     overflow: hidden;
+    margin-top: -80px;
+    padding-top: 80px;
 }
 
 .carousel {
@@ -271,7 +275,7 @@ section {
 
 .carousel-controls {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     left: 0;
     right: 0;
     display: flex;
