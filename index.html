@@ -26,16 +26,97 @@
     </header>
 
     <main>
-<section id="hero">
-            <div class="container">
-                <p class="overline-text">Introducing a new vision of photography.</p>
-                <h2 class="main-headline">The Pierce Lens</h2>
-                <h3 class="sub-headline">Integrated. Intuitive. Infinite.</h3>
-                <div class="product-image-placeholder">
-                    <img src="images/camera_matte-black.png" alt="PierceLENS P.L Camera System" class="hero-product-img">
+        <!-- Full-viewport hero banner carousel -->
+        <section id="hero" class="hero-carousel">
+            <div class="carousel" aria-roledescription="carousel">
+                <div class="carousel-controls">
+                    <div id="carousel-indicators" class="carousel-indicators" role="tablist" aria-label="Slide indicators"></div>
                 </div>
-                <div class="hero-details">
-                    <a href="customize/index.html" class="cta-button">Discover the P.L System</a>
+                <div id="carousel-track" class="carousel-track" tabindex="0" aria-live="polite">
+                    <article class="carousel-slide" style="background-image: url('images/camera_matte-black.png')" aria-label="Pierce Lens - Integrated">
+                        <div class="slide-content container">
+                            <p class="overline-text">Introducing a new vision of photography.</p>
+                            <h2 class="main-headline">The Pierce Lens</h2>
+                            <p class="sub-headline">Integrated. Intuitive. Infinite.</p>
+                            <a href="customize/index.html" class="cta-button">Discover the P.L System</a>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide" style="background-image: url('images/productPreviews/mini-nvme-module.png')" aria-label="Mini-NVMe Module">
+                        <div class="slide-content container">
+                            <p class="overline-text">Speed and Security</p>
+                            <h2 class="main-headline">mini-NVMe Storage</h2>
+                            <p class="sub-headline">Ultra-fast, removable storage for pros on the move.</p>
+                            <a href="store/index.html#modules" class="cta-button">View Specs</a>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide" style="background-image: url('images/productPreviews/mini-nvme-module.png')" aria-label="Studio Microphone">
+                        <div class="slide-content container">
+                            <p class="overline-text">Capture With Confidence</p>
+                            <h2 class="main-headline">Studio Microphone</h2>
+                            <p class="sub-headline">Integrated audio for professional video capture.</p>
+                            <a href="store/index.html#modules" class="cta-button">Learn More</a>
+                        </div>
+                    </article>
+                    
+                    <article class="carousel-slide" style="background-image: url('images/camera_matte-black.png')" aria-label="Color Filter Engine">
+                        <div class="slide-content container">
+                            <p class="overline-text">Create Your Look</p>
+                            <h2 class="main-headline">15-Filter Engine</h2>
+                            <p class="sub-headline">Instant, high-fidelity color and tonal filters in-camera.</p>
+                            <a href="customize/index.html" class="cta-button">See Filters</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product single banners -->
+        <section id="product-banners" class="product-banners">
+            <div class="product-banner" style="background-image: url('images/camera_matte-black.png')">
+                <div class="banner-content container">
+                    <h2>Pierce Lens Camera System</h2>
+                    <p>Experience integrated optics and professional-grade features.</p>
+                    <a href="customize/index.html" class="cta-button">Customize Now</a>
+                </div>
+            </div>
+
+            <div class="product-banner" style="background-image: url('images/productPreviews/mini-nvme-module.png')">
+                <div class="banner-content container">
+                    <h2>mini-NVMe Storage</h2>
+                    <p>Ultra-fast, enterprise-grade removable storage in a thumb-sized package.</p>
+                    <a href="store/index.html#modules" class="cta-button">View Specs</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Large-format product grid below the banner -->
+        <section id="products" class="products-large">
+            <div class="container">
+                <p class="section-title">FEATURED PRODUCTS</p>
+                <h2 class="section-heading">Explore Our System</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="images/camera_matte-black.png" alt="Pierce Lens - Black" class="product-img">
+                        <h3>Pierce Lens (Matte Black)</h3>
+                        <p>Integrated lenses, modular storage, professional features.</p>
+                        <a href="customize/index.html" class="cta-button">Customize</a>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/productPreviews/mini-nvme-module.png" alt="mini-NVMe Module" class="product-img">
+                        <h3>mini-NVMe Module</h3>
+                        <p>High-speed removable storage built for capture workflows.</p>
+                        <a href="store/index.html#modules" class="cta-button">View</a>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/productPreviews/mini-nvme-module.png" alt="Detachable Monitor" class="product-img">
+                        <h3>Detachable Monitor</h3>
+                        <p>Flexible viewing and composition with high-resolution display.</p>
+                        <a href="store/index.html#modules" class="cta-button">Shop</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -130,6 +211,7 @@
 
     <script src="js/cookie_banner.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/carousel.js"></script>
     <script>
     // Mobile nav toggle
     document.addEventListener('DOMContentLoaded', function() {
