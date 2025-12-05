@@ -412,9 +412,63 @@
                 gap: 30px;
             }
         }
+        @media (max-width: 900px) {
+            .scroll-reveal-container {
+                height: 250vh;
+            }
+
+            .camera-image {
+                max-width: 85%;
+            }
+
+            .camera-glow {
+                width: 350px;
+                height: 350px;
+            }
+
+            .camera-text-overlay h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+
+            .camera-text-overlay p {
+                font-size: 15px;
+                padding: 0 20px;
+            }
+
+            .camera-text-overlay .price {
+                font-size: 22px;
+            }
+
+            .feature-section {
+                min-height: auto;
+                padding: 60px 20px;
+            }
+
+            .feature-text h2 {
+                font-size: 32px;
+            }
+
+            .feature-text p {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .feature-list li {
+                font-size: 14px;
+                padding: 10px 0;
+                padding-left: 25px;
+            }
+
+            .feature-list li::before {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
         @media (max-width: 768px) {
             .scroll-reveal-container {
-                height: 350vh;
+                height: 200vh;
             }
 
             .camera-image {
@@ -422,20 +476,75 @@
             }
 
             .camera-glow {
-                width: 400px;
-                height: 400px;
+                width: 300px;
+                height: 300px;
             }
 
             .camera-text-overlay h1 {
-                font-size: 40px;
+                font-size: 28px;
             }
 
             .camera-text-overlay p {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .camera-text-overlay .price {
                 font-size: 20px;
+            }
+
+            .camera-text-overlay .section-title {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .scroll-reveal-container {
+                height: 180vh;
+            }
+
+            .camera-reveal-sticky {
+                height: 80vh;
+            }
+
+            .camera-image {
+                max-width: 95%;
+            }
+
+            .camera-text-overlay h1 {
+                font-size: 24px;
+            }
+
+            .camera-text-overlay p {
+                font-size: 13px;
+                max-width: 90%;
+            }
+
+            .camera-text-overlay .price {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+
+            .feature-section {
+                padding: 40px 15px;
+            }
+
+            .feature-text h2 {
+                font-size: 26px;
+                margin-bottom: 15px;
+            }
+
+            .feature-text .feature-label {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .feature-text p {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .feature-list {
+                margin-top: 20px;
             }
         }
     </style>
