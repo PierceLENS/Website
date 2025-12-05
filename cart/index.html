@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - PierceLENS</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shopping-cart.css">
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <a href="../index.html" class="logo-link">
+                <img src="../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+            </a>
+            <ul class="nav-list">
+                <li class="dropdown">
+                    <a href="#">Cameras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                    </ul>
+                </li>
+                <li><a href="../store/index.html">Store</a></li>
+                <li>
+                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" aria-label="Open navigation">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <div class="cart-container">
+            <!-- Cart Header -->
+            <div class="cart-header">
+                <h1>Shopping Cart</h1>
+                <a href="../customize/index.html" class="continue-shopping">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Continue Shopping
+                </a>
+            </div>
+
+            <!-- Cart Content -->
+            <div class="cart-content">
+                <!-- Cart Items Section -->
+                <div class="cart-items-section" id="cart-items-container">
+                    <!-- Items will be dynamically loaded here -->
+                </div>
+
+                <!-- Cart Summary Section -->
+                <div class="cart-summary-section">
+                    <div class="cart-summary">
+                        <h2>Order Summary</h2>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span class="shipping-free">FREE</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Tax (estimated)</span>
+                            <span id="summary-tax">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span id="summary-total">$0.00</span>
+                        </div>
+                        
+                        <button class="checkout-btn" id="proceed-checkout">
+                            <i class="fa-solid fa-lock"></i>
+                            Proceed to Checkout
+                        </button>
+                        
+                        <div class="secure-checkout">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Secure Checkout Guaranteed</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code -->
+                    <div class="promo-section">
+                        <h3>Have a promo code?</h3>
+                        <div class="promo-input-group">
+                            <input type="text" id="promo-code" placeholder="Enter code">
+                            <button id="apply-promo">Apply</button>
+                        </div>
+                        <p class="promo-message" id="promo-message"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                </a>
+                <ul>
+                    <li><a href="../support/index.html">Support</a></li>
+                    <li><a href="../store/index.html">Find a Dealer</a></li>
+                    <li><a href="../press/index.html">Press</a></li>
+                    <li><a href="../privacy/index.html">Privacy</a></li>
+                </ul>
+            </div>
+            <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/header.js"></script>
+    <script src="../js/shopping-cart.js"></script>
+    <script src="../js/cart-page.js"></script>
+</body>
+</html>

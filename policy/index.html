@@ -11,13 +11,27 @@
 
     <header>
         <nav class="main-nav">
-            <a href="../#" class="logo-link">
+            <a href="../index.html" class="logo-link">
                 <img src="../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
             </a>
-                <ul>
-                    <!-- <li><a href="#system">Cameras</a></li> -->
-                    <li><a href="../store/index.html" class="cta-nav">Store</a></li>
-                </ul>
+            <ul class="nav-list">
+                <li class="dropdown">
+                    <a href="#">Cameras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                    </ul>
+                </li>
+                <li><a href="../store/index.html">Store</a></li>
+                <li>
+                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" aria-label="Open navigation">
+                <span class="hamburger"></span>
+            </button>
         </nav>
     </header>
 
@@ -85,5 +99,8 @@
         </div>
     </footer>
 
+    <script src="../js/cookie_banner.js"></script>
+    <script src="../js/shopping-cart.js"></script>
+    <script src="../js/header.js"></script>
 </body>
 </html>

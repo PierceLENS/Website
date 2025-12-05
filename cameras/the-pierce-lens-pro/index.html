@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PierceLENS | The P.L Pro Camera System</title>
+    <link rel="icon" type="image/png" href="../../images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        @keyframes glitchFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0; }
+            100% { transform: translateY(-30px); opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes crtGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 191, 255, 0.5), 0 0 20px rgba(0, 191, 255, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(0, 191, 255, 0.8), 0 0 40px rgba(0, 191, 255, 0.5), 0 0 60px rgba(0, 191, 255, 0.3); }
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        @keyframes slideInRight {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Scroll Reveal Section - Pro Edition with Enhanced Effects */
+        .scroll-reveal-container {
+            position: relative;
+            height: 350vh;
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 25%, #050505 50%, #0a0a0a 75%, #000000 100%);
+            overflow: visible;
+        }
+
+        .scroll-reveal-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 191, 255, 0.03) 0px,
+                rgba(0, 191, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .camera-reveal-sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background: radial-gradient(ellipse at center, #111111 0%, #0a0a0a 100%);
+        }
+
+        .camera-reveal-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        .camera-image {
+            position: absolute;
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            filter: drop-shadow(0 0 120px rgba(0, 191, 255, 0.5)) drop-shadow(0 40px 100px rgba(0, 191, 255, 0.3));
+            opacity: 0;
+            transform: scale(0.3) rotateX(90deg) rotateZ(-45deg) rotateY(10deg);
+            z-index: 12;
+        }
+
+        .camera-core-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 1) 0%, rgba(0, 191, 255, 0.5) 30%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+            z-index: 8;
+        }
+
+        .camera-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.8) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .camera-outer-ring {
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            opacity: 0;
+            transform: scale(0) rotateZ(0deg);
+            pointer-events: none;
+            z-index: 7;
+        }
+
+        .camera-text-overlay {
+            position: absolute;
+            text-align: center;
+            z-index: 15;
+            opacity: 0;
+            transform: translateY(50px);
+            pointer-events: none;
+        }
+
+        .camera-text-overlay .section-title {
+            font-size: 12px;
+            color: var(--color-accent-blue);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: crtGlow 3s ease-in-out infinite;
+        }
+
+        .camera-text-overlay h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin: 20px 0;
+            letter-spacing: -2px;
+            color: var(--color-text-primary);
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+        }
+
+        .camera-text-overlay p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .camera-text-overlay .price {
+            font-size: 28px;
+            color: var(--color-accent-blue);
+            font-weight: 600;
+            margin-top: 20px;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-accent-blue);
+            stroke-width: 2;
+            fill: none;
+            animation: scrollBounce 2s infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.6));
+        }
+
+        .pro-badge {
+            position: absolute;
+            top: 120px;
+            right: 50px;
+            padding: 10px 20px;
+            border: 2px solid var(--color-accent-blue);
+            color: var(--color-accent-blue);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(0, 191, 255, 0.05);
+            border-radius: 30px;
+            z-index: 25;
+            animation: floatUp 1s ease-out forwards;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 40px;
+            background: #111111;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.5), transparent);
+        }
+
+        .features-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.5), transparent);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.12) 0%, rgba(0, 191, 255, 0.04) 100%);
+            border: 2px solid rgba(0, 191, 255, 0.15);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 191, 255, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            box-shadow: 
+                0 0 30px rgba(0, 191, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                0 25px 70px rgba(0, 191, 255, 0.25);
+            border-color: var(--color-accent-blue);
+            transform: translateY(-12px) scale(1.02);
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.18) 0%, rgba(0, 191, 255, 0.06) 100%);
+        }
+
+        .feature-card i {
+            font-size: 48px;
+            color: var(--color-accent-blue);
+            margin-bottom: 20px;
+            display: block;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.2) rotateZ(5deg);
+            text-shadow: 0 0 40px rgba(0, 191, 255, 0.8);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--color-accent-blue);
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* Specs Section Header */
+        .specs-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #050505 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .specs-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .specs-content h2 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 40px rgba(0, 191, 255, 0.3);
+            animation: crtGlow 4s ease-in-out infinite;
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            padding: 100px 40px;
+            background: #111111;
+        }
+
+        .feature-section:nth-child(odd) {
+            background: #0d0d0d;
+        }
+
+        .feature-section:nth-child(even) {
+            background: #111111;
+        }
+
+        .feature-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .feature-content.reverse {
+            direction: rtl;
+        }
+
+        .feature-content.reverse > div {
+            direction: ltr;
+        }
+
+        .feature-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+            opacity: 0;
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-visual img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 60px rgba(0, 191, 255, 0.2));
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(80px) scale(0.8);
+        }
+
+        .feature-visual img.in-view {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .feature-content.reverse .feature-visual img {
+            transform: translateX(-80px) scale(0.8);
+        }
+
+        .feature-content.reverse .feature-visual img.in-view {
+            transform: translateX(0) scale(1);
+        }
+
+        .feature-section:hover .feature-visual img {
+            filter: drop-shadow(0 30px 80px rgba(0, 191, 255, 0.4));
+            transform: scale(1.05);
+        }
+
+        .feature-content.reverse .feature-section:hover .feature-visual img {
+            transform: scale(1.05);
+        }
+
+        .feature-text h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .feature-text p {
+            font-size: 16px;
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .feature-text p:first-of-type {
+            animation-delay: 0.1s;
+        }
+
+        .feature-text p:last-of-type {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-list li {
+            font-size: 15px;
+            color: #aaa;
+            padding: 12px 0 12px 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideInLeft 0.5s ease-out forwards;
+        }
+
+        .feature-list li:nth-child(1) { animation-delay: 0.3s; }
+        .feature-list li:nth-child(2) { animation-delay: 0.35s; }
+        .feature-list li:nth-child(3) { animation-delay: 0.4s; }
+        .feature-list li:nth-child(4) { animation-delay: 0.45s; }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-blue);
+            font-weight: 700;
+            font-size: 16px;
+            text-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+        }
+
+        @media (max-width: 1024px) {
+            .feature-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-content.reverse {
+                direction: ltr;
+            }
+
+            .feature-text h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feature-section {
+                padding: 80px 20px;
+            }
+
+            .feature-text h2 {
+                font-size: 28px;
+            }
+
+            .feature-text p {
+                font-size: 15px;
+            }
+
+            .feature-content {
+                gap: 30px;
+            }
+        }
+
+        /* Sensor Section - Megapixel Animation */
+        .sensor-scroll-container,
+        .connectivity-scroll-container,
+        .storage-scroll-container,
+        .battery-scroll-container,
+        .audio-scroll-container,
+        .video-scroll-container {
+            position: relative;
+            height: 300vh;
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            overflow: visible;
+        }
+
+        .sensor-reveal-sticky,
+        .connectivity-reveal-sticky,
+        .storage-reveal-sticky,
+        .battery-reveal-sticky,
+        .audio-reveal-sticky,
+        .video-reveal-sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+        }
+
+        .sensor-reveal-wrapper,
+        .connectivity-reveal-wrapper,
+        .storage-reveal-wrapper,
+        .battery-reveal-wrapper,
+        .audio-reveal-wrapper,
+        .video-reveal-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        /* ============ SENSOR SECTION ============ */
+        .sensor-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+            padding: 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .pixel-matrix {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            gap: 8px;
+            width: 400px;
+            height: 400px;
+        }
+
+        .pixel-row {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            gap: 3px;
+            background: linear-gradient(90deg, rgba(0, 191, 255, 0.1), rgba(0, 191, 255, 0.3), rgba(0, 191, 255, 0.1));
+            border-radius: 4px;
+            padding: 8px;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .sensor-left-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .text-line {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            opacity: 0;
+            transform: translateX(-50px);
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .sensor-right-visual {
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+
+        .sensor-aperture {
+            width: 280px;
+            height: 280px;
+            border: 3px solid rgba(0, 191, 255, 0.6);
+            border-radius: 50%;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            opacity: 0;
+            transform: scale(0);
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(0, 191, 255, 0.2);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .sensor-shine {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.8), transparent);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            filter: blur(30px);
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .sensor-bottom-stat {
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* ============ CONNECTIVITY SECTION ============ */
+        .connectivity-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .network-visualization {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--color-accent-blue), rgba(0, 191, 255, 0.3));
+            left: 50%;
+            top: 50%;
+            opacity: 0;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .network-node.center {
+            width: 60px;
+            height: 60px;
+        }
+
+        .network-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .net-line {
+            stroke: rgba(0, 191, 255, 0.4);
+            stroke-width: 2;
+            opacity: 0;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            transition: opacity 0.6s ease-out, stroke-dashoffset 0.8s ease-out;
+        }
+
+        .connectivity-labels {
+            display: flex;
+            gap: 80px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+        }
+
+        .connectivity-labels div {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .connection-status {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* ============ STORAGE SECTION ============ */
+        .storage-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .vault-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .nvme-slot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nvme-card {
+            width: 120px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(0, 191, 255, 0.1));
+            border: 2px solid rgba(0, 191, 255, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slot-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .vault-middle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .speed-gauge {
+            width: 200px;
+            height: 120px;
+            border: 2px solid rgba(0, 191, 255, 0.5);
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            overflow: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            width: 6px;
+            height: 80px;
+            background: var(--color-accent-blue);
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%) rotateZ(-90deg);
+            transform-origin: bottom center;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .gauge-markings {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 20px 20px 20px;
+            font-size: 12px;
+            color: var(--color-accent-blue);
+        }
+
+        .speed-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .storage-features {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature-badge {
+            padding: 12px 24px;
+            background: rgba(0, 191, 255, 0.15);
+            border: 2px solid rgba(0, 191, 255, 0.4);
+            border-radius: 6px;
+            color: var(--color-accent-blue);
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .storage-bottom-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* ============ BATTERY SECTION ============ */
+        .battery-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .battery-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .battery-left-cell,
+        .battery-right-cell {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .battery-body {
+            width: 100px;
+            height: 180px;
+            border: 3px solid rgba(0, 191, 255, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(0, 191, 255, 0.05));
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
+            position: relative;
+        }
+
+        .battery-charge-bar {
+            width: 100%;
+            height: 120px;
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .charge-level {
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, var(--color-accent-blue), rgba(0, 191, 255, 0.5));
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            transition: height 0.8s ease-out;
+        }
+
+        .battery-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .battery-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+
+        .power-flow {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(180deg, var(--color-accent-blue), transparent);
+            animation: energyFlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes energyFlow {
+            0%, 100% {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        .connector-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-accent-blue);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+        }
+
+        .battery-runtime-display {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .runtime-number {
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+            line-height: 1;
+        }
+
+        .runtime-unit {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .battery-features-list {
+            display: flex;
+            gap: 40px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .battery-features-list span {
+            padding: 0 15px;
+            border-left: 2px solid rgba(0, 191, 255, 0.3);
+        }
+
+        .battery-features-list span:first-child {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        /* ============ AUDIO SECTION ============ */
+        .audio-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .waveform-container {
+            width: 90%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .waveform-graphic {
+            width: 100%;
+            height: 200px;
+            filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.3));
+        }
+
+        .wave-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .frequency-bars-display {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            height: 150px;
+        }
+
+        .frequency-bars-display .bar {
+            width: 40px;
+            background: linear-gradient(180deg, var(--color-accent-blue), rgba(0, 191, 255, 0.3));
+            border-radius: 4px;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .bar[style*="--freq: 1"] { height: calc(20px + 1 * 15px); }
+        .bar[style*="--freq: 2"] { height: calc(20px + 2 * 15px); }
+        .bar[style*="--freq: 3"] { height: calc(20px + 3 * 15px); }
+        .bar[style*="--freq: 4"] { height: calc(20px + 4 * 15px); }
+        .bar[style*="--freq: 5"] { height: calc(20px + 5 * 15px); }
+        .bar[style*="--freq: 6"] { height: calc(20px + 6 * 15px); }
+
+        .audio-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .spec-row {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .spec-label {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            min-width: 120px;
+        }
+
+        .spec-value {
+            color: var(--color-accent-blue);
+            font-weight: 600;
+        }
+
+        /* ============ VIDEO SECTION ============ */
+        .video-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .film-strip-container {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .film-frame {
+            width: 140px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(0, 191, 255, 0.1));
+            border: 2px solid rgba(0, 191, 255, 0.5);
+            border-radius: 6px;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.5);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .film-frame::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, var(--color-accent-blue) 0px, var(--color-accent-blue) 8px, transparent 8px, transparent 16px);
+            border-radius: 2px 0 0 2px;
+        }
+
+        .film-frame::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, var(--color-accent-blue) 0px, var(--color-accent-blue) 8px, transparent 8px, transparent 16px);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .resolution-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .resolution-card {
+            padding: 20px 40px;
+            background: rgba(0, 191, 255, 0.05);
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .resolution-card.active {
+            background: rgba(0, 191, 255, 0.15);
+            border-color: var(--color-accent-blue);
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+        }
+
+        .res-label {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+        }
+
+        .res-detail {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .res-badge {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 4px 12px;
+            background: var(--color-accent-blue);
+            color: var(--color-background-primary);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .video-capabilities {
+            display: flex;
+            gap: 40px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .capability {
+            padding: 0 20px;
+            border-left: 2px solid rgba(0, 191, 255, 0.3);
+        }
+
+        .capability:first-child {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        /* Shared styling for all feature sections */
+        .sensor-image,
+        .connectivity-image,
+        .storage-image,
+        .battery-image,
+        .audio-image,
+        .video-image {
+            position: absolute;
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            filter: drop-shadow(0 0 80px rgba(0, 191, 255, 0.4));
+            opacity: 0;
+            z-index: 12;
+        }
+
+        .sensor-glow,
+        .connectivity-glow,
+        .storage-glow,
+        .battery-glow,
+        .audio-glow,
+        .video-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.6) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0;
+            z-index: 9;
+        }
+
+        .sensor-text-overlay,
+        .connectivity-text-overlay,
+        .storage-text-overlay,
+        .battery-text-overlay,
+        .audio-text-overlay,
+        .video-text-overlay {
+            position: absolute;
+            text-align: center;
+            z-index: 15;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .sensor-text-overlay .feature-label,
+        .connectivity-text-overlay .feature-label,
+        .storage-text-overlay .feature-label,
+        .battery-text-overlay .feature-label,
+        .audio-text-overlay .feature-label,
+        .video-text-overlay .feature-label {
+            font-size: 12px;
+            color: var(--color-accent-blue);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+            animation: crtGlow 3s ease-in-out infinite;
+        }
+
+        .sensor-text-overlay h2,
+        .connectivity-text-overlay h2,
+        .storage-text-overlay h2,
+        .battery-text-overlay h2,
+        .audio-text-overlay h2,
+        .video-text-overlay h2 {
+            font-size: 64px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--color-text-primary);
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+        }
+
+        .sensor-text-overlay p,
+        .connectivity-text-overlay p,
+        .storage-text-overlay p,
+        .battery-text-overlay p,
+        .audio-text-overlay p,
+        .video-text-overlay p {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            max-width: 500px;
+        }
+
+        /* Feature Indicators */
+        .megapixel-indicator,
+        .connectivity-indicator,
+        .speed-indicator,
+        .battery-indicator,
+        .audio-indicator,
+        .resolution-indicator {
+            position: absolute;
+            bottom: 60px;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+            z-index: 20;
+            opacity: 0;
+        }
+
+        .megapixel-indicator span,
+        .connectivity-indicator span,
+        .speed-indicator span,
+        .battery-indicator span,
+        .audio-indicator span,
+        .resolution-indicator span {
+            font-size: 24px;
+            margin-left: 5px;
+        }
+
+        /* Performance Stats Section with Scroll Animation */
+        .stats-scroll-container {
+            position: relative;
+            height: 300vh;
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            overflow: visible;
+        }
+
+        .stats-reveal-sticky {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+        }
+
+        .stats-reveal-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 900px;
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stat-value {
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--color-accent-blue);
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0s; }
+        .stat-item:nth-child(2) { animation-delay: 0.1s; }
+        .stat-item:nth-child(3) { animation-delay: 0.2s; }
+        .stat-item:nth-child(4) { animation-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .stat-value {
+                font-size: 48px;
+            }
+
+            .stat-label {
+                font-size: 14px;
+            }
+        }
+
+        /* Price Strip */
+        .price-strip {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 40px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-strip-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex: 1;
+        }
+
+        .price-strip-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price-strip-product h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--color-text-primary);
+        }
+
+        .price-strip-price {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        .price-strip-price strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .price-strip-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .price-strip .cta-button {
+            padding: 10px 28px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .price-strip .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--color-accent-blue);
+            color: var(--color-accent-blue);
+            padding: 8px 26px;
+        }
+
+        .price-strip .cta-button.secondary:hover {
+            background: var(--color-accent-blue);
+            color: var(--color-background-primary);
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .camera-text-overlay h1 {
+                font-size: 48px;
+            }
+
+            .price-strip {
+                padding: 8px 15px;
+            }
+
+            .price-strip-content {
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price-strip-product {
+                gap: 8px;
+            }
+
+            .price-strip-product h3 {
+                font-size: 14px;
+            }
+
+            .price-strip-price {
+                font-size: 12px;
+            }
+
+            .price-strip-actions {
+                width: 100%;
+                justify-content: stretch;
+                gap: 8px;
+            }
+
+            .price-strip .cta-button {
+                flex: 1;
+                text-align: center;
+                font-size: 12px;
+                padding: 6px 16px;
+            }
+
+            .price-strip .cta-button.secondary {
+                padding: 4px 14px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .price-strip {
+                padding: 6px 10px;
+            }
+
+            .price-strip-content {
+                gap: 5px;
+            }
+
+            .price-strip-product h3 {
+                font-size: 12px;
+            }
+
+            .price-strip-price {
+                font-size: 10px;
+            }
+
+            .price-strip .cta-button {
+                padding: 4px 12px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="../../index.html" class="logo-link">
+                <img src="../../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+            </a>
+            <ul class="nav-list">
+                <li class="dropdown">
+                    <a href="#">Cameras</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                    </ul>
+                </li>
+                <li><a href="../../store/index.html">Store</a></li>
+                <li>
+                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="nav-toggle" aria-label="Open navigation">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Scroll Reveal Hero Section -->
+        <section class="scroll-reveal-container">
+            <div class="camera-reveal-sticky">
+                <div class="camera-reveal-wrapper">
+                    <div class="camera-outer-ring"></div>
+                    <div class="camera-core-glow"></div>
+                    <div class="camera-glow"></div>
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Pro Camera" class="camera-image" id="cameraImage">
+                    <div class="camera-text-overlay" id="textOverlay">
+                        <p class="section-title">Professional Edition</p>
+                        <h1>The Pierce Lens Pro</h1>
+                        <p>The ultimate professional integrated camera system</p>
+                        <div class="price">Starting at $1,699</div>
+                    </div>
+                    <div class="pro-badge">PRO EDITION</div>
+                </div>
+                <div class="scroll-indicator" id="scrollIndicator">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="12 5 12 19 M5 12 L12 19 L19 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h3>61MP Sensor</h3>
+                    <p>Advanced full-frame sensor with 16+ stops of dynamic range. Professional-grade resolution for studio and field work.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fa-solid fa-wifi"></i>
+                    <h3>5G Connectivity</h3>
+                    <p>Built-in 5G module with Wi-Fi 6E and Ethernet. Live streaming and remote control from anywhere.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fa-solid fa-hard-drive"></i>
+                    <h3>Dual Storage</h3>
+                    <p>Dual Mini-NVMe slots for simultaneous recording. Redundancy and backup for mission-critical work.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h3>Pro Color Grading</h3>
+                    <p>Advanced in-camera color grading engine. Professional RAW export and metadata handling.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fa-solid fa-battery-full"></i>
+                    <h3>Extended Runtime</h3>
+                    <p>Dual battery support for 16+ hours continuous operation. Hot-swap battery management system.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fa-solid fa-headset"></i>
+                    <h3>Pro Audio</h3>
+                    <p>Integrated studio-grade microphone with XLR module support for professional audio gear.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specs Section - Detailed Features -->
+        <section class="specs-section" id="specs">
+            <div class="specs-content">
+                <h2>Key Technologies</h2>
+            </div>
+        </section>
+
+        <!-- Feature Section 1: 61MP Sensor - Pixel Formation -->
+        <section class="sensor-scroll-container">
+            <div class="sensor-reveal-sticky">
+                <div class="sensor-reveal-wrapper">
+                    <div class="sensor-content">
+                        <div class="pixel-matrix">
+                            <div class="pixel-row" style="--row: 0;"></div>
+                            <div class="pixel-row" style="--row: 1;"></div>
+                            <div class="pixel-row" style="--row: 2;"></div>
+                            <div class="pixel-row" style="--row: 3;"></div>
+                            <div class="pixel-row" style="--row: 4;"></div>
+                        </div>
+                        <div class="sensor-left-text">
+                            <div class="text-line line-1">61 Million</div>
+                            <div class="text-line line-2">Individual Pixels</div>
+                            <div class="text-line line-3">Full Frame Coverage</div>
+                        </div>
+                        <div class="sensor-right-visual">
+                            <div class="sensor-aperture"></div>
+                            <div class="sensor-shine"></div>
+                        </div>
+                        <div class="sensor-bottom-stat">Professional Grade • Global Shutter • 16+ Dynamic Range</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 2: 5G Connectivity - Signal Network -->
+        <section class="connectivity-scroll-container">
+            <div class="connectivity-reveal-sticky">
+                <div class="connectivity-reveal-wrapper">
+                    <div class="connectivity-content">
+                        <div class="network-visualization">
+                            <div class="network-node center"></div>
+                            <div class="network-node" style="--angle: 0deg; --distance: 120px;"></div>
+                            <div class="network-node" style="--angle: 72deg; --distance: 120px;"></div>
+                            <div class="network-node" style="--angle: 144deg; --distance: 120px;"></div>
+                            <div class="network-node" style="--angle: 216deg; --distance: 120px;"></div>
+                            <div class="network-node" style="--angle: 288deg; --distance: 120px;"></div>
+                            <svg class="network-lines" viewBox="0 0 400 400">
+                                <line class="net-line" x1="200" y1="200" x2="200" y2="80" style="--delay: 0s;"></line>
+                                <line class="net-line" x1="200" y1="200" x2="316.2" y2="138" style="--delay: 0.1s;"></line>
+                                <line class="net-line" x1="200" y1="200" x2="290.8" y2="296.2" style="--delay: 0.2s;"></line>
+                                <line class="net-line" x1="200" y1="200" x2="109.2" y2="296.2" style="--delay: 0.3s;"></line>
+                                <line class="net-line" x1="200" y1="200" x2="83.8" y2="138" style="--delay: 0.4s;"></line>
+                            </svg>
+                        </div>
+                        <div class="connectivity-labels">
+                            <div class="label-5g">5G</div>
+                            <div class="label-wifi">Wi-Fi 6E</div>
+                            <div class="label-ethernet">Ethernet</div>
+                        </div>
+                        <div class="connection-status">Live from Anywhere • Global Coverage • Always Connected</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 3: Dual NVMe Storage - Vault System -->
+        <section class="storage-scroll-container">
+            <div class="storage-reveal-sticky">
+                <div class="storage-reveal-wrapper">
+                    <div class="storage-content">
+                        <div class="vault-container">
+                            <div class="nvme-slot left">
+                                <div class="nvme-card"></div>
+                                <div class="slot-label">Slot A</div>
+                            </div>
+                            <div class="vault-middle">
+                                <div class="speed-gauge">
+                                    <div class="gauge-needle"></div>
+                                    <div class="gauge-markings">
+                                        <span style="--pos: 0%;">0</span>
+                                        <span style="--pos: 50%;">3700</span>
+                                        <span style="--pos: 100%;">7400</span>
+                                    </div>
+                                </div>
+                                <div class="speed-label">MB/s</div>
+                            </div>
+                            <div class="nvme-slot right">
+                                <div class="nvme-card"></div>
+                                <div class="slot-label">Slot B</div>
+                            </div>
+                        </div>
+                        <div class="storage-features">
+                            <div class="feature-badge">Dual Mini-NVMe</div>
+                            <div class="feature-badge">Up to 4TB</div>
+                            <div class="feature-badge">Hot-Swap Ready</div>
+                        </div>
+                        <div class="storage-bottom-text">Simultaneous Recording • Redundant Backup • Enterprise Grade</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 4: Extended Battery - Power Flow -->
+        <section class="battery-scroll-container">
+            <div class="battery-reveal-sticky">
+                <div class="battery-reveal-wrapper">
+                    <div class="battery-content">
+                        <div class="battery-display">
+                            <div class="battery-left-cell">
+                                <div class="battery-body">
+                                    <div class="battery-charge-bar">
+                                        <div class="charge-level"></div>
+                                    </div>
+                                    <div class="battery-label">Cell 1</div>
+                                </div>
+                            </div>
+                            <div class="battery-connector">
+                                <div class="power-flow"></div>
+                                <div class="connector-dot"></div>
+                                <div class="power-flow"></div>
+                            </div>
+                            <div class="battery-right-cell">
+                                <div class="battery-body">
+                                    <div class="battery-charge-bar">
+                                        <div class="charge-level"></div>
+                                    </div>
+                                    <div class="battery-label">Cell 2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="battery-runtime-display">
+                            <div class="runtime-number">16+</div>
+                            <div class="runtime-unit">Hours</div>
+                        </div>
+                        <div class="battery-features-list">
+                            <span>Dual Battery System</span>
+                            <span>Hot-Swap Capable</span>
+                            <span>Continuous Operation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 5: Pro Audio - Sound Visualization -->
+        <section class="audio-scroll-container">
+            <div class="audio-reveal-sticky">
+                <div class="audio-reveal-wrapper">
+                    <div class="audio-content">
+                        <div class="waveform-container">
+                            <svg class="waveform-graphic" viewBox="0 0 600 200" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:rgba(0,191,255,0.3);stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:rgba(0,191,255,0.8);stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:rgba(0,191,255,0.3);stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path class="wave-path" d="M0,100 Q50,50 100,100 T200,100 T300,100 T400,100 T500,100 T600,100" fill="none" stroke="url(#waveGradient)" stroke-width="3"></path>
+                            </svg>
+                            <div class="frequency-bars-display">
+                                <div class="bar" style="--freq: 1;"></div>
+                                <div class="bar" style="--freq: 2;"></div>
+                                <div class="bar" style="--freq: 3;"></div>
+                                <div class="bar" style="--freq: 4;"></div>
+                                <div class="bar" style="--freq: 5;"></div>
+                                <div class="bar" style="--freq: 6;"></div>
+                                <div class="bar" style="--freq: 5;"></div>
+                                <div class="bar" style="--freq: 4;"></div>
+                            </div>
+                        </div>
+                        <div class="audio-specs">
+                            <div class="spec-row"><span class="spec-label">Microphone:</span> <span class="spec-value">Studio Grade XLR</span></div>
+                            <div class="spec-row"><span class="spec-label">Range:</span> <span class="spec-value">20Hz - 20kHz</span></div>
+                            <div class="spec-row"><span class="spec-label">Recording:</span> <span class="spec-value">Lossless PCM</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section 6: 8K Video - Cinematic Reveal -->
+        <section class="video-scroll-container">
+            <div class="video-reveal-sticky">
+                <div class="video-reveal-wrapper">
+                    <div class="video-content">
+                        <div class="film-strip-container">
+                            <div class="film-frame frame-1"></div>
+                            <div class="film-frame frame-2"></div>
+                            <div class="film-frame frame-3"></div>
+                            <div class="film-frame frame-4"></div>
+                            <div class="film-frame frame-5"></div>
+                        </div>
+                        <div class="resolution-stack">
+                            <div class="resolution-card res-4k">
+                                <div class="res-label">4K</div>
+                                <div class="res-detail">4096×2160</div>
+                            </div>
+                            <div class="resolution-card res-6k">
+                                <div class="res-label">6K</div>
+                                <div class="res-detail">6144×3240</div>
+                            </div>
+                            <div class="resolution-card res-8k active">
+                                <div class="res-label">8K</div>
+                                <div class="res-detail">8192×4320</div>
+                                <div class="res-badge">60fps</div>
+                            </div>
+                        </div>
+                        <div class="video-capabilities">
+                            <div class="capability">10-bit Color Depth</div>
+                            <div class="capability">HDR Support</div>
+                            <div class="capability">RAW Output</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Stats Section -->
+        <section class="stats-scroll-container">
+            <div class="stats-reveal-sticky">
+                <div class="stats-reveal-wrapper">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">61MP</div>
+                            <div class="stat-label">Resolution</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">16+</div>
+                            <div class="stat-label">Dynamic Range</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8K</div>
+                            <div class="stat-label">Video @ 60fps</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">7400</div>
+                            <div class="stat-label">MB/s Storage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Price Strip -->
+    <div class="price-strip" id="priceStrip">
+        <div class="price-strip-content">
+            <div class="price-strip-product">
+                <h3>The Pierce Lens Pro</h3>
+            </div>
+            <div class="price-strip-price">
+                From <strong>$1,699</strong>
+            </div>
+        </div>
+        <div class="price-strip-actions">
+            <a href="#" id="customize-camera-btn" class="cta-button">Customize This Camera</a>
+            <a href="#specs" class="cta-button secondary">Learn More</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                </a>
+                <ul>
+                    <li><a href="../../support/index.html">Support</a></li>
+                    <li><a href="../../store/index.html">Find a Dealer</a></li>
+                    <li><a href="../../press/index.html">Press</a></li>
+                    <li><a href="../../privacy/index.html">Privacy</a></li>
+                </ul>
+            </div>
+            <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Handle customize button click
+        document.getElementById('customize-camera-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (typeof CameraSelection !== 'undefined') {
+                CameraSelection.goToCustomize('pl-pro', 'The Pierce Lens Pro');
+            } else {
+                window.location.href = '../../customize/index.html';
+            }
+        });
+
+        // Enhanced scroll-based camera reveal animation with multiple visual layers
+        const cameraImage = document.getElementById('cameraImage');
+        const cameraGlow = document.querySelector('.camera-glow');
+        const cameraCoreGlow = document.querySelector('.camera-core-glow');
+        const cameraOuterRing = document.querySelector('.camera-outer-ring');
+        const textOverlay = document.getElementById('textOverlay');
+        const scrollContainer = document.querySelector('.scroll-reveal-container');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        function updateCameraReveal() {
+            const scrollContainerTop = scrollContainer.offsetTop;
+            const scrollContainerHeight = scrollContainer.offsetHeight;
+            const windowHeight = window.innerHeight;
+            
+            const scrollY = window.scrollY;
+            const elementStart = scrollContainerTop;
+            const elementEnd = scrollContainerTop + scrollContainerHeight;
+            
+            let scrollProgress = (scrollY - elementStart) / (scrollContainerHeight - windowHeight);
+            scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+            // Phase 1: Explosive scale in with 3D rotation (0 - 0.25)
+            if (scrollProgress <= 0.25) {
+                const phase1 = scrollProgress / 0.25;
+                const scale = 0.2 + phase1 * 0.6;
+                const rotX = 90 - phase1 * 80;
+                const rotZ = -45 + phase1 * 40;
+                const rotY = -20 + phase1 * 20;
+                
+                cameraImage.style.transform = `scale(${scale}) rotateX(${rotX}deg) rotateZ(${rotZ}deg) rotateY(${rotY}deg)`;
+                cameraImage.style.opacity = phase1 * 0.8;
+            }
+            // Phase 2: Mid-flight adjustments (0.25 - 0.5)
+            else if (scrollProgress <= 0.5) {
+                const phase2 = (scrollProgress - 0.25) / 0.25;
+                const scale = 0.8 + phase2 * 0.15;
+                const rotX = 10 - phase2 * 10;
+                const rotZ = -5 + phase2 * 2;
+                const rotY = 0;
+                
+                cameraImage.style.transform = `scale(${scale}) rotateX(${rotX}deg) rotateZ(${rotZ}deg) rotateY(${rotY}deg)`;
+                cameraImage.style.opacity = 0.8 + phase2 * 0.2;
+            }
+            // Phase 3: Landing position (0.5 - 0.75)
+            else if (scrollProgress <= 0.75) {
+                const phase3 = (scrollProgress - 0.5) / 0.25;
+                const scale = 0.95 + phase3 * 0.05;
+                
+                cameraImage.style.transform = `scale(${scale}) rotateX(0deg) rotateZ(-3deg) rotateY(0)`;
+                cameraImage.style.opacity = 1;
+            }
+            // Phase 4: Final rest state (0.75 - 1.0)
+            else {
+                cameraImage.style.transform = `scale(1) rotateX(0deg) rotateZ(-2deg) rotateY(0)`;
+                cameraImage.style.opacity = 1;
+            }
+
+            // Multi-layer glow animation with sinusoidal pulsing
+            const glowOpacity = Math.sin(scrollProgress * Math.PI) * 0.9;
+            const glowScale = 0.4 + scrollProgress * 1.8;
+            
+            cameraGlow.style.opacity = glowOpacity;
+            cameraGlow.style.transform = `scale(${glowScale})`;
+
+            // Core glow (brighter inner glow)
+            const coreGlowOpacity = Math.sin(scrollProgress * Math.PI * 1.5) * 0.6;
+            const coreGlowScale = 0.3 + scrollProgress * 1.2;
+            
+            if (cameraCoreGlow !== cameraGlow) {
+                cameraCoreGlow.style.opacity = coreGlowOpacity;
+                cameraCoreGlow.style.transform = `scale(${coreGlowScale})`;
+            }
+
+            // Outer ring animation with rotation
+            const ringOpacity = Math.sin((scrollProgress + 0.3) * Math.PI) * 0.7;
+            const ringScale = 0.5 + scrollProgress * 2.0;
+            const ringRotation = scrollProgress * 720;
+            
+            cameraOuterRing.style.opacity = ringOpacity;
+            cameraOuterRing.style.transform = `scale(${ringScale}) rotateZ(${ringRotation}deg)`;
+
+            // Text animation with delayed fade-in
+            if (scrollProgress <= 0.5) {
+                const textPhase = Math.max(0, (scrollProgress - 0.15) / 0.25);
+                textOverlay.style.opacity = textPhase;
+                textOverlay.style.transform = `translateY(${50 - textPhase * 50}px) scale(${0.95 + textPhase * 0.05})`;
+            } else {
+                textOverlay.style.opacity = 1;
+                textOverlay.style.transform = `translateY(0) scale(1)`;
+            }
+
+            // Scroll indicator fade with glow
+            if (scrollProgress > 0.1) {
+                scrollIndicator.style.opacity = 0;
+                scrollIndicator.style.pointerEvents = 'none';
+            } else {
+                scrollIndicator.style.opacity = 1 - scrollProgress * 10;
+                scrollIndicator.style.pointerEvents = 'auto';
+            }
+        }
+
+        window.addEventListener('scroll', updateCameraReveal);
+        window.addEventListener('resize', updateCameraReveal);
+        updateCameraReveal();
+
+        // Enhanced feature and spec cards animation with stagger and visual effects
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Staggered animation with increased delay
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                        // Add a subtle pulse effect after appearing
+                        entry.target.style.animation = `none`;
+                        setTimeout(() => {
+                            entry.target.style.animation = `floatUp 0.6s ease-out`;
+                        }, 10);
+                    }, index * 80);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => cardObserver.observe(card));
+        document.querySelectorAll('.spec-item').forEach(spec => cardObserver.observe(spec));
+
+        // Feature section animations on scroll
+        const featureSectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const section = entry.target;
+                    
+                    // Animate heading
+                    const heading = section.querySelector('.feature-text h2');
+                    if (heading) {
+                        heading.style.animation = 'slideInUp 0.6s ease-out forwards';
+                    }
+                    
+                    // Animate paragraphs
+                    const paragraphs = section.querySelectorAll('.feature-text p');
+                    paragraphs.forEach((p, index) => {
+                        p.style.animation = `slideInUp 0.6s ease-out forwards`;
+                        p.style.animationDelay = `${0.1 + index * 0.1}s`;
+                    });
+                    
+                    // Animate list items
+                    const listItems = section.querySelectorAll('.feature-list li');
+                    listItems.forEach((li, index) => {
+                        li.style.animation = `slideInLeft 0.5s ease-out forwards`;
+                        li.style.animationDelay = `${0.3 + index * 0.05}s`;
+                    });
+                    
+                    // Animate image
+                    const image = section.querySelector('.feature-visual img');
+                    if (image) {
+                        image.classList.add('in-view');
+                        image.style.animation = 'slideInUp 0.8s ease-out forwards';
+                        image.style.animationDelay = '0.2s';
+                    }
+                    
+                    // Animate label
+                    const label = section.querySelector('.feature-label');
+                    if (label) {
+                        label.style.animation = 'slideInUp 0.6s ease-out forwards';
+                    }
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('.feature-section').forEach(section => {
+            featureSectionObserver.observe(section);
+        });
+
+        // Feature sections scroll handlers - Redesigned with unique animations
+        
+        // SENSOR SECTION - Pixel Formation Animation
+        const sensorContainer = document.querySelector('.sensor-scroll-container');
+        if (sensorContainer) {
+            function updateSensorScroll() {
+                const containerTop = sensorContainer.offsetTop;
+                const containerHeight = sensorContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Pixel rows animation with stagger
+                const pixelRows = sensorContainer.querySelectorAll('.pixel-row');
+                pixelRows.forEach((row, index) => {
+                    const delay = index * 0.1;
+                    const rowProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
+                    row.style.opacity = rowProgress;
+                    row.style.transform = `scaleX(${rowProgress})`;
+                });
+
+                // Text lines animation
+                const textLines = sensorContainer.querySelectorAll('.text-line');
+                textLines.forEach((line, index) => {
+                    const delay = 0.1 + index * 0.1;
+                    const lineProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    line.style.opacity = lineProgress;
+                    line.style.transform = `translateX(${-50 + lineProgress * 50}px)`;
+                });
+
+                // Aperture animation
+                const aperture = sensorContainer.querySelector('.sensor-aperture');
+                if (aperture) {
+                    const apertureProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.3));
+                    aperture.style.opacity = apertureProgress;
+                    aperture.style.transform = `scale(${apertureProgress}) rotate(${apertureProgress * 360}deg)`;
+                }
+
+                // Shine animation
+                const shine = sensorContainer.querySelector('.sensor-shine');
+                if (shine) {
+                    const shineProgress = Math.max(0, Math.min(1, (progress - 0.4) / 0.3));
+                    shine.style.opacity = shineProgress * 0.6;
+                    shine.style.transform = `translate(-50%, -50%) scale(${0.5 + shineProgress})`;
+                }
+
+                // Bottom stat fade in
+                const bottomStat = sensorContainer.querySelector('.sensor-bottom-stat');
+                if (bottomStat) {
+                    bottomStat.style.opacity = Math.max(0, Math.min(1, (progress - 0.5) / 0.3));
+                }
+            }
+            window.addEventListener('scroll', updateSensorScroll);
+            updateSensorScroll();
+        }
+
+        // CONNECTIVITY SECTION - Network Visualization Animation
+        const connectivityContainer = document.querySelector('.connectivity-scroll-container');
+        if (connectivityContainer) {
+            function updateConnectivityScroll() {
+                const containerTop = connectivityContainer.offsetTop;
+                const containerHeight = connectivityContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Network nodes animation
+                const nodes = connectivityContainer.querySelectorAll('.network-node');
+                nodes.forEach((node, index) => {
+                    const delay = index * 0.05;
+                    const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    node.style.opacity = nodeProgress;
+                    node.style.transform = index === 0 
+                        ? `translate(-50%, -50%) scale(${nodeProgress})`
+                        : `translate(-50%, -50%) scale(${nodeProgress})`;
+                });
+
+                // SVG lines animation (stroke drawing)
+                const lines = connectivityContainer.querySelectorAll('.net-line');
+                lines.forEach((line, index) => {
+                    const delay = 0.2 + index * 0.08;
+                    const lineProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
+                    line.style.opacity = lineProgress;
+                    line.style.strokeDashoffset = 500 - (lineProgress * 500);
+                });
+
+                // Labels animation
+                const labels = connectivityContainer.querySelectorAll('.connectivity-labels div');
+                labels.forEach((label, index) => {
+                    const delay = 0.4 + index * 0.1;
+                    const labelProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    label.style.opacity = labelProgress;
+                    label.style.transform = `translateY(${30 - labelProgress * 30}px)`;
+                });
+
+                // Connection status
+                const status = connectivityContainer.querySelector('.connection-status');
+                if (status) {
+                    status.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
+                }
+            }
+            window.addEventListener('scroll', updateConnectivityScroll);
+            updateConnectivityScroll();
+        }
+
+        // STORAGE SECTION - Vault System Animation
+        const storageContainer = document.querySelector('.storage-scroll-container');
+        if (storageContainer) {
+            function updateStorageScroll() {
+                const containerTop = storageContainer.offsetTop;
+                const containerHeight = storageContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // NVMe slots animation
+                const leftCard = storageContainer.querySelector('.nvme-slot.left .nvme-card');
+                if (leftCard) {
+                    const leftProgress = Math.max(0, Math.min(1, progress / 0.3));
+                    leftCard.style.opacity = leftProgress;
+                    leftCard.style.transform = `translateX(${-50 + leftProgress * 50}px) rotateY(${-20 + leftProgress * 20}deg)`;
+                }
+
+                const rightCard = storageContainer.querySelector('.nvme-slot.right .nvme-card');
+                if (rightCard) {
+                    const rightProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.3));
+                    rightCard.style.opacity = rightProgress;
+                    rightCard.style.transform = `translateX(${50 - rightProgress * 50}px) rotateY(${20 - rightProgress * 20}deg)`;
+                }
+
+                // Speed gauge animation
+                const gauge = storageContainer.querySelector('.speed-gauge');
+                if (gauge) {
+                    const gaugeProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.3));
+                    gauge.style.opacity = gaugeProgress;
+                    gauge.style.transform = `scaleY(${gaugeProgress})`;
+                }
+
+                // Gauge needle animation
+                const needle = storageContainer.querySelector('.gauge-needle');
+                if (needle) {
+                    const needleProgress = Math.max(0, Math.min(1, (progress - 0.2) / 0.4));
+                    needle.style.opacity = needleProgress;
+                    needle.style.transform = `translateX(-50%) rotateZ(${-90 + needleProgress * 90}deg)`;
+                }
+                
+                // Slot labels
+                const leftLabel = storageContainer.querySelector('.nvme-slot.left .slot-label');
+                if (leftLabel) {
+                    const labelProgress = Math.max(0, Math.min(1, (progress - 0.15) / 0.25));
+                    leftLabel.style.opacity = labelProgress;
+                    leftLabel.style.transform = `translateY(${20 - labelProgress * 20}px)`;
+                }
+                
+                const rightLabel = storageContainer.querySelector('.nvme-slot.right .slot-label');
+                if (rightLabel) {
+                    const labelProgress = Math.max(0, Math.min(1, (progress - 0.25) / 0.25));
+                    rightLabel.style.opacity = labelProgress;
+                    rightLabel.style.transform = `translateY(${20 - labelProgress * 20}px)`;
+                }
+
+                // Feature badges animation
+                const badges = storageContainer.querySelectorAll('.feature-badge');
+                badges.forEach((badge, index) => {
+                    const delay = 0.5 + index * 0.1;
+                    const badgeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    badge.style.opacity = badgeProgress;
+                    badge.style.transform = `scale(${0.8 + badgeProgress * 0.2})`;
+                });
+
+                // Bottom text
+                const bottomText = storageContainer.querySelector('.storage-bottom-text');
+                if (bottomText) {
+                    bottomText.style.opacity = Math.max(0, Math.min(1, (progress - 0.7) / 0.3));
+                }
+            }
+            window.addEventListener('scroll', updateStorageScroll);
+            updateStorageScroll();
+        }
+
+        // BATTERY SECTION - Power Flow Animation
+        const batteryContainer = document.querySelector('.battery-scroll-container');
+        if (batteryContainer) {
+            function updateBatteryScroll() {
+                const containerTop = batteryContainer.offsetTop;
+                const containerHeight = batteryContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Battery cells animation
+                const leftCell = batteryContainer.querySelector('.battery-left-cell');
+                if (leftCell) {
+                    const leftProgress = Math.max(0, Math.min(1, progress / 0.3));
+                    leftCell.style.opacity = leftProgress;
+                    leftCell.style.transform = `scale(${0.5 + leftProgress * 0.5})`;
+                }
+
+                const rightCell = batteryContainer.querySelector('.battery-right-cell');
+                if (rightCell) {
+                    const rightProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.3));
+                    rightCell.style.opacity = rightProgress;
+                    rightCell.style.transform = `scale(${0.5 + rightProgress * 0.5})`;
+                }
+
+                // Charge level animation
+                const chargeLevels = batteryContainer.querySelectorAll('.charge-level');
+                chargeLevels.forEach((level, index) => {
+                    const delay = 0.2 + index * 0.1;
+                    const chargeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.4));
+                    level.style.height = `${chargeProgress * 100}%`;
+                });
+
+                // Connector and power flow
+                const connector = batteryContainer.querySelector('.battery-connector');
+                if (connector) {
+                    connector.style.opacity = Math.max(0, Math.min(1, (progress - 0.15) / 0.25));
+                }
+
+                // Runtime display
+                const runtime = batteryContainer.querySelector('.battery-runtime-display');
+                if (runtime) {
+                    runtime.style.opacity = Math.max(0, Math.min(1, (progress - 0.5) / 0.3));
+                    runtime.style.transform = `translateY(${20 - Math.min(1, (progress - 0.5) / 0.3) * 20}px)`;
+                }
+
+                // Features list
+                const features = batteryContainer.querySelector('.battery-features-list');
+                if (features) {
+                    features.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
+                }
+            }
+            window.addEventListener('scroll', updateBatteryScroll);
+            updateBatteryScroll();
+        }
+
+        // AUDIO SECTION - Sound Visualization Animation
+        const audioContainer = document.querySelector('.audio-scroll-container');
+        if (audioContainer) {
+            function updateAudioScroll() {
+                const containerTop = audioContainer.offsetTop;
+                const containerHeight = audioContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Waveform container
+                const waveformContainer = audioContainer.querySelector('.waveform-container');
+                if (waveformContainer) {
+                    const waveProgress = Math.max(0, Math.min(1, progress / 0.3));
+                    waveformContainer.style.opacity = waveProgress;
+                    waveformContainer.style.transform = `translateY(${20 - waveProgress * 20}px)`;
+                }
+
+                // Waveform path (SVG drawing)
+                const wavePath = audioContainer.querySelector('.wave-path');
+                if (wavePath) {
+                    const pathProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.4));
+                    wavePath.style.strokeDashoffset = 1000 - (pathProgress * 1000);
+                }
+
+                // Frequency bars animation
+                const bars = audioContainer.querySelectorAll('.frequency-bars-display .bar');
+                bars.forEach((bar, index) => {
+                    const delay = 0.3 + index * 0.05;
+                    const barProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    bar.style.opacity = barProgress;
+                    bar.style.transform = `translateY(${20 - barProgress * 20}px)`;
+                });
+
+                // Audio specs
+                const specs = audioContainer.querySelector('.audio-specs');
+                if (specs) {
+                    specs.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
+                    specs.style.transform = `translateY(${20 - Math.min(1, (progress - 0.6) / 0.3) * 20}px)`;
+                }
+            }
+            window.addEventListener('scroll', updateAudioScroll);
+            updateAudioScroll();
+        }
+
+        // VIDEO SECTION - Cinematic Reveal Animation
+        const videoContainer = document.querySelector('.video-scroll-container');
+        if (videoContainer) {
+            function updateVideoScroll() {
+                const containerTop = videoContainer.offsetTop;
+                const containerHeight = videoContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(1, progress));
+
+                // Film strip animation
+                const filmStrip = videoContainer.querySelector('.film-strip-container');
+                if (filmStrip) {
+                    const stripProgress = Math.max(0, Math.min(1, progress / 0.3));
+                    filmStrip.style.opacity = stripProgress;
+                    filmStrip.style.transform = `scaleX(${stripProgress})`;
+                }
+
+                // Film frames animation
+                const frames = videoContainer.querySelectorAll('.film-frame');
+                frames.forEach((frame, index) => {
+                    const delay = 0.1 + index * 0.05;
+                    const frameProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    frame.style.opacity = frameProgress;
+                    frame.style.transform = `scale(${0.5 + frameProgress * 0.5})`;
+                });
+
+                // Resolution stack animation
+                const resStack = videoContainer.querySelector('.resolution-stack');
+                if (resStack) {
+                    resStack.style.opacity = Math.max(0, Math.min(1, (progress - 0.3) / 0.3));
+                }
+
+                // Resolution cards animation
+                const resCards = videoContainer.querySelectorAll('.resolution-card');
+                resCards.forEach((card, index) => {
+                    const delay = 0.4 + index * 0.08;
+                    const cardProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
+                    card.style.opacity = cardProgress;
+                    card.style.transform = `translateX(${-30 + cardProgress * 30}px)`;
+                });
+
+                // Video capabilities
+                const capabilities = videoContainer.querySelector('.video-capabilities');
+                if (capabilities) {
+                    capabilities.style.opacity = Math.max(0, Math.min(1, (progress - 0.7) / 0.3));
+                    capabilities.style.transform = `translateY(${20 - Math.min(1, (progress - 0.7) / 0.3) * 20}px)`;
+                }
+            }
+            window.addEventListener('scroll', updateVideoScroll);
+            updateVideoScroll();
+        }
+
+        // Stats animation on scroll
+        const statsContainer = document.querySelector('.stats-scroll-container');
+        if (statsContainer) {
+            const statsItems = document.querySelectorAll('.stat-item');
+
+            function updateStatsReveal() {
+                const containerTop = statsContainer.offsetTop;
+                const containerHeight = statsContainer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                
+                const scrollY = window.scrollY;
+                const elementStart = containerTop;
+                
+                let scrollProgress = (scrollY - elementStart) / (containerHeight - windowHeight);
+                scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+                statsItems.forEach((item, index) => {
+                    // Stagger animation for each stat
+                    const staggerDelay = index * 0.15;
+                    const adjustedProgress = Math.max(0, scrollProgress - staggerDelay);
+                    
+                    if (adjustedProgress > 0) {
+                        item.classList.add('visible');
+                        
+                        // Scale and opacity animation
+                        const scale = 0.8 + adjustedProgress * 0.2;
+                        const opacity = adjustedProgress * 1.2; // Goes beyond 1 for quick appearance
+                        
+                        item.style.transform = `translateY(${40 - adjustedProgress * 40}px) scale(${Math.min(1, scale)})`;
+                        item.style.opacity = Math.min(1, opacity);
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateStatsReveal);
+            updateStatsReveal();
+        }
+
+        // Price strip is always visible
+
+        // Parallax effect for background on scroll
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const revealContainer = document.querySelector('.scroll-reveal-container');
+            if (revealContainer) {
+                revealContainer.style.backgroundPosition = `0 ${scrollY * 0.3}px`;
+            }
+        });
+
+        // Add subtle cursor-following glow effect
+        document.addEventListener('mousemove', (e) => {
+            const coreGlow = document.querySelector('.camera-core-glow');
+            const windowHeight = window.innerHeight;
+            
+            // Only apply effect in viewport of the camera reveal
+            if (e.clientY < windowHeight * 1.5 && document.querySelector('.camera-reveal-sticky')) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                coreGlow.style.filter = `blur(${60 + x * 20}px)`;
+            }
+        });
+
+        // Loading animation for pro badge
+        setTimeout(() => {
+            const proBadge = document.querySelector('.pro-badge');
+            if (proBadge) {
+                proBadge.style.opacity = '1';
+            }
+        }, 500);
+    </script>
+
+    <script src="../../js/camera-selection.js"></script>
+    <script src="../../js/shopping-cart.js"></script>
+</body>
+</html>
