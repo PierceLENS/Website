@@ -97,6 +97,85 @@
     .category-title {
         font-size: 28px;
     }
+
+    /* --- PRODUCT GRID ADJUSTMENTS --- */
+    #categories {
+        padding: 60px 20px;
+    }
+
+    .category-group {
+        margin-bottom: 50px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        border-radius: 12px;
+    }
+
+    .product-image-wrapper {
+        height: 200px;
+    }
+
+    .product-details {
+        padding: 16px;
+    }
+
+    .product-details h4 {
+        font-size: 18px;
+    }
+
+    .product-price {
+        font-size: 18px;
+    }
+
+    .store-header .section-heading {
+        font-size: 36px;
+    }
+
+    .section-description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-headline {
+        font-size: 32px;
+    }
+
+    .banner-sub-text {
+        font-size: 14px;
+    }
+
+    .category-title {
+        font-size: 24px;
+    }
+
+    #categories {
+        padding: 40px 15px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .product-cta-button {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 13px;
+    }
+
+    .store-header .section-heading {
+        font-size: 28px;
+    }
+
+    .section-description {
+        font-size: 15px;
+    }
 }
 
 /* Default Container Padding (used for reference in the carousel) */

@@ -204,12 +204,14 @@
             object-fit: contain;
             filter: drop-shadow(0 20px 40px rgba(0, 191, 255, 0.3));
             animation: float 6s ease-in-out infinite;
-            transition: opacity 0.5s ease-in-out;
             opacity: 1;
         }
 
         .camera-preview-img.fade-out {
+            animation: none;
             opacity: 0;
+            filter: drop-shadow(0 20px 40px rgba(0, 191, 255, 0.1));
+            transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out;
         }
 
         @keyframes float {
@@ -651,7 +653,7 @@
                 <div class="camera-grid">
                     <!-- The Pierce Lens -->
                     <div class="camera-card active" data-camera="pl">
-                        <img src="../images/cameraPreviews/camera_black.png" alt="The Pierce Lens">
+                        <img src="../images/products/the_pierce_lens/the-pierce-lens.png" alt="The Pierce Lens">
                         <h3>The Pierce Lens</h3>
                         <p>Professional integrated camera system</p>
                         <div class="price">From $999</div>
@@ -659,7 +661,7 @@
 
                     <!-- The Pierce Lens Pro -->
                     <div class="camera-card" data-camera="pl-pro">
-                        <img src="../images/cameraPreviews/camera_black.png" alt="The Pierce Lens Pro">
+                        <img src="../images/products/the_pierce_lens/the-pierce-lens.png" alt="The Pierce Lens Pro">
                         <h3>The Pierce Lens Pro</h3>
                         <p>61MP professional integrated system</p>
                         <div class="price">From $1,499</div>
@@ -678,7 +680,7 @@
                     <h1 class="preview-title">The Pierce Lens</h1>
                     
                     <div class="camera-preview-container">
-                        <img id="previewImage" src="../images/cameraPreviews/camera_black.png" alt="Preview" class="camera-preview-img">
+                        <img id="previewImage" src="../images/products/the_pierce_lens/the-pierce-lens.png" alt="Preview" class="camera-preview-img">
                     </div>
 
                     <div class="preview-specs">
@@ -712,12 +714,12 @@
                             Body Finish & Color
                         </h3>
                         <div class="color-swatches">
-                            <div class="color-swatch selected" style="background-color: #111111;" data-label="Black" data-finish="black" data-price="0" data-image="camera_black.png"></div>
-                            <div class="color-swatch" style="background-color: #704214;" data-label="Brown" data-finish="brown" data-price="100" data-image="camera_brown.png"></div>
-                            <div class="color-swatch" style="background-color: #008080;" data-label="Teal" data-finish="teal" data-price="100" data-image="camera_teal.png"></div>
-                            <div class="color-swatch" style="background-color: #6B8E23;" data-label="Olive" data-finish="olive" data-price="100" data-image="camera_olive-green.png"></div>
-                            <div class="color-swatch" style="background-color: #C8A2C8;" data-label="Lilac" data-finish="lilac" data-price="150" data-image="camera_lilac.png"></div>
-                            <div class="color-swatch" style="background-color: #F8BBD0;" data-label="Pink" data-finish="pink" data-price="150" data-image="camera_pastel-pink.png"></div>
+                            <div class="color-swatch selected" style="background-color: #111111;" data-label="Black" data-finish="black" data-price="0" data-image="the-pierce-lens.png"></div>
+                            <div class="color-swatch" style="background-color: #704214;" data-label="Brown" data-finish="brown" data-price="100" data-image="the-pierce-lens_brown.png"></div>
+                            <div class="color-swatch" style="background-color: #008080;" data-label="Teal" data-finish="teal" data-price="100" data-image="the-pierce-lens_teal.png"></div>
+                            <div class="color-swatch" style="background-color: #6B8E23;" data-label="Olive" data-finish="olive" data-price="100" data-image="the-pierce-lens_olive.png"></div>
+                            <div class="color-swatch" style="background-color: #C8A2C8;" data-label="Lilac" data-finish="lilac" data-price="150" data-image="the-pierce-lens_lilac.png"></div>
+                            <div class="color-swatch" style="background-color: #F8BBD0;" data-label="Pink" data-finish="pink" data-price="150" data-image="the-pierce-lens_pink.png"></div>
                         </div>
                     </div>
 
@@ -813,6 +815,7 @@
                     </ul>
                     <ul>
                         <li class="footer-heading">Products</li>
+                        <li><a href="../cameras/pierce-lens/index.html">Pierce Lens</a></li>
                         <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
                         <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
                     </ul>
@@ -934,7 +937,15 @@
             swatch.addEventListener('click', function() {
                 document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
                 this.classList.add('selected');
-                currentConfig.finish = this.dataset.finish;
+                
+                const finishValue = this.dataset.finish;
+                const finishPrice = parseInt(this.dataset.price) || 0;
+                
+                // Update config and ensure priceModifiers is synchronized
+                currentConfig.finish = finishValue;
+                priceModifiers.finish[finishValue] = finishPrice;
+                
+                // Trigger preview update and price recalculation
                 updateCameraPreview(this.dataset.image);
                 updatePrice();
             });
@@ -943,36 +954,52 @@
         function updateCameraPreview(imageName) {
             const container = document.querySelector('.camera-preview-container');
             const currentImg = document.getElementById('previewImage');
-            const newSrc = `../images/cameraPreviews/${imageName}`;
+            const newSrc = `../images/products/the_pierce_lens/${imageName}`;
             
             if (currentImg.src.includes(imageName)) return;
             
-            // Create new image element
-            const newImg = document.createElement('img');
-            newImg.src = newSrc;
-            newImg.alt = 'Preview';
-            newImg.className = 'camera-preview-img';
-            newImg.style.opacity = '0';
-            
-            // Add new image to container
-            container.appendChild(newImg);
-            
-            // Sync animations - both images follow same float animation
-            const currentAnimationTime = parseFloat(window.getComputedStyle(currentImg).animationDelay || 0);
-            newImg.style.animationDelay = currentAnimationTime + 's';
-            
-            // Trigger crossfade
-            requestAnimationFrame(() => {
-                currentImg.classList.add('fade-out');
-                newImg.style.opacity = '1';
+            // Preload new image to ensure smooth transition
+            const preloadImg = new Image();
+            preloadImg.onload = function() {
+                // Create new image element
+                const newImg = document.createElement('img');
+                newImg.src = newSrc;
+                newImg.alt = 'Preview';
+                newImg.className = 'camera-preview-img';
+                newImg.style.opacity = '0';
                 
-                // Remove old image after transition
-                setTimeout(() => {
-                    currentImg.remove();
-                    newImg.id = 'previewImage';
-                }, 500);
-            });
+                // Position new image on top
+                newImg.style.zIndex = '2';
+                currentImg.style.zIndex = '1';
+                
+                // Add new image to container
+                container.appendChild(newImg);
+                
+                // Sync animations - both images follow same float animation
+                const currentAnimationTime = parseFloat(window.getComputedStyle(currentImg).animationDelay || 0);
+                newImg.style.animationDelay = currentAnimationTime + 's';
+                
+                // Trigger smooth morph transition
+                requestAnimationFrame(() => {
+                    // Start morph effect on current image
+                    currentImg.classList.add('fade-out');
+                    
+                    // Fade in new image with morph
+                    setTimeout(() => {
+                        newImg.style.opacity = '1';
+                    }, 50);
+                    
+                    // Remove old image after transition completes
+                    setTimeout(() => {
+                        currentImg.remove();
+                        newImg.id = 'previewImage';
+                        newImg.style.zIndex = 'auto';
+                    }, 800);
+                });
+            };
+            preloadImg.src = newSrc;
         }
+
 
         // Option Label Selection
         document.querySelectorAll('.option-label').forEach(label => {
@@ -1037,7 +1064,7 @@
             const cartItem = {
                 name: cameraNames[currentConfig.camera] || 'The Pierce Lens',
                 price: totalPrice,
-                image: `../images/cameraPreviews/camera_${selectedFinish.dataset.finish}.png`,
+                image: selectedFinish.dataset.finish === 'black' ? `../images/products/the_pierce_lens/the-pierce-lens.png` : `../images/products/the_pierce_lens/the-pierce-lens_${selectedFinish.dataset.finish}.png`,
                 quantity: 1,
                 customizations: {
                     'Body Finish': finishName,

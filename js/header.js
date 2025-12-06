@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lazy-load auth script across all pages
     if (!document.getElementById('pl-auth-script')) {
+        const headerScript = document.currentScript || document.querySelector('script[src*="header.js"]');
+        const scriptSrc = headerScript ? headerScript.getAttribute('src') || '' : 'js/header.js';
+        const basePath = scriptSrc.includes('/') ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) : '';
+
         const s = document.createElement('script');
-        s.src = (window.location.pathname.includes('/')) ? `${window.location.pathname.includes('cameras/') || window.location.pathname.includes('customize/') || window.location.pathname.includes('store/') || window.location.pathname.includes('support/') || window.location.pathname.includes('press/') || window.location.pathname.includes('policy/') || window.location.pathname.includes('privacy/') || window.location.pathname.includes('cart/') || window.location.pathname.includes('checkout/') ? '../' : ''}js/auth.js` : 'js/auth.js';
+        s.src = `${basePath}auth.js`;
         s.id = 'pl-auth-script';
         document.body.appendChild(s);
     }

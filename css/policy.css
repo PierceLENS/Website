@@ -61,3 +61,50 @@
 .policy-section li {
     margin-bottom: 10px;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .policy-main {
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+
+    .policy-container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .policy-container h1 {
+        font-size: 32px;
+    }
+
+    .policy-section h2 {
+        font-size: 24px;
+    }
+
+    .policy-section h3 {
+        font-size: 20px;
+    }
+
+    .policy-section p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .policy-container h1 {
+        font-size: 28px;
+    }
+
+    .policy-section h2 {
+        font-size: 22px;
+    }
+
+    .policy-section h3 {
+        font-size: 18px;
+    }
+
+    .policy-section {
+        margin-bottom: 30px;
+    }
+}

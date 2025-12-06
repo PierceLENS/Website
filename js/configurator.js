@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (selectedFinish) {
         const finishValue = selectedFinish.value; 
-        const newSrc = `../images/cameraPreviews/camera_${finishValue}.png`; 
+        const newSrc = finishValue === 'black' ? `../images/products/the_pierce_lens/the-pierce-lens.png` : `../images/products/the_pierce_lens/the-pierce-lens_${finishValue}.png`; 
         
         // --- 1. Avoid redundant transition if same color is selected ---
         if (currentActiveImage.src.includes(newSrc)) {

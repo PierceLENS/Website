@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PierceLENS | Account Settings</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shopping-cart.css">
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-logo">
+                <img src="../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="../cameras/pierce-lens/index.html">Pierce Lens</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="../cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
+                        <li><a href="../customize/index.html">Customize</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="../support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../support/index.html">Support Center</a></li>
+                        <li><a href="../press/index.html">Newsroom</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="account-main">
+        <div class="account-container">
+            <!-- Sidebar -->
+            <aside class="account-sidebar">
+                <nav class="account-nav">
+                    <button type="button" class="account-nav-link active" data-section="profile">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </button>
+                    <button type="button" class="account-nav-link" data-section="payment">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>Payment Methods</span>
+                    </button>
+                    <button type="button" class="account-nav-link" data-section="orders">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Order History</span>
+                    </button>
+                    <button type="button" class="account-nav-link" data-section="settings">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <section class="account-content">
+                <!-- Profile Section -->
+                <div id="profile-section" class="account-section active">
+                    <div class="section-header">
+                        <h2>Profile</h2>
+                        <p class="section-description">Manage your account information</p>
+                    </div>
+
+                    <div class="profile-avatar-area">
+                        <div class="avatar-display" id="profile-avatar-display"></div>
+                        <div class="avatar-info">
+                            <h3 id="profile-display-name"></h3>
+                            <p id="profile-display-email"></p>
+                            <button type="button" class="avatar-upload-btn">Change Avatar</button>
+                        </div>
+                    </div>
+
+                    <form id="profile-form" class="account-form">
+                        <div class="form-group">
+                            <label for="profile-name">Full Name</label>
+                            <input type="text" id="profile-name" name="name" placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" name="email" disabled>
+                            <small class="form-helper">Email cannot be changed</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Phone (optional)</label>
+                            <input type="tel" id="profile-phone" name="phone" placeholder="+1 (000) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-country">Country</label>
+                            <select id="profile-country" name="country">
+                                <option value="">Select country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-avatar">Profile Picture</label>
+                            <input type="file" id="profile-avatar" name="avatar" accept="image/*">
+                            <small class="form-helper">Max 2MB, JPG/PNG</small>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                            <span class="form-message" id="profile-message"></span>
+                        </div>
+                    </form>
+
+                    <div class="profile-section-divider"></div>
+
+                    <h3 style="margin-top: 40px;">Address Book</h3>
+                    <div class="address-book-list" id="address-book-list">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>No addresses saved</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-secondary" id="add-address-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Address</span>
+                    </button>
+                </div>
+
+                <!-- Payment Methods Section -->
+                <div id="payment-section" class="account-section">
+                    <div class="section-header">
+                        <h2>Payment Methods</h2>
+                        <p class="section-description">Manage your payment information through Virtual Enterprises US Bank Network</p>
+                    </div>
+
+                    <div class="payment-methods-list" id="payment-methods-list">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-credit-card"></i>
+                            <p>No payment methods saved</p>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-secondary" id="add-payment-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Payment Method</span>
+                    </button>
+
+                    <div class="payment-info-box">
+                        <h3>Secure Payment Processing</h3>
+                        <p>Your payment information is securely processed through <strong>Virtual Enterprises US Bank Network</strong>. We never store your account details on our servers.</p>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div id="orders-section" class="account-section">
+                    <div class="section-header">
+                        <h2>Order History</h2>
+                        <p class="section-description">View and manage your past orders</p>
+                    </div>
+                    <div class="empty-state">
+                        <i class="fa-solid fa-box"></i>
+                        <p>No orders yet</p>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="account-section">
+                    <div class="section-header">
+                        <h2>Settings</h2>
+                        <p class="section-description">Account preferences and privacy</p>
+                    </div>
+
+                    <h3>Notifications</h3>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Email Notifications</h4>
+                                <p>Receive updates about orders and new products</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="setting-email-notif" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Marketing Emails</h4>
+                                <p>Receive news and exclusive offers</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="setting-marketing">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Security</h3>
+                    <div class="settings-group">
+                        <button type="button" class="btn-secondary" id="change-password-btn">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>Change Password</span>
+                        </button>
+                        <button type="button" class="btn-secondary" id="setup-2fa-btn">
+                            <i class="fa-solid fa-shield"></i>
+                            <span>Setup Two-Factor Authentication</span>
+                        </button>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Connected Services</h3>
+                    <div class="settings-group">
+                        <p style="color: var(--color-text-secondary); font-size: 14px;">No connected services yet</p>
+                    </div>
+
+                    <div class="danger-zone" style="margin-top: 40px;">
+                        <h3>Danger Zone</h3>
+                        <button type="button" class="btn-danger" id="delete-account-btn">Delete Account</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Address Modal -->
+    <div class="address-modal" id="address-modal">
+        <div class="address-modal-content">
+            <button type="button" class="modal-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2>Add Address</h2>
+            <form id="address-form" class="address-form">
+                <div class="form-group">
+                    <label for="addr-name">Full Name</label>
+                    <input type="text" id="addr-name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="addr-street">Street Address</label>
+                    <input type="text" id="addr-street" placeholder="123 Main St" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addr-city">City</label>
+                        <input type="text" id="addr-city" placeholder="New York" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addr-state">State/Province</label>
+                        <input type="text" id="addr-state" placeholder="NY" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addr-zip">ZIP/Postal Code</label>
+                        <input type="text" id="addr-zip" placeholder="10001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addr-country">Country</label>
+                        <input type="text" id="addr-country" placeholder="USA" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="addr-default" checked>
+                        <span>Make this my default address</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary">Save Address</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="payment-modal">
+        <div class="payment-modal-content">
+            <button type="button" class="modal-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2>Add Payment Method</h2>
+            <form id="payment-form" class="payment-form">
+                <div class="form-group">
+                    <label for="card-name">Account Holder Name</label>
+                    <input type="text" id="card-name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Account Number</label>
+                    <input type="text" id="card-number" placeholder="123 456 789" maxlength="11" required>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="card-default" checked>
+                        <span>Make this my default payment method</span>
+                    </label>
+                </div>
+                <div class="payment-notice">
+                    <i class="fa-solid fa-lock"></i>
+                    <p>Processed securely through <strong>Virtual Enterprises US Bank Network</strong></p>
+                </div>
+                <button type="submit" class="btn-primary">Add Payment Method</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div class="password-modal" id="password-modal">
+        <div class="password-modal-content">
+            <button type="button" class="modal-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2>Change Password</h2>
+            <form id="password-form" class="password-form">
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" placeholder="••••••••" required>
+                    <small class="form-helper">At least 8 characters</small>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="••••••••" required>
+                </div>
+                <div class="password-form-message" id="password-message"></div>
+                <button type="submit" class="btn-primary">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2FA Setup Modal -->
+    <div class="twofa-modal" id="twofa-modal">
+        <div class="twofa-modal-content">
+            <button type="button" class="modal-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2>Two-Factor Authentication</h2>
+            <div id="twofa-steps">
+                <div id="twofa-step-1" class="twofa-step active">
+                    <p>Two-factor authentication adds an extra layer of security to your account.</p>
+                    <button type="button" class="btn-primary" id="enable-2fa-btn">Enable 2FA</button>
+                </div>
+                <div id="twofa-step-2" class="twofa-step">
+                    <p>Scan this QR code with your authenticator app:</p>
+                    <div class="qr-code-placeholder" id="qr-placeholder">
+                        [QR Code]
+                    </div>
+                    <p>Or enter this code manually:</p>
+                    <code class="code-display" id="secret-code">ABCD1234EFGH5678</code>
+                    <button type="button" class="copy-btn" id="copy-code-btn">
+                        <i class="fa-solid fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div id="twofa-step-3" class="twofa-step">
+                    <p>Enter the 6-digit code from your authenticator app:</p>
+                    <input type="text" id="twofa-code" placeholder="000000" maxlength="6" class="twofa-input">
+                    <button type="button" class="btn-primary" id="verify-2fa-btn">Verify & Enable</button>
+                    <button type="button" class="btn-secondary" id="cancel-2fa-btn">Cancel</button>
+                </div>
+                <div id="twofa-step-4" class="twofa-step">
+                    <div class="twofa-success">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <h3>2FA Enabled!</h3>
+                        <p>Your account is now more secure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                </a>
+                <div class="footer-columns">
+                    <ul>
+                        <li class="footer-heading">Explore</li>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../customize/index.html">Customize</a></li>
+                        <li><a href="../store/index.html">Store</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Products</li>
+                        <li><a href="../cameras/pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Support</li>
+                        <li><a href="../support/index.html">Support</a></li>
+                        <li><a href="../press/index.html">Press</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Legal</li>
+                        <li><a href="../privacy/index.html">Privacy Policy</a></li>
+                        <li><a href="../policy/index.html">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/cookie_banner.js"></script>
+    <script src="../js/header.js"></script>
+    <script src="../js/shopping-cart.js"></script>
+    <script src="account.js"></script>
+</body>
+</html>
