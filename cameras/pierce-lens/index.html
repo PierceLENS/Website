@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierce Lens - Cinema Camera Lineup | PierceLENS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .lineup-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .lineup-hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .lineup-hero p {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .model-grid {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .model-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
+            border: 2px solid rgba(0, 191, 255, 0.15);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .model-card:hover {
+            border-color: var(--color-main-accent);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 191, 255, 0.3);
+        }
+
+        .model-card:hover::before {
+            opacity: 1;
+        }
+
+        .model-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-main-accent);
+            padding: 6px 14px;
+            border: 1px solid var(--color-main-accent);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .model-new {
+            background: var(--color-main-accent);
+            color: var(--color-background-primary);
+        }
+
+        .model-coming-soon {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .model-card h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .model-tagline {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-bottom: 35px;
+        }
+
+        .model-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .model-image img {
+            max-width: 90%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 191, 255, 0.3));
+            transition: transform 0.4s ease;
+        }
+
+        .model-card:hover .model-image img {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .model-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 35px 0;
+            text-align: left;
+        }
+
+        .spec-item {
+            padding: 15px;
+            background: rgba(0, 191, 255, 0.05);
+            border: 1px solid rgba(0, 191, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .spec-label {
+            font-size: 11px;
+            color: var(--color-main-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .spec-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .model-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-main-accent);
+            margin: 30px 0 25px;
+        }
+
+        .model-buttons {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-main-accent);
+            color: var(--color-background-primary);
+        }
+
+        .btn-primary:hover {
+            background: #00d7ff;
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-main-accent);
+            border: 2px solid var(--color-main-accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .comparison-section {
+            max-width: 1400px;
+            margin: 100px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .comparison-section h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .comparison-section p {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-bottom: 50px;
+        }
+
+        .comparison-link {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(0, 191, 255, 0.05) 100%);
+            border: 2px solid var(--color-main-accent);
+            border-radius: 12px;
+            color: var(--color-main-accent);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-link:hover {
+            background: rgba(0, 191, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 900px) {
+            .lineup-hero h1 {
+                font-size: 48px;
+            }
+
+            .lineup-hero p {
+                font-size: 18px;
+            }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 20px;
+            }
+
+            .model-card h2 {
+                font-size: 32px;
+            }
+
+            .model-image {
+                height: 200px;
+            }
+
+            .comparison-section h2 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../../store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="../../cameras/pierce-lens/index.html">Pierce Lens</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../../cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="../../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="../../cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
+                        <li><a href="../../customize/index.html">Customize</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="../../support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../../support/index.html">Support Center</a></li>
+                        <li><a href="../../press/index.html">Newsroom</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="lineup-hero">
+            <div>
+                <h1>Pierce Lens</h1>
+                <p>Professional cinema cameras designed for creators who demand excellence</p>
+            </div>
+        </section>
+
+        <!-- Model Lineup -->
+        <div class="model-grid">
+            <!-- Pierce Lens -->
+            <div class="model-card">
+                <span class="model-badge">Available Now</span>
+                <h2>Pierce Lens</h2>
+                <p class="model-tagline">Professional cinema camera</p>
+
+                <div class="model-image">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Pierce Lens Camera">
+                </div>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Resolution</div>
+                        <div class="spec-value">6K</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Frame Rate</div>
+                        <div class="spec-value">120 fps</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sensor</div>
+                        <div class="spec-value">Super 35</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Recording</div>
+                        <div class="spec-value">ProRes</div>
+                    </div>
+                </div>
+
+                <div class="model-price">From $2,499</div>
+
+                <div class="model-buttons">
+                    <a href="../the-pierce-lens/index.html" class="btn btn-primary">Learn More</a>
+                    <a href="../../customize/index.html" class="btn btn-secondary">Customize</a>
+                </div>
+            </div>
+
+            <!-- Pierce Lens Pro -->
+            <div class="model-card">
+                <span class="model-badge model-new">New</span>
+                <h2>Pierce Lens Pro</h2>
+                <p class="model-tagline">Advanced professional cinema camera</p>
+
+                <div class="model-image">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Pierce Lens Pro Camera">
+                </div>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Resolution</div>
+                        <div class="spec-value">8K</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Frame Rate</div>
+                        <div class="spec-value">240 fps</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sensor</div>
+                        <div class="spec-value">Full Frame</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Recording</div>
+                        <div class="spec-value">ProRes RAW</div>
+                    </div>
+                </div>
+
+                <div class="model-price">From $4,999</div>
+
+                <div class="model-buttons">
+                    <a href="../the-pierce-lens-pro/index.html" class="btn btn-primary">Learn More</a>
+                    <a href="../../customize/index.html" class="btn btn-secondary">Customize</a>
+                </div>
+            </div>
+
+            <!-- Pierce Lens Lite (Coming Soon) -->
+            <div class="model-card">
+                <span class="model-badge model-coming-soon">Coming Soon</span>
+                <h2>Pierce Lens Lite</h2>
+                <p class="model-tagline">Compact cinema powerhouse</p>
+
+                <div class="model-image">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Pierce Lens Lite Camera" style="opacity: 0.4;">
+                </div>
+
+                <div class="model-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Resolution</div>
+                        <div class="spec-value">4K</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Frame Rate</div>
+                        <div class="spec-value">60 fps</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Sensor</div>
+                        <div class="spec-value">Micro 4/3</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Recording</div>
+                        <div class="spec-value">H.265</div>
+                    </div>
+                </div>
+
+                <div class="model-price">From $1,299</div>
+
+                <div class="model-buttons">
+                    <button class="btn btn-disabled">Coming 2026</button>
+                    <a href="../../support/index.html" class="btn btn-secondary">Notify Me</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <h2>Compare Models</h2>
+            <p>Find the perfect Pierce Lens camera for your workflow</p>
+            <a href="#" class="comparison-link">View Full Comparison <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i></a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                </a>
+
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Explore</h4>
+                        <ul>
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../customize/index.html">Customize</a></li>
+                            <li><a href="../../store/index.html">Store</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Products</h4>
+                        <ul>
+                            <li><a href="../the-pierce-lens/index.html">Pierce Lens</a></li>
+                            <li><a href="../the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Support</h4>
+                        <ul>
+                            <li><a href="../../support/index.html">Support Center</a></li>
+                            <li><a href="../../press/index.html">Press</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Legal</h4>
+                        <ul>
+                            <li><a href="../../privacy/index.html">Privacy Policy</a></li>
+                            <li><a href="../../policy/index.html">Terms &amp; Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p style="color: var(--color-text-secondary); font-size: 14px; margin-top: 40px;">&copy; 2025 PierceLENS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <button id="search-close" class="search-close" aria-label="Close search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search products, cameras, accessories..." autocomplete="off">
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+
+    <script src="../../js/cookie_banner.js"></script>
+    <script src="../../js/header.js"></script>
+    <script src="../../js/shopping-cart.js"></script>
+    <script src="../../js/search.js"></script>
+</body>
+</html>

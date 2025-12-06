@@ -653,6 +653,8 @@
             transform: scaleX(0);
             transform-origin: left;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
 
         .sensor-left-text {
@@ -670,6 +672,7 @@
             transform: translateX(-50px);
             text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .sensor-right-visual {
@@ -688,8 +691,10 @@
             top: 10px;
             opacity: 0;
             transform: scale(0);
-            box-shadow: 0 0 40px rgba(0, 191, 255, 0.4), inset 0 0 40px rgba(0, 191, 255, 0.2);
+            box-shadow: 0 0 24px rgba(0, 191, 255, 0.3), inset 0 0 20px rgba(0, 191, 255, 0.15);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
 
         .sensor-shine {
@@ -701,9 +706,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.5);
-            filter: blur(30px);
+            filter: blur(22px);
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
 
         .sensor-bottom-stat {
@@ -743,8 +750,11 @@
             left: 50%;
             top: 50%;
             opacity: 0;
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
+            box-shadow: 0 0 18px rgba(0, 191, 255, 0.6);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            animation: idlePulse 3.2s ease-in-out infinite;
         }
 
         .network-node.center {
@@ -767,6 +777,7 @@
             stroke-dasharray: 500;
             stroke-dashoffset: 500;
             transition: opacity 0.6s ease-out, stroke-dashoffset 0.8s ease-out;
+            will-change: stroke-dashoffset, opacity;
         }
 
         .connectivity-labels {
@@ -824,9 +835,12 @@
             background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(0, 191, 255, 0.1));
             border: 2px solid rgba(0, 191, 255, 0.6);
             border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
+            box-shadow: 0 0 18px rgba(0, 191, 255, 0.28);
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            animation: idlePulse 3.4s ease-in-out infinite;
         }
 
         .slot-label {
@@ -856,6 +870,7 @@
             transform-origin: bottom;
             overflow: hidden;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .gauge-needle {
@@ -868,8 +883,10 @@
             transform: translateX(-50%) rotateZ(-90deg);
             transform-origin: bottom center;
             opacity: 0;
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+            box-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
 
         .gauge-markings {
@@ -911,6 +928,9 @@
             opacity: 0;
             transform: scale(0.8);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            animation: idlePulse 3.6s ease-in-out infinite;
         }
 
         .storage-bottom-text {
@@ -958,7 +978,7 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.3);
+            box-shadow: 0 0 18px rgba(0, 191, 255, 0.22);
             position: relative;
         }
 
@@ -979,6 +999,7 @@
             position: absolute;
             bottom: 0;
             transition: height 0.8s ease-out;
+            will-change: height;
         }
 
         .battery-label {
@@ -994,6 +1015,8 @@
             gap: 15px;
             opacity: 0;
             transition: opacity 0.6s ease-out;
+            will-change: opacity;
+            backface-visibility: hidden;
         }
 
         .power-flow {
@@ -1019,7 +1042,7 @@
             height: 12px;
             border-radius: 50%;
             background: var(--color-accent-blue);
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+            box-shadow: 0 0 12px rgba(0, 191, 255, 0.55);
             animation: dotPulse 1.5s ease-in-out infinite;
         }
 
@@ -1095,6 +1118,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .waveform-graphic {
@@ -1125,6 +1149,7 @@
             box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
         }
 
         .bar[style*="--freq: 1"] { height: calc(20px + 1 * 15px); }
@@ -1179,6 +1204,8 @@
             transform: scaleX(0);
             transform-origin: left;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
 
         .film-frame {
@@ -1190,8 +1217,11 @@
             position: relative;
             opacity: 0;
             transform: scale(0.5);
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+            box-shadow: 0 0 14px rgba(0, 191, 255, 0.2);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            animation: idlePulse 3.8s ease-in-out infinite;
         }
 
         .film-frame::before {
@@ -1237,6 +1267,13 @@
             opacity: 0;
             transform: translateX(-30px);
             transition: all 0.6s ease-out;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        @keyframes idlePulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.18); transform: scale(1); }
+            50% { box-shadow: 0 0 18px rgba(0, 191, 255, 0.32); transform: scale(1.01); }
         }
 
         .resolution-card.active {
@@ -1632,31 +1669,164 @@
                 font-size: 10px;
             }
         }
+
+        /* ============ RESPONSIVE & ACCESSIBILITY POLISH ============ */
+        @media (max-width: 1024px) {
+            .sensor-content,
+            .connectivity-content,
+            .storage-content,
+            .battery-content,
+            .audio-content,
+            .video-content {
+                padding: 0 30px;
+                gap: 40px;
+            }
+
+            .pixel-matrix { width: 320px; height: 320px; }
+            .text-line { font-size: 32px; }
+            .sensor-right-visual { width: 240px; height: 240px; }
+
+            .network-visualization { width: 320px; height: 320px; }
+            .connectivity-labels { gap: 40px; font-size: 16px; }
+
+            .vault-container { gap: 30px; }
+            .nvme-card { height: 170px; }
+            .speed-gauge { width: 180px; height: 110px; }
+
+            .battery-display { gap: 30px; }
+            .battery-body { width: 90px; height: 160px; }
+
+            .waveform-graphic { height: 160px; }
+            .frequency-bars-display .bar { width: 32px; }
+
+            .film-frame { width: 110px; height: 80px; }
+        }
+
+        @media (max-width: 768px) {
+            .sensor-content,
+            .connectivity-content,
+            .storage-content,
+            .battery-content,
+            .audio-content,
+            .video-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .pixel-matrix { width: 260px; height: 260px; }
+            .text-line { font-size: 28px; }
+            .sensor-right-visual { width: 200px; height: 200px; }
+
+            .network-visualization { width: 260px; height: 260px; }
+            .connectivity-labels { flex-direction: column; gap: 12px; }
+
+            .vault-container { flex-direction: column; }
+            .nvme-card { width: 140px; height: 150px; }
+            .speed-gauge { width: 160px; height: 96px; }
+
+            .battery-display { flex-direction: column; }
+            .battery-body { width: 110px; height: 150px; }
+            .battery-runtime-display .runtime-number { font-size: 56px; }
+
+            .waveform-graphic { height: 140px; }
+            .frequency-bars-display { gap: 8px; }
+            .frequency-bars-display .bar { width: 24px; }
+
+            .film-strip-container { gap: 12px; }
+            .film-frame { width: 96px; height: 70px; }
+            .resolution-card { padding: 16px 28px; }
+        }
+
+        @media (max-width: 520px) {
+            .pixel-matrix { width: 220px; height: 220px; }
+            .text-line { font-size: 24px; }
+            .sensor-bottom-stat { font-size: 12px; }
+
+            .network-visualization { width: 220px; height: 220px; }
+            .connectivity-labels { font-size: 14px; }
+            .connection-status { font-size: 12px; }
+
+            .nvme-card { width: 130px; height: 140px; }
+            .slot-label { font-size: 14px; }
+            .speed-label { font-size: 12px; }
+            .feature-badge { font-size: 12px; padding: 10px 18px; }
+            .storage-bottom-text { font-size: 12px; }
+
+            .battery-body { width: 100px; height: 140px; }
+            .runtime-number { font-size: 48px; }
+            .runtime-unit { font-size: 16px; }
+            .battery-features-list { gap: 20px; font-size: 12px; }
+
+            .waveform-graphic { height: 120px; }
+            .frequency-bars-display .bar { width: 18px; }
+            .audio-specs { font-size: 12px; }
+
+            .film-frame { width: 80px; height: 60px; }
+            .resolution-card { padding: 14px 22px; }
+            .res-label { font-size: 18px; }
+        }
+
+        /* Hover/idle cues to keep UI feeling alive */
+        .feature-badge:hover,
+        .nvme-card:hover,
+        .film-frame:hover,
+        .network-node:hover {
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .power-flow,
+            .connector-dot {
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <nav class="main-nav">
-            <a href="../../index.html" class="logo-link">
-                <img src="../../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
             </a>
-            <ul class="nav-list">
-                <li class="dropdown">
-                    <a href="#">Cameras</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
-                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+            <ul class="nav-links">
+                <li><a href="../../store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="../../cameras/pierce-lens/index.html">Pierce Lens</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../../cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="../../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="../../cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
+                        <li><a href="../../customize/index.html">Customize</a></li>
                     </ul>
                 </li>
-                <li><a href="../../store/index.html">Store</a></li>
-                <li>
-                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                <li class="nav-dropdown">
+                    <a href="../../support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../../support/index.html">Support Center</a></li>
+                        <li><a href="../../press/index.html">Newsroom</a></li>
+                    </ul>
                 </li>
             </ul>
-            <button class="nav-toggle" aria-label="Open navigation">
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
         </nav>
@@ -1995,12 +2165,29 @@
                 <a href="../../index.html" class="logo-link">
                     <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
                 </a>
-                <ul>
-                    <li><a href="../../support/index.html">Support</a></li>
-                    <li><a href="../../store/index.html">Find a Dealer</a></li>
-                    <li><a href="../../press/index.html">Press</a></li>
-                    <li><a href="../../privacy/index.html">Privacy</a></li>
-                </ul>
+                <div class="footer-columns">
+                    <ul>
+                        <li class="footer-heading">Explore</li>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../customize/index.html">Customize</a></li>
+                        <li><a href="../../store/index.html">Store</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Products</li>
+                        <li><a href="../../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Support</li>
+                        <li><a href="../../support/index.html">Support</a></li>
+                        <li><a href="../../press/index.html">Press</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Legal</li>
+                        <li><a href="../../privacy/index.html">Privacy Policy</a></li>
+                        <li><a href="../../policy/index.html">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
             </div>
             <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
         </div>
@@ -2216,8 +2403,9 @@
                 pixelRows.forEach((row, index) => {
                     const delay = index * 0.1;
                     const rowProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
-                    row.style.opacity = rowProgress;
-                    row.style.transform = `scaleX(${rowProgress})`;
+                    const eased = rowProgress * rowProgress; // ease-in for punchier reveal
+                    row.style.opacity = eased;
+                    row.style.transform = `scaleX(${0.2 + eased * 0.8})`;
                 });
 
                 // Text lines animation
@@ -2225,30 +2413,35 @@
                 textLines.forEach((line, index) => {
                     const delay = 0.1 + index * 0.1;
                     const lineProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    line.style.opacity = lineProgress;
-                    line.style.transform = `translateX(${-50 + lineProgress * 50}px)`;
+                    const eased = Math.pow(lineProgress, 1.2);
+                    line.style.opacity = eased;
+                    line.style.transform = `translateX(${-60 + eased * 60}px)`;
                 });
 
                 // Aperture animation
                 const aperture = sensorContainer.querySelector('.sensor-aperture');
                 if (aperture) {
                     const apertureProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.3));
-                    aperture.style.opacity = apertureProgress;
-                    aperture.style.transform = `scale(${apertureProgress}) rotate(${apertureProgress * 360}deg)`;
+                    const eased = Math.pow(apertureProgress, 1.3);
+                    aperture.style.opacity = eased;
+                    aperture.style.transform = `scale(${eased}) rotate(${eased * 540}deg)`;
                 }
 
                 // Shine animation
                 const shine = sensorContainer.querySelector('.sensor-shine');
                 if (shine) {
                     const shineProgress = Math.max(0, Math.min(1, (progress - 0.4) / 0.3));
-                    shine.style.opacity = shineProgress * 0.6;
-                    shine.style.transform = `translate(-50%, -50%) scale(${0.5 + shineProgress})`;
+                    const eased = Math.pow(shineProgress, 1.2);
+                    shine.style.opacity = eased * 0.7;
+                    shine.style.transform = `translate(-50%, -50%) scale(${0.6 + eased * 1.2})`;
                 }
 
                 // Bottom stat fade in
                 const bottomStat = sensorContainer.querySelector('.sensor-bottom-stat');
                 if (bottomStat) {
-                    bottomStat.style.opacity = Math.max(0, Math.min(1, (progress - 0.5) / 0.3));
+                    const statProgress = Math.max(0, Math.min(1, (progress - 0.5) / 0.3));
+                    bottomStat.style.opacity = statProgress;
+                    bottomStat.style.transform = `translateY(${20 - statProgress * 20}px)`;
                 }
             }
             window.addEventListener('scroll', updateSensorScroll);
@@ -2272,10 +2465,16 @@
                 nodes.forEach((node, index) => {
                     const delay = index * 0.05;
                     const nodeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    node.style.opacity = nodeProgress;
-                    node.style.transform = index === 0 
-                        ? `translate(-50%, -50%) scale(${nodeProgress})`
-                        : `translate(-50%, -50%) scale(${nodeProgress})`;
+                    const eased = Math.pow(nodeProgress, 1.25);
+                    const style = getComputedStyle(node);
+                    const angle = parseFloat(style.getPropertyValue('--angle')) || 0;
+                    const distance = parseFloat(style.getPropertyValue('--distance')) || 0;
+                    if (index === 0) {
+                        node.style.transform = `translate(-50%, -50%) scale(${eased})`;
+                    } else {
+                        node.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translate(${distance}px) scale(${eased})`;
+                    }
+                    node.style.opacity = eased;
                 });
 
                 // SVG lines animation (stroke drawing)
@@ -2283,8 +2482,9 @@
                 lines.forEach((line, index) => {
                     const delay = 0.2 + index * 0.08;
                     const lineProgress = Math.max(0, Math.min(1, (progress - delay) / 0.3));
-                    line.style.opacity = lineProgress;
-                    line.style.strokeDashoffset = 500 - (lineProgress * 500);
+                    const eased = Math.pow(lineProgress, 1.1);
+                    line.style.opacity = eased;
+                    line.style.strokeDashoffset = 500 - (eased * 500);
                 });
 
                 // Labels animation
@@ -2292,14 +2492,17 @@
                 labels.forEach((label, index) => {
                     const delay = 0.4 + index * 0.1;
                     const labelProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    label.style.opacity = labelProgress;
-                    label.style.transform = `translateY(${30 - labelProgress * 30}px)`;
+                    const eased = Math.pow(labelProgress, 1.1);
+                    label.style.opacity = eased;
+                    label.style.transform = `translateY(${40 - eased * 40}px)`;
                 });
 
                 // Connection status
                 const status = connectivityContainer.querySelector('.connection-status');
                 if (status) {
-                    status.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
+                    const statusProgress = Math.max(0, Math.min(1, (progress - 0.6) / 0.25));
+                    status.style.opacity = statusProgress;
+                    status.style.transform = `translateY(${20 - statusProgress * 20}px)`;
                 }
             }
             window.addEventListener('scroll', updateConnectivityScroll);
@@ -2322,15 +2525,17 @@
                 const leftCard = storageContainer.querySelector('.nvme-slot.left .nvme-card');
                 if (leftCard) {
                     const leftProgress = Math.max(0, Math.min(1, progress / 0.3));
-                    leftCard.style.opacity = leftProgress;
-                    leftCard.style.transform = `translateX(${-50 + leftProgress * 50}px) rotateY(${-20 + leftProgress * 20}deg)`;
+                    const eased = Math.pow(leftProgress, 1.1);
+                    leftCard.style.opacity = eased;
+                    leftCard.style.transform = `translateX(${-60 + eased * 60}px) rotateY(${-22 + eased * 22}deg)`;
                 }
 
                 const rightCard = storageContainer.querySelector('.nvme-slot.right .nvme-card');
                 if (rightCard) {
                     const rightProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.3));
-                    rightCard.style.opacity = rightProgress;
-                    rightCard.style.transform = `translateX(${50 - rightProgress * 50}px) rotateY(${20 - rightProgress * 20}deg)`;
+                    const eased = Math.pow(rightProgress, 1.1);
+                    rightCard.style.opacity = eased;
+                    rightCard.style.transform = `translateX(${60 - eased * 60}px) rotateY(${22 - eased * 22}deg)`;
                 }
 
                 // Speed gauge animation
@@ -2345,8 +2550,9 @@
                 const needle = storageContainer.querySelector('.gauge-needle');
                 if (needle) {
                     const needleProgress = Math.max(0, Math.min(1, (progress - 0.2) / 0.4));
-                    needle.style.opacity = needleProgress;
-                    needle.style.transform = `translateX(-50%) rotateZ(${-90 + needleProgress * 90}deg)`;
+                    const eased = Math.pow(needleProgress, 1.1);
+                    needle.style.opacity = eased;
+                    needle.style.transform = `translateX(-50%) rotateZ(${-110 + eased * 110}deg)`;
                 }
                 
                 // Slot labels
@@ -2399,15 +2605,17 @@
                 const leftCell = batteryContainer.querySelector('.battery-left-cell');
                 if (leftCell) {
                     const leftProgress = Math.max(0, Math.min(1, progress / 0.3));
-                    leftCell.style.opacity = leftProgress;
-                    leftCell.style.transform = `scale(${0.5 + leftProgress * 0.5})`;
+                    const eased = Math.pow(leftProgress, 1.1);
+                    leftCell.style.opacity = eased;
+                    leftCell.style.transform = `scale(${0.45 + eased * 0.55})`;
                 }
 
                 const rightCell = batteryContainer.querySelector('.battery-right-cell');
                 if (rightCell) {
                     const rightProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.3));
-                    rightCell.style.opacity = rightProgress;
-                    rightCell.style.transform = `scale(${0.5 + rightProgress * 0.5})`;
+                    const eased = Math.pow(rightProgress, 1.1);
+                    rightCell.style.opacity = eased;
+                    rightCell.style.transform = `scale(${0.45 + eased * 0.55})`;
                 }
 
                 // Charge level animation
@@ -2415,7 +2623,8 @@
                 chargeLevels.forEach((level, index) => {
                     const delay = 0.2 + index * 0.1;
                     const chargeProgress = Math.max(0, Math.min(1, (progress - delay) / 0.4));
-                    level.style.height = `${chargeProgress * 100}%`;
+                    const eased = Math.pow(chargeProgress, 1.2);
+                    level.style.height = `${eased * 100}%`;
                 });
 
                 // Connector and power flow
@@ -2427,14 +2636,18 @@
                 // Runtime display
                 const runtime = batteryContainer.querySelector('.battery-runtime-display');
                 if (runtime) {
-                    runtime.style.opacity = Math.max(0, Math.min(1, (progress - 0.5) / 0.3));
-                    runtime.style.transform = `translateY(${20 - Math.min(1, (progress - 0.5) / 0.3) * 20}px)`;
+                    const rtProgress = Math.max(0, Math.min(1, (progress - 0.45) / 0.3));
+                    const eased = Math.pow(rtProgress, 1.1);
+                    runtime.style.opacity = eased;
+                    runtime.style.transform = `translateY(${24 - eased * 24}px)`;
                 }
 
                 // Features list
                 const features = batteryContainer.querySelector('.battery-features-list');
                 if (features) {
-                    features.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
+                    const featProgress = Math.max(0, Math.min(1, (progress - 0.6) / 0.25));
+                    features.style.opacity = featProgress;
+                    features.style.transform = `translateY(${20 - featProgress * 20}px)`;
                 }
             }
             window.addEventListener('scroll', updateBatteryScroll);
@@ -2457,15 +2670,17 @@
                 const waveformContainer = audioContainer.querySelector('.waveform-container');
                 if (waveformContainer) {
                     const waveProgress = Math.max(0, Math.min(1, progress / 0.3));
-                    waveformContainer.style.opacity = waveProgress;
-                    waveformContainer.style.transform = `translateY(${20 - waveProgress * 20}px)`;
+                    const eased = Math.pow(waveProgress, 1.1);
+                    waveformContainer.style.opacity = eased;
+                    waveformContainer.style.transform = `translateY(${24 - eased * 24}px)`;
                 }
 
                 // Waveform path (SVG drawing)
                 const wavePath = audioContainer.querySelector('.wave-path');
                 if (wavePath) {
                     const pathProgress = Math.max(0, Math.min(1, (progress - 0.1) / 0.4));
-                    wavePath.style.strokeDashoffset = 1000 - (pathProgress * 1000);
+                    const eased = Math.pow(pathProgress, 1.05);
+                    wavePath.style.strokeDashoffset = 1000 - (eased * 1000);
                 }
 
                 // Frequency bars animation
@@ -2473,15 +2688,17 @@
                 bars.forEach((bar, index) => {
                     const delay = 0.3 + index * 0.05;
                     const barProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    bar.style.opacity = barProgress;
-                    bar.style.transform = `translateY(${20 - barProgress * 20}px)`;
+                    const eased = Math.pow(barProgress, 1.1);
+                    bar.style.opacity = eased;
+                    bar.style.transform = `translateY(${26 - eased * 26}px)`;
                 });
 
                 // Audio specs
                 const specs = audioContainer.querySelector('.audio-specs');
                 if (specs) {
-                    specs.style.opacity = Math.max(0, Math.min(1, (progress - 0.6) / 0.3));
-                    specs.style.transform = `translateY(${20 - Math.min(1, (progress - 0.6) / 0.3) * 20}px)`;
+                    const specsProgress = Math.max(0, Math.min(1, (progress - 0.6) / 0.25));
+                    specs.style.opacity = specsProgress;
+                    specs.style.transform = `translateY(${20 - specsProgress * 20}px)`;
                 }
             }
             window.addEventListener('scroll', updateAudioScroll);
@@ -2504,8 +2721,9 @@
                 const filmStrip = videoContainer.querySelector('.film-strip-container');
                 if (filmStrip) {
                     const stripProgress = Math.max(0, Math.min(1, progress / 0.3));
-                    filmStrip.style.opacity = stripProgress;
-                    filmStrip.style.transform = `scaleX(${stripProgress})`;
+                    const eased = Math.pow(stripProgress, 1.1);
+                    filmStrip.style.opacity = eased;
+                    filmStrip.style.transform = `scaleX(${0.1 + eased * 0.9})`;
                 }
 
                 // Film frames animation
@@ -2513,14 +2731,17 @@
                 frames.forEach((frame, index) => {
                     const delay = 0.1 + index * 0.05;
                     const frameProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    frame.style.opacity = frameProgress;
-                    frame.style.transform = `scale(${0.5 + frameProgress * 0.5})`;
+                    const eased = Math.pow(frameProgress, 1.05);
+                    frame.style.opacity = eased;
+                    frame.style.transform = `scale(${0.4 + eased * 0.6})`;
                 });
 
                 // Resolution stack animation
                 const resStack = videoContainer.querySelector('.resolution-stack');
                 if (resStack) {
-                    resStack.style.opacity = Math.max(0, Math.min(1, (progress - 0.3) / 0.3));
+                    const stackProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.25));
+                    resStack.style.opacity = stackProgress;
+                    resStack.style.transform = `translateY(${20 - stackProgress * 20}px)`;
                 }
 
                 // Resolution cards animation
@@ -2528,15 +2749,17 @@
                 resCards.forEach((card, index) => {
                     const delay = 0.4 + index * 0.08;
                     const cardProgress = Math.max(0, Math.min(1, (progress - delay) / 0.25));
-                    card.style.opacity = cardProgress;
-                    card.style.transform = `translateX(${-30 + cardProgress * 30}px)`;
+                    const eased = Math.pow(cardProgress, 1.05);
+                    card.style.opacity = eased;
+                    card.style.transform = `translateX(${-40 + eased * 40}px)`;
                 });
 
                 // Video capabilities
                 const capabilities = videoContainer.querySelector('.video-capabilities');
                 if (capabilities) {
-                    capabilities.style.opacity = Math.max(0, Math.min(1, (progress - 0.7) / 0.3));
-                    capabilities.style.transform = `translateY(${20 - Math.min(1, (progress - 0.7) / 0.3) * 20}px)`;
+                    const capsProgress = Math.max(0, Math.min(1, (progress - 0.65) / 0.25));
+                    capabilities.style.opacity = capsProgress;
+                    capabilities.style.transform = `translateY(${22 - capsProgress * 22}px)`;
                 }
             }
             window.addEventListener('scroll', updateVideoScroll);
@@ -2615,7 +2838,22 @@
         }, 500);
     </script>
 
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <button id="search-close" class="search-close" aria-label="Close search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search products, cameras, accessories..." autocomplete="off">
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+
     <script src="../../js/camera-selection.js"></script>
     <script src="../../js/shopping-cart.js"></script>
+    <script src="../../js/search.js"></script>
 </body>
 </html>

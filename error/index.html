@@ -14,25 +14,38 @@
 
     <header>
         <nav class="main-nav">
-            <a href="../index.html" class="logo-link">
-                <img src="../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+            <a href="../index.html" class="nav-logo">
+                <img src="../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
             </a>
-            <ul class="nav-list">
-                <li class="dropdown">
-                    <a href="#">Cameras</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
-                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+            <ul class="nav-links">
+                <li><a href="../store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="../cameras/pierce-lens/index.html">Pierce Lens</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="../cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
+                        <li><a href="../customize/index.html">Customize</a></li>
                     </ul>
                 </li>
-                <li><a href="../store/index.html">Store</a></li>
-                <li>
-                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                <li class="nav-dropdown">
+                    <a href="../support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../support/index.html">Support Center</a></li>
+                        <li><a href="../press/index.html">Newsroom</a></li>
+                    </ul>
                 </li>
             </ul>
-            <button class="nav-toggle" aria-label="Open navigation">
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
         </nav>
@@ -48,22 +61,51 @@
                 <a href="../index.html" class="logo-link">
                     <img src="../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
                 </a>
-                <ul>
-                    <li><a href="support/index.html">Support</a></li> 
-                    
-                    <li><a href="store/index.html">Find a Dealer</a></li> 
-                    
-                    <li><a href="press/index.html">Press</a></li> 
-                    
-                    <li><a href="privacy/index.html">Privacy</a></li> 
-                </ul>
+                <div class="footer-columns">
+                    <ul>
+                        <li class="footer-heading">Explore</li>
+                        <li><a href="../index.html">Home</a></li> 
+                        <li><a href="../customize/index.html">Customize</a></li> 
+                        <li><a href="../store/index.html">Store</a></li> 
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Products</li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li> 
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li> 
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Support</li>
+                        <li><a href="../support/index.html">Support</a></li> 
+                        <li><a href="../press/index.html">Press</a></li> 
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Legal</li>
+                        <li><a href="../privacy/index.html">Privacy Policy</a></li> 
+                        <li><a href="../policy/index.html">Terms &amp; Conditions</a></li> 
+                    </ul>
+                </div>
             </div>
             <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <button id="search-close" class="search-close" aria-label="Close search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search products, cameras, accessories..." autocomplete="off">
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+
     <script src="../js/cookie_banner.js"></script>
     <script src="../js/shopping-cart.js"></script>
     <script src="../js/header.js"></script>
+    <script src="../js/search.js"></script>
     </body>
 </html>

@@ -14,25 +14,38 @@
 
     <header>
         <nav class="main-nav">
-            <a href="#" class="logo-link">
-                <img src="images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
+            <a href="index.html" class="nav-logo">
+                <img src="images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
             </a>
-            <ul class="nav-list">
-                <li class="dropdown">
-                    <a href="#">Cameras</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
-                        <li><a href="cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+            <ul class="nav-links">
+                <li><a href="store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="cameras/pierce-lens/index.html">Pierce Lens</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
+                        <li><a href="customize/index.html">Customize</a></li>
                     </ul>
                 </li>
-                <li><a href="store/index.html">Store</a></li>
-                <li>
-                    <a href="#" id="cart-trigger" class="cta-nav" aria-label="View Shopping Cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                <li class="nav-dropdown">
+                    <a href="support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="support/index.html">Support Center</a></li>
+                        <li><a href="press/index.html">Newsroom</a></li>
+                    </ul>
                 </li>
             </ul>
-            <button class="nav-toggle" aria-label="Open navigation">
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
         </nav>
@@ -43,14 +56,16 @@
         <section id="hero" class="hero-carousel">
             <div class="carousel" aria-roledescription="carousel">
                 <div class="carousel-controls">
+                    <button id="prev-slide" class="carousel-nav" aria-label="Previous slide">‹</button>
                     <div id="carousel-indicators" class="carousel-indicators" role="tablist" aria-label="Slide indicators"></div>
+                    <button id="next-slide" class="carousel-nav" aria-label="Next slide">›</button>
                 </div>
                 <div id="carousel-track" class="carousel-track" tabindex="0" aria-live="polite">
                     <article class="carousel-slide" style="background-image: url('images/img_pierceLens_landing.jpg')" aria-label="Pierce Lens - Integrated">
                         <div class="slide-content container">
                             <p class="overline-text">Introducing a new vision of photography.</p>
                             <h2 class="main-headline">The Pierce Lens</h2>
-                            <p class="sub-headline">Integrated. Intuitive. Infinite.</p>
+                            <p class="sub-headline">Integrated. Intuitive. Infinite.<sup>1</sup></p>
                             <a href="cameras/the-pierce-lens/index.html" class="cta-button">Discover the P.L System</a>
                         </div>
                     </article>
@@ -59,7 +74,7 @@
                         <div class="slide-content container">
                             <p class="overline-text">Speed and Security</p>
                             <h2 class="main-headline">mini-NVMe Storage</h2>
-                            <p class="sub-headline">Ultra-fast, removable storage for pros on the move.</p>
+                            <p class="sub-headline">Ultra-fast, removable storage for pros on the move.<sup>2</sup></p>
                             <a href="store/index.html#modules" class="cta-button">View Specs</a>
                         </div>
                     </article>
@@ -111,21 +126,21 @@
                 <h2 class="section-heading">Explore Our System</h2>
                 <div class="product-grid">
                     <div class="product-card">
-                        <img src="images/camera_matte-black.png" alt="Pierce Lens - Black" class="product-img">
+                        <img src="images/camera_matte-black.png" alt="Pierce Lens - Black" class="product-img" loading="lazy" decoding="async">
                         <h3>Pierce Lens (Matte Black)</h3>
                         <p>Integrated lenses, modular storage, professional features.</p>
                         <a href="customize/index.html" class="cta-button">Customize</a>
                     </div>
 
                     <div class="product-card">
-                        <img src="images/productPreviews/mini-nvme-module.png" alt="mini-NVMe Module" class="product-img">
+                        <img src="images/productPreviews/mini-nvme-module.png" alt="mini-NVMe Module" class="product-img" loading="lazy" decoding="async">
                         <h3>mini-NVMe Module</h3>
                         <p>High-speed removable storage built for capture workflows.</p>
                         <a href="store/index.html#modules" class="cta-button">View</a>
                     </div>
 
                     <div class="product-card">
-                        <img src="images/productPreviews/mini-nvme-module.png" alt="Detachable Monitor" class="product-img">
+                        <img src="images/productPreviews/mini-nvme-module.png" alt="Detachable Monitor" class="product-img" loading="lazy" decoding="async">
                         <h3>Detachable Monitor</h3>
                         <p>Flexible viewing and composition with high-resolution display.</p>
                         <a href="store/index.html#modules" class="cta-button">Shop</a>
@@ -174,7 +189,7 @@
                     </div>
                     <div class="feature-item">
                         <h3>Night Vision Mode</h3>
-                        <p>Capture stunning detail in near-total darkness, pushing the boundaries of low-light photography.</p>
+                        <p>Capture stunning detail in near-total darkness, pushing the boundaries of low-light photography.<sup>3</sup></p>
                     </div>
                     <div class="feature-item">
                         <h3>Wireless Ecosystem</h3>
@@ -190,12 +205,12 @@
                 <h2 class="section-heading">mini-NVMe: The New Standard.</h2>
                 <div class="tech-content">
                     <div class="tech-text">
-                        <p>The <strong>Pierce Lens</strong> is the first camera system to adopt <strong>mini-NVMe</strong> technology, a revolutionary portable storage medium.</p>
-                        <p>Achieve unparalleled read/write speeds that eliminate buffer time, ensuring you never miss a shot. This robust, thumb-sized drive protects your most critical work with enterprise-level security and longevity.</p>
+                        <p>The <strong>Pierce Lens</strong> is the first camera system to adopt <strong>mini-NVMe</strong> technology, a revolutionary portable storage medium.<sup>4</sup></p>
+                        <p>Achieve unparalleled read/write speeds that eliminate buffer time, ensuring you never miss a shot. This robust, thumb-sized drive protects your most critical work with enterprise-level security and longevity.<sup>2</sup></p>
                         <a href="store/index.html#modules" class="cta-button secondary-cta">View Storage Specifications</a>
                     </div>
                     <div class="mini-nvme-module">
-                       <img src="images/productPreviews/mini-nvme-module.png" alt="Mini-NVMe Storage Module" class="feature-product-img"> 
+                       <img src="images/productPreviews/mini-nvme-module.png" alt="Mini-NVMe Storage Module" class="feature-product-img" loading="lazy" decoding="async"> 
                     </div>
                 </div>
             </div>
@@ -208,52 +223,111 @@
                 <a href="index.html" class="logo-link">
                     <img src="images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
                 </a>
-                <ul>
-                    <li><a href="support/index.html">Support</a></li> 
-                    
-                    <li><a href="store/index.html">Find a Dealer</a></li> 
-                    
-                    <li><a href="press/index.html">Press</a></li> 
-                    
-                    <li><a href="privacy/index.html">Privacy</a></li> 
-                </ul>
+                <div class="footer-columns">
+                    <ul>
+                        <li class="footer-heading">Explore</li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="customize/index.html">Customize</a></li>
+                        <li><a href="store/index.html">Store</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Products</li>
+                        <li><a href="cameras/pierce-lens/index.html">Pierce Lens</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Support</li>
+                        <li><a href="support/index.html">Support</a></li>
+                        <li><a href="press/index.html">Press</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Legal</li>
+                        <li><a href="privacy/index.html">Privacy Policy</a></li> 
+                        <li><a href="policy/index.html">Terms &amp; Conditions</a></li> 
+                    </ul>
+                </div>
+            </div>
+            <div class="footnotes">
+                <ol>
+                    <li>The Pierce Lens system integrates optics, storage, and modular accessories in a unified camera body designed for professional workflows.</li>
+                    <li>mini-NVMe storage offers read speeds up to 7000 MB/s and write speeds up to 5000 MB/s. Actual performance may vary based on configuration and conditions.</li>
+                    <li>Night Vision Mode utilizes advanced sensor technology for enhanced low-light capture. Performance depends on ambient lighting conditions and camera settings.</li>
+                    <li>First consumer camera system to feature removable mini-NVMe storage as the primary recording medium. Patent pending.</li>
+                </ol>
             </div>
             <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <button id="search-close" class="search-close" aria-label="Close search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search products, cameras, accessories..." autocomplete="off">
+            </div>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </div>
+
     <script src="js/cookie_banner.js"></script>
     <script src="js/header.js"></script>
     <script src="js/shopping-cart.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/search.js"></script>
     <script>
-    // Mobile nav toggle
     document.addEventListener('DOMContentLoaded', function() {
-        var navToggle = document.querySelector('.nav-toggle');
-        var navList = document.querySelector('.nav-list');
-        navToggle.addEventListener('click', function() {
-            navList.classList.toggle('nav-open');
-            navToggle.classList.toggle('open');
-        });
-        
         // Cart trigger
         var cartTrigger = document.getElementById('cart-trigger');
-        
         if (cartTrigger && typeof ShoppingCart !== 'undefined') {
-            // Remove any existing listeners by cloning the element
             var newCartTrigger = cartTrigger.cloneNode(true);
             cartTrigger.parentNode.replaceChild(newCartTrigger, cartTrigger);
-            
             newCartTrigger.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 ShoppingCart.showCartModal();
             });
-            
-            // Update cart count
             ShoppingCart.updateCartCount();
         }
+
+        // Dropdown accessibility (keyboard + focus + escape)
+        var dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(function(dd) {
+            var trigger = dd.querySelector('a');
+            var menu = dd.querySelector('.dropdown-menu');
+            if (!trigger || !menu) return;
+            trigger.setAttribute('aria-haspopup', 'true');
+            trigger.setAttribute('aria-expanded', 'false');
+
+            function openMenu() {
+                dd.classList.add('open');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+            function closeMenu() {
+                dd.classList.remove('open');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+
+            trigger.addEventListener('focus', openMenu);
+            trigger.addEventListener('mouseenter', openMenu);
+            dd.addEventListener('mouseleave', closeMenu);
+
+            dd.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMenu();
+                    trigger.focus();
+                }
+            });
+
+            dd.addEventListener('focusout', function(e) {
+                if (!dd.contains(e.relatedTarget)) {
+                    closeMenu();
+                }
+            });
+        });
     });
     </script>
     </body>
