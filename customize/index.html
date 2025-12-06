@@ -207,13 +207,6 @@
             opacity: 1;
         }
 
-        .camera-preview-img.fade-out {
-            animation: none;
-            opacity: 0;
-            filter: drop-shadow(0 20px 40px rgba(0, 191, 255, 0.1));
-            transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out;
-        }
-
         @keyframes float {
             0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
             50% { transform: translate(-50%, -50%) translateY(-15px); }
@@ -952,52 +945,19 @@
         });
 
         function updateCameraPreview(imageName) {
-            const container = document.querySelector('.camera-preview-container');
             const currentImg = document.getElementById('previewImage');
             const newSrc = `../images/products/the_pierce_lens/${imageName}`;
             
             if (currentImg.src.includes(imageName)) return;
             
-            // Preload new image to ensure smooth transition
-            const preloadImg = new Image();
-            preloadImg.onload = function() {
-                // Create new image element
-                const newImg = document.createElement('img');
-                newImg.src = newSrc;
-                newImg.alt = 'Preview';
-                newImg.className = 'camera-preview-img';
-                newImg.style.opacity = '0';
-                
-                // Position new image on top
-                newImg.style.zIndex = '2';
-                currentImg.style.zIndex = '1';
-                
-                // Add new image to container
-                container.appendChild(newImg);
-                
-                // Sync animations - both images follow same float animation
-                const currentAnimationTime = parseFloat(window.getComputedStyle(currentImg).animationDelay || 0);
-                newImg.style.animationDelay = currentAnimationTime + 's';
-                
-                // Trigger smooth morph transition
-                requestAnimationFrame(() => {
-                    // Start morph effect on current image
-                    currentImg.classList.add('fade-out');
-                    
-                    // Fade in new image with morph
-                    setTimeout(() => {
-                        newImg.style.opacity = '1';
-                    }, 50);
-                    
-                    // Remove old image after transition completes
-                    setTimeout(() => {
-                        currentImg.remove();
-                        newImg.id = 'previewImage';
-                        newImg.style.zIndex = 'auto';
-                    }, 800);
-                });
-            };
-            preloadImg.src = newSrc;
+            // Simple fade out, change image, fade in
+            currentImg.style.transition = 'opacity 0.4s ease-in-out';
+            currentImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentImg.src = newSrc;
+                currentImg.style.opacity = '1';
+            }, 400);
         }
 
 
