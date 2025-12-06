@@ -662,7 +662,7 @@
                         <img src="../images/cameraPreviews/camera_black.png" alt="The Pierce Lens Pro">
                         <h3>The Pierce Lens Pro</h3>
                         <p>61MP professional integrated system</p>
-                        <div class="price">From $1,699</div>
+                        <div class="price">From $1,499</div>
                     </div>
                 </div>
             </div>
@@ -896,6 +896,9 @@
         });
 
         // Customizer Logic
+        const cameraBasePrices = { 'pl': 999, 'pl-pro': 1499 };
+        const cameraNames = { 'pl': 'The Pierce Lens', 'pl-pro': 'The Pierce Lens Pro' };
+
         let currentConfig = {
             camera: 'pl',
             finish: 'black',
@@ -909,7 +912,22 @@
             filter: { standard: 0, pro: 300 }
         };
 
-        const basePrice = 999;
+        let currentBasePrice = cameraBasePrices[currentConfig.camera];
+
+        // Camera card selection
+        document.querySelectorAll('.camera-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.camera-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                currentConfig.camera = this.dataset.camera;
+                currentBasePrice = cameraBasePrices[currentConfig.camera] || 999;
+                // Update preview title
+                const title = document.querySelector('.preview-title');
+                if (title) title.textContent = cameraNames[currentConfig.camera] || 'The Pierce Lens';
+                updatePrice();
+                document.querySelector('.customizer-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
 
         // Color Swatch Selection
         document.querySelectorAll('.color-swatch').forEach(swatch => {
@@ -971,12 +989,12 @@
         });
 
         function updatePrice() {
-            let total = basePrice;
+            let total = currentBasePrice;
             total += priceModifiers.finish[currentConfig.finish] || 0;
             total += priceModifiers.grip[currentConfig.grip] || 0;
             total += priceModifiers.filter[currentConfig.filter] || 0;
 
-            const upgrades = total - basePrice;
+            const upgrades = total - currentBasePrice;
             const upgradesRow = document.getElementById('upgrades');
             
             document.getElementById('upgradesTotal').textContent = `$${upgrades}`;
@@ -1009,7 +1027,7 @@
             const filterPrice = parseInt(selectedFilter.dataset.price);
 
             // Calculate total price
-            const totalPrice = 999 + finishPrice + gripPrice + filterPrice;
+            const totalPrice = currentBasePrice + finishPrice + gripPrice + filterPrice;
 
             // Get customization labels
             const gripLabel = gripValue === 'synthetic' ? 'Synthetic Rubber' : 'Italian Leather';
@@ -1017,7 +1035,7 @@
 
             // Create cart item
             const cartItem = {
-                name: 'The Pierce Lens',
+                name: cameraNames[currentConfig.camera] || 'The Pierce Lens',
                 price: totalPrice,
                 image: `../images/cameraPreviews/camera_${selectedFinish.dataset.finish}.png`,
                 quantity: 1,
@@ -1030,7 +1048,7 @@
 
             // Add to cart
             ShoppingCart.addItem(cartItem);
-            ShoppingCart.showAddConfirmation('The Pierce Lens');
+            ShoppingCart.showAddConfirmation(cartItem.name);
         });
     </script>
 </body>
