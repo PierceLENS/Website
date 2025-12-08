@@ -1,3 +1,47 @@
+/* Festive Holiday Banner Styles */
+.festive-banner {
+    position: relative;
+    background: repeating-linear-gradient(135deg, #388e3c 0 48px, #d32f2f 48px 64px, #388e3c 64px 112px);
+    color: #fff;
+    padding: 18px 0;
+    overflow: hidden;
+    z-index: 2;
+}
+.festive-banner .promo-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-size: 1.15em;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+}
+.festive-banner .festive-text {
+    color: #fff176;
+    text-shadow: 0 2px 8px #2e7d32;
+}
+
+/* Snow animation */
+.festive-banner .snow {
+    pointer-events: none;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+}
+.festive-banner .snowflake {
+    position: absolute;
+    top: -30px;
+    color: #fff;
+    font-size: 1.2em;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: snow-fall 6s linear infinite;
+}
+@keyframes snow-fall {
+    to {
+        transform: translateY(120px);
+        opacity: 0.3;
+    }
+}
 /* New Updated main css, NO AI HERE!!! */
 
 /* Custom Scrollbar */
@@ -1369,8 +1413,7 @@ section {
 }
 
 /* Promo Banner */
-.promo-banner {
-    background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+ .promo-banner {
     padding: 12px 0;
     text-align: center;
     margin-top: 0;

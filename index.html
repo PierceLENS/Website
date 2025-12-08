@@ -53,9 +53,10 @@
 
     <main>
         <!-- Promo Banner -->
-        <section class="promo-banner">
+        <section class="promo-banner festive-banner">
             <div class="promo-content">
-                <p>🎄 Holiday Sale: Save up to $200 on the entire Pierce Lens lineup. <a href="store/index.html">Shop now</a></p>
+                <div class="snow"></div>
+                <p>🎄 <span class="festive-text">Holiday Sale:</span> Save up to <span style="color:#d32f2f;font-weight:bold;">$200</span> on the entire Pierce Lens lineup. <a href="store/index.html">Shop now</a></p>
             </div>
         </section>
 
@@ -81,21 +82,18 @@
 
         <!-- Grid Layout -->
         <section class="content-grid">
-            <!-- Large Card: Pierce Lens -->
-            <div class="grid-item large" style="background-image: url('images/camera_matte-black.png')">
+            <div class="grid-item large matte-black-bg">
                 <div class="grid-content">
                     <p class="grid-badge">Gift ideas</p>
                     <h2>Pierce Lens</h2>
-                    <p>The perfect gift for creators. From $799. <span style="text-decoration: line-through; opacity: 0.6;">$999</span></p>
+                    <p>The perfect gift for creators. From $799. <span class="old-price">$999</span></p>
                     <div class="grid-links">
                         <a href="cameras/the-pierce-lens/index.html">Learn more</a>
                         <a href="customize/index.html">Buy</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Large Card: mini-NVMe Storage -->
-            <div class="grid-item large" style="background-image: url('images/products/the_pierce_lens/the-pierce-lens.png')">
+            <div class="grid-item large pierce-lens-bg">
                 <div class="grid-content">
                     <h2>mini-NVMe Storage</h2>
                     <p>Lightning fast. Enterprise secure.<sup>2</sup></p>
@@ -104,36 +102,28 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Small Card: 15-Filter Engine -->
-            <div class="grid-item small dark" style="background-image: url('images/camera_matte-black.png')">
+            <div class="grid-item small matte-black-bg dark">
                 <div class="grid-content">
                     <h3>15-Filter Engine</h3>
                     <p>Real-time color grading.</p>
                     <a href="customize/index.html">Explore</a>
                 </div>
             </div>
-
-            <!-- Small Card: Studio Microphone -->
-            <div class="grid-item small" style="background-image: url('images/products/the_pierce_lens/the-pierce-lens.png')">
+            <div class="grid-item small pierce-lens-bg">
                 <div class="grid-content">
                     <h3>Studio Microphone</h3>
                     <p>Pro audio built in.</p>
                     <a href="store/index.html#modules">Learn more</a>
                 </div>
             </div>
-
-            <!-- Small Card: Night Vision -->
-            <div class="grid-item small" style="background-image: url('images/camera_matte-black.png')">
+            <div class="grid-item small matte-black-bg">
                 <div class="grid-content">
                     <h3>Night Vision</h3>
                     <p>See in the dark.<sup>3</sup></p>
                     <a href="cameras/the-pierce-lens/index.html">Learn more</a>
                 </div>
             </div>
-
-            <!-- Small Card: Accessories -->
-            <div class="grid-item small dark" style="background-image: url('images/products/the_pierce_lens/the-pierce-lens.png')">
+            <div class="grid-item small pierce-lens-bg dark">
                 <div class="grid-content">
                     <h3>Accessories</h3>
                     <p>Expand your system.</p>
@@ -207,6 +197,20 @@
     <script src="js/search.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Festive snow animation
+        var snowContainer = document.querySelector('.festive-banner .snow');
+        if (snowContainer) {
+            for (var i = 0; i < 24; i++) {
+                var snowflake = document.createElement('span');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄';
+                snowflake.style.left = (Math.random() * 100) + '%';
+                snowflake.style.fontSize = (0.8 + Math.random() * 1.2) + 'em';
+                snowflake.style.animationDelay = (Math.random() * 6) + 's';
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
         // Cart trigger
         var cartTrigger = document.getElementById('cart-trigger');
         if (cartTrigger && typeof ShoppingCart !== 'undefined') {
