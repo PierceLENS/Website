@@ -30,6 +30,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .price-strip.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .price-strip-content {
@@ -88,73 +96,42 @@
 
         @media (max-width: 768px) {
             .price-strip {
-                padding: 8px 15px;
+                padding: 12px 20px;
             }
 
             .price-strip-content {
-                gap: 8px;
+                gap: 20px;
                 flex-direction: column;
                 align-items: flex-start;
             }
 
             .price-strip-product {
-                gap: 8px;
+                gap: 10px;
             }
 
             .price-strip-product h3 {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .price-strip-price {
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .price-strip-actions {
                 width: 100%;
                 justify-content: stretch;
-                gap: 8px;
+                gap: 10px;
             }
 
             .price-strip .cta-button {
                 flex: 1;
                 text-align: center;
-                font-size: 12px;
-                padding: 6px 16px;
+                font-size: 13px;
+                padding: 8px 20px;
             }
 
             .price-strip .cta-button.secondary {
-                padding: 4px 14px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .price-strip {
-                padding: 6px 10px;
-            }
-
-            .price-strip-content {
-                gap: 5px;
-            }
-
-            .price-strip-product h3 {
-                font-size: 12px;
-            }
-
-            .price-strip-price {
-                font-size: 10px;
-            }
-
-            .price-strip-actions {
-                gap: 6px;
-            }
-
-            .price-strip .cta-button {
-                font-size: 10px;
-                padding: 5px 10px;
-            }
-
-            .price-strip .cta-button.secondary {
-                padding: 3px 8px;
+                padding: 6px 18px;
             }
         }
 
@@ -435,63 +412,9 @@
                 gap: 30px;
             }
         }
-        @media (max-width: 900px) {
-            .scroll-reveal-container {
-                height: 250vh;
-            }
-
-            .camera-image {
-                max-width: 85%;
-            }
-
-            .camera-glow {
-                width: 350px;
-                height: 350px;
-            }
-
-            .camera-text-overlay h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-            }
-
-            .camera-text-overlay p {
-                font-size: 15px;
-                padding: 0 20px;
-            }
-
-            .camera-text-overlay .price {
-                font-size: 22px;
-            }
-
-            .feature-section {
-                min-height: auto;
-                padding: 60px 20px;
-            }
-
-            .feature-text h2 {
-                font-size: 32px;
-            }
-
-            .feature-text p {
-                font-size: 15px;
-                line-height: 1.6;
-            }
-
-            .feature-list li {
-                font-size: 14px;
-                padding: 10px 0;
-                padding-left: 25px;
-            }
-
-            .feature-list li::before {
-                width: 10px;
-                height: 10px;
-            }
-        }
-
         @media (max-width: 768px) {
             .scroll-reveal-container {
-                height: 200vh;
+                height: 350vh;
             }
 
             .camera-image {
@@ -499,268 +422,20 @@
             }
 
             .camera-glow {
-                width: 300px;
-                height: 300px;
+                width: 400px;
+                height: 400px;
             }
 
             .camera-text-overlay h1 {
-                font-size: 28px;
+                font-size: 40px;
             }
 
             .camera-text-overlay p {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .camera-text-overlay .price {
                 font-size: 20px;
-            }
-
-            .camera-text-overlay .section-title {
-                font-size: 11px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .scroll-reveal-container {
-                height: 180vh;
-            }
-
-            .camera-reveal-sticky {
-                height: 80vh;
-            }
-
-            .camera-image {
-                max-width: 95%;
-            }
-
-            .camera-text-overlay h1 {
-                font-size: 24px;
-            }
-
-            .camera-text-overlay p {
-                font-size: 13px;
-                max-width: 90%;
-            }
-
-            .camera-text-overlay .price {
-                font-size: 18px;
-                margin-top: 10px;
-            }
-
-            .feature-section {
-                padding: 40px 15px;
-            }
-
-            .feature-text h2 {
-                font-size: 26px;
-                margin-bottom: 15px;
-            }
-
-            .feature-text .feature-label {
-                font-size: 12px;
-                margin-bottom: 10px;
-            }
-
-            .feature-text p {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            .feature-list {
-                margin-top: 20px;
-            }
-        }
-
-        /* Second Scroll Reveal - mini-NVMe Speed Animation */
-        .nvme-scroll-container {
-            position: relative;
-            height: 250vh;
-            background: linear-gradient(90deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%);
-            overflow: visible;
-        }
-
-        .nvme-reveal-sticky {
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            background: var(--color-background-primary);
-            overflow: hidden;
-        }
-
-        .nvme-reveal-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nvme-image {
-            position: absolute;
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            filter: drop-shadow(0 0 40px rgba(0, 191, 255, 0.6));
-            opacity: 0;
-            transform: translateX(-200%) scale(0.5);
-            z-index: 5;
-        }
-
-        .speed-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, rgba(0, 191, 255, 0.8) 50%, transparent 100%);
-            opacity: 0;
-            left: -100%;
-            width: 100%;
-            pointer-events: none;
-        }
-
-        .speed-line:nth-child(1) { top: 20%; height: 1px; }
-        .speed-line:nth-child(2) { top: 35%; height: 2px; }
-        .speed-line:nth-child(3) { top: 50%; height: 3px; }
-        .speed-line:nth-child(4) { top: 65%; height: 2px; }
-        .speed-line:nth-child(5) { top: 80%; height: 1px; }
-
-        .nvme-glow {
-            position: absolute;
-            width: 800px;
-            height: 200px;
-            background: linear-gradient(90deg, transparent 0%, rgba(0, 191, 255, 0.4) 50%, transparent 100%);
-            filter: blur(80px);
-            opacity: 0;
-            transform: translateX(-100%);
-            pointer-events: none;
-        }
-
-        .nvme-text-overlay {
-            position: absolute;
-            text-align: center;
-            z-index: 15;
-            opacity: 0;
-            transform: translateX(-100px);
-            pointer-events: none;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-
-        .nvme-text-overlay h2 {
-            font-size: 56px;
-            font-weight: 700;
-            margin: 20px 0;
-            letter-spacing: -2px;
-            color: var(--color-text-primary);
-            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        }
-
-        .nvme-text-overlay p {
-            font-size: 18px;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-
-        .speed-indicator {
-            position: absolute;
-            bottom: 40px;
-            right: 40px;
-            font-size: 72px;
-            font-weight: 900;
-            color: var(--color-accent-blue);
-            opacity: 0;
-            font-family: monospace;
-            letter-spacing: -3px;
-            text-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
-        }
-
-        .speed-indicator span {
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        @media (max-width: 900px) {
-            .nvme-scroll-container {
-                height: 200vh;
-            }
-
-            .nvme-image {
-                max-width: 70%;
-            }
-
-            .nvme-text-overlay h2 {
-                font-size: 36px;
-            }
-
-            .nvme-text-overlay p {
-                font-size: 15px;
-            }
-
-            .speed-indicator {
-                font-size: 48px;
-                bottom: 30px;
-                right: 30px;
-            }
-
-            .speed-indicator span {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nvme-scroll-container {
-                height: 180vh;
-            }
-
-            .nvme-image {
-                max-width: 75%;
-            }
-
-            .nvme-text-overlay h2 {
-                font-size: 28px;
-            }
-
-            .nvme-text-overlay p {
-                font-size: 14px;
-            }
-
-            .speed-indicator {
-                font-size: 36px;
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .speed-indicator span {
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .nvme-scroll-container {
-                height: 160vh;
-            }
-
-            .nvme-text-overlay h2 {
-                font-size: 24px;
-            }
-
-            .nvme-text-overlay p {
-                font-size: 13px;
-            }
-
-            .speed-indicator {
-                font-size: 28px;
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .speed-indicator span {
-                font-size: 14px;
             }
         }
     </style>
@@ -769,38 +444,13 @@
 
     <header>
         <nav class="main-nav">
-            <a href="../../index.html" class="nav-logo">
-                <img src="../../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
+            <a href="../../index.html" class="logo-link">
+                <img src="../../images/logo.png" alt="PierceLENS Photography Logo" class="logo-img">
             </a>
-            <ul class="nav-links">
-                <li><a href="../../store/index.html">Store</a></li>
-                <li class="nav-dropdown">
-                    <a href="../../cameras/pierce-lens/index.html">Pierce Lens</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="../../cameras/pierce-lens/index.html">Overview</a></li>
-                        <li><a href="../../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
-                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
-                        <li><a href="../../cameras/pierce-lens/index.html#lite" class="coming-soon">Pierce Lens Lite <span>Coming Soon</span></a></li>
-                        <li><a href="../../customize/index.html">Customize</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="../../support/index.html">Support</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="../../support/index.html">Support Center</a></li>
-                        <li><a href="../../press/index.html">Newsroom</a></li>
-                    </ul>
-                </li>
+            <ul class="nav-list">
+                <li><a href="../../store/index.html" class="cta-nav">Store</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="#" id="search-trigger" aria-label="Search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </a>
-                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-            </div>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <button class="nav-toggle" aria-label="Open navigation">
                 <span class="hamburger"></span>
             </button>
         </nav>
@@ -811,11 +461,11 @@
             <div class="camera-reveal-sticky">
                 <div class="camera-reveal-wrapper">
                     <div class="camera-glow" id="cameraGlow"></div>
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="PierceLENS P.L Camera" class="camera-image" id="cameraImage">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="PierceLENS P.L Camera" class="camera-image" id="cameraImage">
                     <div class="camera-text-overlay" id="textOverlay">
                         <p class="section-title">THE FLAGSHIP CAMERA</p>
                         <h1>The Pierce Lens</h1>
-                        <div class="price">Starting at $999</div>
+                        <div class="price">Starting at $799 <span style="text-decoration: line-through; opacity: 0.6; font-size: 20px; margin-left: 10px;">$999</span></div>
                         <p>Engineered for uncompromising professionals.</p>
                     </div>
                 </div>
@@ -843,7 +493,7 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="Cyber Sensor Technology">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Cyber Sensor Technology">
                 </div>
             </div>
         </section>
@@ -864,7 +514,7 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="Integrated Optics">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Integrated Optics">
                 </div>
             </div>
         </section>
@@ -885,28 +535,28 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="Filter Engine">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Filter Engine">
                 </div>
             </div>
         </section>
 
-        <!-- Feature Section 4: mini-NVMe Storage - Speed Animation -->
-        <section class="nvme-scroll-container">
-            <div class="nvme-reveal-sticky">
-                <div class="nvme-reveal-wrapper">
-                    <div class="speed-line"></div>
-                    <div class="speed-line"></div>
-                    <div class="speed-line"></div>
-                    <div class="speed-line"></div>
-                    <div class="speed-line"></div>
-                    <div class="nvme-glow" id="nvmeGlow"></div>
-                    <img src="../../images/products/mini-nvme-module.png" alt="mini-NVMe Storage" class="nvme-image" id="nvmeImage">
-                    <div class="nvme-text-overlay" id="nvmeTextOverlay">
-                        <span class="feature-label" style="display: block; margin-bottom: 15px;">Speed & Security</span>
-                        <h2>7,400 MB/s</h2>
-                        <p>Ultra-fast mini-NVMe storage. Up to 4TB capacity with enterprise-grade encryption.</p>
-                    </div>
-                    <div class="speed-indicator" id="speedIndicator">7400<span> MB/s</span></div>
+        <!-- Feature Section 4: mini-NVMe Storage -->
+        <section class="feature-section">
+            <div class="feature-content reverse">
+                <div class="feature-text">
+                    <span class="feature-label">Speed & Security</span>
+                    <h2>mini-NVMe Storage</h2>
+                    <p>Ultra-fast removable storage that fits in your pocket. The Pierce Lens integrates a mini-NVMe module with capacities up to 4TB, delivering sustained read/write speeds of 7,400 MB/s.</p>
+                    <p>Enterprise-grade security and reliability meet professional performance. No more waiting for file transfers or worrying about data loss. Your most critical work is protected and instantly accessible wherever you go.</p>
+                    <ul class="feature-list">
+                        <li>Up to 4TB Capacity</li>
+                        <li>7,400 MB/s Sustained Speed</li>
+                        <li>Enterprise-Grade Encryption</li>
+                        <li>Hot-Swappable Design</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <img src="../../images/productPreviews/mini-nvme-module.png" alt="mini-NVMe Storage">
                 </div>
             </div>
         </section>
@@ -927,7 +577,7 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="Built-in Projector">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Built-in Projector">
                 </div>
             </div>
         </section>
@@ -948,7 +598,7 @@
                     </ul>
                 </div>
                 <div class="feature-visual">
-                    <img src="../../images/products/the_pierce_lens/the-pierce-lens.png" alt="Wireless Connectivity">
+                    <img src="../../images/cameraPreviews/camera_black.png" alt="Wireless Connectivity">
                 </div>
             </div>
         </section>
@@ -961,76 +611,39 @@
                 <h3>The Pierce Lens</h3>
             </div>
             <div class="price-strip-price">
-                From <strong>$999</strong>
+                From <strong>$799</strong> <span style="text-decoration: line-through; opacity: 0.5; margin-left: 8px;">$999</span>
             </div>
         </div>
         <div class="price-strip-actions">
-            <a href="#" id="customize-camera-btn" class="cta-button">Customize This Camera</a>
+            <a href="../../customize/index.html" class="cta-button">Buy Now</a>
             <a href="#specs" class="cta-button secondary">Learn More</a>
         </div>
     </div>
 
-    <script>
-        // Handle customize button click
-        document.getElementById('customize-camera-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (typeof CameraSelection !== 'undefined') {
-                CameraSelection.goToCustomize('pl', 'The Pierce Lens');
-            } else {
-                // Fallback if script isn't loaded
-                window.location.href = '../../customize/index.html';
-            }
-        });
-    </script>
-
     <footer>
         <div class="container">
+            <div class="footnotes">
+                <ol>
+                    <li>Holiday Sale! Pierce Lens $799 (was $999), Pierce Lens Pro $999 (was $1,199), Pierce Lens Lite $499. While supplies last.</li>
+                    <li>mini-NVMe storage offers read speeds up to 7000 MB/s and write speeds up to 5000 MB/s. Actual performance may vary based on configuration and conditions.</li>
+                    <li>Night Vision Mode utilizes advanced sensor technology for enhanced low-light capture. Performance depends on ambient lighting conditions and camera settings.</li>
+                    <li>First consumer camera system to feature removable mini-NVMe storage as the primary recording medium. Patent pending.</li>
+                </ol>
+            </div>
             <div class="footer-links">
                 <a href="../../index.html" class="logo-link">
                     <img src="../../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
                 </a>
-                <div class="footer-columns">
-                    <ul>
-                        <li class="footer-heading">Explore</li>
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="../../customize/index.html">Customize</a></li>
-                        <li><a href="../../store/index.html">Store</a></li>
-                    </ul>
-                    <ul>
-                        <li class="footer-heading">Products</li>
-                        <li><a href="../../cameras/pierce-lens/index.html">Pierce Lens</a></li>
-                        <li><a href="../../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
-                        <li><a href="../../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
-                    </ul>
-                    <ul>
-                        <li class="footer-heading">Support</li>
-                        <li><a href="../../support/index.html">Support</a></li>
-                        <li><a href="../../press/index.html">Press</a></li>
-                    </ul>
-                    <ul>
-                        <li class="footer-heading">Legal</li>
-                        <li><a href="../../privacy/index.html">Privacy Policy</a></li>
-                        <li><a href="../../policy/index.html">Terms &amp; Conditions</a></li>
-                    </ul>
-                </div>
+                <ul>
+                    <li><a href="../../support/index.html">Support</a></li>
+                    <li><a href="../../store/index.html">Find a Dealer</a></li>
+                    <li><a href="../../press/index.html">Press</a></li>
+                    <li><a href="../../privacy/index.html">Privacy</a></li>
+                </ul>
             </div>
             <p class="copyright">&copy; 2025 PierceLENS. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Search Modal -->
-    <div id="search-modal" class="search-modal">
-        <div class="search-modal-content">
-            <button id="search-close" class="search-close" aria-label="Close search">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="search-input-wrapper">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" class="search-input" placeholder="Search products, cameras, accessories..." autocomplete="off">
-            </div>
-            <div id="search-results" class="search-results"></div>
-        </div>
-    </div>
 
     <script src="../../js/cookie_banner.js"></script>
     <script src="../../js/header.js"></script>
@@ -1147,97 +760,24 @@
         featureObserver.observe(section);
     });
 
-    // Price strip is always visible
-
-    // mini-NVMe speed scroll animation
-    const nvmeImage = document.getElementById('nvmeImage');
-    const nvmeGlow = document.getElementById('nvmeGlow');
-    const nvmeTextOverlay = document.getElementById('nvmeTextOverlay');
-    const speedIndicator = document.getElementById('speedIndicator');
-    const nvmeScrollContainer = document.querySelector('.nvme-scroll-container');
-    const speedLines = document.querySelectorAll('.speed-line');
-
-    function updateNVMEReveal() {
-        if (!nvmeScrollContainer) return;
-
-        const scrollContainerTop = nvmeScrollContainer.offsetTop;
-        const scrollContainerHeight = nvmeScrollContainer.offsetHeight;
+    // Price strip visibility on scroll
+    const priceStrip = document.getElementById('priceStrip');
+    
+    function updatePriceStrip() {
+        const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         
-        const scrollY = window.scrollY;
-        
-        // Only animate while container is in view
-        if (scrollY + windowHeight < scrollContainerTop || scrollY > scrollContainerTop + scrollContainerHeight) {
-            return;
-        }
-        
-        let scrollProgress = (scrollY - scrollContainerTop) / (scrollContainerHeight - windowHeight * 0.5);
-        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
-
-        // Phase 1: Rapid entry from left (0 - 0.25)
-        if (scrollProgress <= 0.25) {
-            const phase1 = scrollProgress / 0.25;
-            const easeOut = 1 - Math.pow(1 - phase1, 3);
-            const translateX = -200 + easeOut * 200;
-            const scale = 0.5 + easeOut * 0.5;
-            nvmeImage.style.transform = `translateX(${translateX}%) scale(${scale})`;
-            nvmeImage.style.opacity = easeOut;
-            
-            speedLines.forEach((line, index) => {
-                const lineDelay = index * 0.05;
-                const lineProgress = Math.max(0, Math.min(1, (phase1 - lineDelay) / 0.3));
-                const lineX = -100 + lineProgress * 200;
-                line.style.transform = `translateX(${lineX}%)`;
-                line.style.opacity = lineProgress * (1 - lineProgress) * 2;
-            });
-        }
-        else {
-            const phase2 = (scrollProgress - 0.25) / 0.2;
-            const overshoot = Math.sin(Math.max(0, phase2) * Math.PI * 0.5) * 5;
-            nvmeImage.style.transform = `translateX(${overshoot}%) scale(1)`;
-            nvmeImage.style.opacity = 1;
-            
-            speedLines.forEach(line => {
-                line.style.opacity = 0;
-            });
-        }
-
-        if (scrollProgress <= 0.3) {
-            const glowPhase = scrollProgress / 0.3;
-            const glowX = -100 + glowPhase * 100;
-            nvmeGlow.style.transform = `translateX(${glowX}%)`;
-            nvmeGlow.style.opacity = glowPhase * 0.8;
+        // Show price strip after scrolling past 50% of the initial camera reveal
+        if (scrollY > windowHeight * 0.5) {
+            priceStrip.classList.add('visible');
         } else {
-            nvmeGlow.style.opacity = 0;
-        }
-
-        if (scrollProgress <= 0.4) {
-            const textPhase = Math.max(0, (scrollProgress - 0.15) / 0.25);
-            nvmeTextOverlay.style.opacity = textPhase;
-            nvmeTextOverlay.style.transform = `translateX(${-100 + textPhase * 100}px)`;
-        } else {
-            nvmeTextOverlay.style.opacity = 1;
-            nvmeTextOverlay.style.transform = `translateX(0)`;
-        }
-
-        if (scrollProgress <= 0.5) {
-            const speedPhase = Math.max(0, (scrollProgress - 0.2) / 0.3);
-            speedIndicator.style.opacity = speedPhase;
-            const currentSpeed = Math.floor(speedPhase * 7400);
-            speedIndicator.innerHTML = `${currentSpeed}<span> MB/s</span>`;
-        } else {
-            speedIndicator.style.opacity = 1;
-            speedIndicator.innerHTML = `7400<span> MB/s</span>`;
+            priceStrip.classList.remove('visible');
         }
     }
-
-    window.addEventListener('scroll', updateNVMEReveal);
-    window.addEventListener('resize', updateNVMEReveal);
-    updateNVMEReveal(); // Initial call
+    
+    window.addEventListener('scroll', updatePriceStrip);
+    updatePriceStrip(); // Initial check
     </script>
 
-    <script src="../../js/camera-selection.js"></script>
-    <script src="../../js/shopping-cart.js"></script>
-    <script src="../../js/search.js"></script>
 </body>
 </html>

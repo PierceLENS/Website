@@ -507,6 +507,18 @@
     </style>
 </head>
 <body>
+    <!-- PayPal Payment Modal -->
+    <div id="paypal-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#222; border-radius:16px; max-width:400px; width:90vw; margin:auto; padding:32px 24px; box-shadow:0 0 40px #00d7ff55; text-align:center; color:#fff; position:relative;">
+            <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" style="width:64px; height:64px; margin-bottom:18px;" />
+            <h2 style="margin-bottom:18px; word-break:break-word;">PayPal Payment</h2>
+            <p style="margin-bottom:18px;">You will be redirected to PayPal to complete your purchase.<br>For this demo, click below to confirm payment.</p>
+            <div style="display:flex; gap:12px; justify-content:center;">
+                <button id="paypal-confirm-btn" style="background:#009cde; color:#fff; font-weight:700; border:none; border-radius:8px; padding:12px 32px; cursor:pointer;">Confirm PayPal Payment</button>
+                <button id="paypal-cancel-btn" style="background:transparent; color:#fff; border:none; font-size:13px; cursor:pointer;">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <header>
         <nav class="main-nav">
@@ -547,6 +559,22 @@
         </nav>
     </header>
 
+    <!-- Crypto Payment Modal -->
+    <div id="crypto-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#222; border-radius:16px; max-width:400px; width:90vw; margin:auto; padding:32px 24px; box-shadow:0 0 40px #00d7ff55; text-align:center; color:#fff; position:relative;">
+            <h2 style="margin-bottom:18px; word-break:break-word;">Crypto Payment</h2>
+            <p style="margin-bottom:12px;">Send your payment to the wallet address below:</p>
+            <div style="font-size:15px; font-weight:700; background:#111; padding:10px 8px; border-radius:8px; margin-bottom:18px; word-break:break-all; overflow-wrap:break-word; white-space:pre-line; max-width:100%; display:inline-block;">
+                0x1234abcd5678efgh9012ijkl3456mnop7890qrst
+            </div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=0x1234abcd5678efgh9012ijkl3456mnop7890qrst" alt="Crypto QR" style="margin-bottom:18px; border-radius:8px; max-width:100%; height:auto;" />
+            <p style="margin-bottom:18px; font-size:13px; color:#aaa;">Scan the QR code or copy the address to your wallet app.</p>
+            <div style="display:flex; gap:12px; justify-content:center;">
+                <button id="crypto-confirm-btn" style="background:var(--color-main-accent); color:#000; font-weight:700; border:none; border-radius:8px; padding:12px 32px; cursor:pointer;">I've Sent Payment</button>
+                <button id="crypto-cancel-btn" style="background:transparent; color:#fff; border:none; font-size:13px; cursor:pointer;">Cancel</button>
+            </div>
+        </div>
+    </div>
     <main class="checkout-main">
         <div class="checkout-container">
             
@@ -785,14 +813,14 @@
                                 <p>Grip: Italian Leather</p>
                                 <p>Filter: Pro Cine-Tones</p>
                             </div>
-                            <div class="item-price">$999</div>
+                            <div class="item-price">$799</div>
                         </div>
                     </div>
 
                     <div class="order-totals">
                         <div class="total-row">
                             <p>Subtotal</p>
-                            <strong>$999</strong>
+                            <strong>$799</strong>
                         </div>
                         <div class="total-row">
                             <p>Shipping</p>
@@ -875,6 +903,32 @@
                 });
             });
 
+                // PayPal modal logic (moved inside DOMContentLoaded)
+                const paypalModal = document.getElementById('paypal-modal');
+                const paypalConfirmBtn = document.getElementById('paypal-confirm-btn');
+                const paypalCancelBtn = document.getElementById('paypal-cancel-btn');
+                if (paypalConfirmBtn) {
+                    paypalConfirmBtn.addEventListener('click', async function() {
+                        paypalModal.style.display = 'none';
+                        if (window.paypalOrderData) {
+                            VEMarketplace.showLoading(true);
+                            const result = await VEMarketplace.demoTransaction(window.paypalOrderData.customer);
+                            VEMarketplace.showLoading(false);
+                            if (result.success) {
+                                VEMarketplace.showCashierConfirmation(window.paypalOrderData, result);
+                            } else {
+                                alert('There was a problem processing your PayPal payment.');
+                            }
+                        } else {
+                            alert('Order data missing. Please try again.');
+                        }
+                    });
+                }
+                if (paypalCancelBtn) {
+                    paypalCancelBtn.addEventListener('click', function() {
+                        paypalModal.style.display = 'none';
+                    });
+                }
             // Account number formatting (9 digits in groups of 3)
             const cardNumber = document.getElementById('cardNumber');
             if (cardNumber) {
@@ -911,63 +965,100 @@
                     paymentMethod: document.querySelector('.payment-method.active').dataset.method
                 };
 
-                // Validate all required fields
-                const requiredFields = document.querySelectorAll('input[required], select[required]');
+                // Validate required fields
                 let isValid = true;
-
-                requiredFields.forEach(field => {
-                    if (!field.value) {
-                        isValid = false;
-                        field.style.borderColor = '#ff4444';
-                    } else {
-                        field.style.borderColor = '';
+                if (formData.paymentMethod === 'crypto' || formData.paymentMethod === 'paypal') {
+                    // Only validate user info fields for crypto and paypal
+                    const userFields = [
+                        document.getElementById('firstName'),
+                        document.getElementById('lastName'),
+                        document.getElementById('email')
+                    ];
+                    userFields.forEach(field => {
+                        if (!field.value) {
+                            isValid = false;
+                            field.style.borderColor = '#ff4444';
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+                } else {
+                    // Validate all required fields for non-crypto
+                    const requiredFields = document.querySelectorAll('input[required], select[required]');
+                    requiredFields.forEach(field => {
+                        if (!field.value) {
+                            isValid = false;
+                            field.style.borderColor = '#ff4444';
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+                    // Additional validation for payment info if US Bank Debit is selected
+                    if (formData.paymentMethod === 'card') {
+                        const cardName = document.getElementById('cardName')?.value;
+                        const cardNumber = document.getElementById('cardNumber')?.value;
+                        if (!cardName || !cardNumber) {
+                            isValid = false;
+                            if (!cardName) document.getElementById('cardName').style.borderColor = '#ff4444';
+                            if (!cardNumber) document.getElementById('cardNumber').style.borderColor = '#ff4444';
+                        }
                     }
-                });
+                }
 
                 if (!isValid) {
                     alert('Please fill in all required fields.');
                     return;
                 }
 
-                // Collect US Bank Network debit card information
-                const cardDetails = document.getElementById('card-details');
-                const selectedPaymentIdx = cardDetails.dataset.selectedPayment;
                 let paymentData;
+                if (formData.paymentMethod === 'crypto') {
+                    paymentData = {
+                        crypto: true
+                    };
+                } else if (formData.paymentMethod === 'paypal') {
+                    paymentData = {
+                        paypal: true
+                    };
+                } else {
+                    // Collect US Bank Network debit card information
+                    const cardDetails = document.getElementById('card-details');
+                    const selectedPaymentIdx = cardDetails.dataset.selectedPayment;
 
-                if (selectedPaymentIdx !== undefined) {
-                    // Using saved payment method
-                    const sessionRaw = sessionStorage.getItem('pl_session') || localStorage.getItem('pl_session');
-                    if (sessionRaw) {
-                        const session = JSON.parse(sessionRaw);
-                        const payments = JSON.parse(localStorage.getItem('pl_payments') || '{}');
-                        const userPayments = payments[session.email] || [];
-                        const savedPayment = userPayments[parseInt(selectedPaymentIdx)];
-                        
-                        if (savedPayment) {
-                            paymentData = {
-                                cardName: savedPayment.name,
-                                cardNumber: '••• ••• ' + savedPayment.lastFour.slice(-3),
-                                savedPayment: true
-                            };
+                    if (selectedPaymentIdx !== undefined) {
+                        // Using saved payment method
+                        const sessionRaw = sessionStorage.getItem('pl_session') || localStorage.getItem('pl_session');
+                        if (sessionRaw) {
+                            const session = JSON.parse(sessionRaw);
+                            const payments = JSON.parse(localStorage.getItem('pl_payments') || '{}');
+                            const userPayments = payments[session.email] || [];
+                            const savedPayment = userPayments[parseInt(selectedPaymentIdx)];
+                            
+                            if (savedPayment) {
+                                paymentData = {
+                                    cardName: savedPayment.name,
+                                    cardNumber: '••• ••• ' + savedPayment.lastFour.slice(-3),
+                                    savedPayment: true
+                                };
+                            }
                         }
                     }
-                }
 
-                // If no saved payment selected, use manual entry
-                if (!paymentData) {
-                    const cardName = document.getElementById('cardName')?.value;
-                    const cardNumber = document.getElementById('cardNumber')?.value;
-                    
-                    if (!cardName || !cardNumber) {
-                        alert('Please select a payment method or enter payment information.');
-                        return;
+                    // If no saved payment selected, use manual entry
+                    if (!paymentData) {
+                        const cardName = document.getElementById('cardName')?.value;
+                        const cardNumber = document.getElementById('cardNumber')?.value;
+                        
+                        if (!cardName || !cardNumber) {
+                            alert('Please select a payment method or enter payment information.');
+                            return;
+                        }
+
+                        paymentData = {
+                            cardName: cardName,
+                            cardNumber: cardNumber,
+                            savedPayment: false
+                        };
                     }
-
-                    paymentData = {
-                        cardName: cardName,
-                        cardNumber: cardNumber,
-                        savedPayment: false
-                    };
                 }
 
                 // Prepare complete order data for cashier screen
@@ -978,16 +1069,52 @@
                     total: parseFloat(document.querySelector('.total-row.final strong').textContent.replace('$', '').replace(',', ''))
                 };
 
+                // If payment method is crypto, show mock processor
+                if (formData.paymentMethod === 'crypto') {
+                    document.getElementById('crypto-modal').style.display = 'flex';
+                    window.cryptoOrderData = completeOrderData;
+                    return;
+                }
+                if (formData.paymentMethod === 'paypal') {
+                    document.getElementById('paypal-modal').style.display = 'flex';
+                    window.paypalOrderData = completeOrderData;
+                    return;
+                }
+        // PayPal modal logic
+        const paypalModal = document.getElementById('paypal-modal');
+        const paypalConfirmBtn = document.getElementById('paypal-confirm-btn');
+        const paypalCancelBtn = document.getElementById('paypal-cancel-btn');
+        if (paypalConfirmBtn) {
+            paypalConfirmBtn.addEventListener('click', async function() {
+                paypalModal.style.display = 'none';
+                if (window.paypalOrderData) {
+                    VEMarketplace.showLoading(true);
+                    const result = await VEMarketplace.demoTransaction(window.paypalOrderData.customer);
+                    VEMarketplace.showLoading(false);
+                    if (result.success) {
+                        VEMarketplace.showCashierConfirmation(window.paypalOrderData, result);
+                    } else {
+                        alert('There was a problem processing your PayPal payment.');
+                    }
+                } else {
+                    alert('Order data missing. Please try again.');
+                }
+            });
+        }
+        if (paypalCancelBtn) {
+            paypalCancelBtn.addEventListener('click', function() {
+                paypalModal.style.display = 'none';
+            });
+        }
+
                 // Process order through VE Marketplace
                 // Note: Set VEMarketplace.config values first, or use demo mode
-                
                 // For demo/testing - uncomment the line below:
                 const result = await VEMarketplace.demoTransaction(formData);
                 VEMarketplace.showLoading(false);
                 if (result.success) {
                     VEMarketplace.showCashierConfirmation(completeOrderData, result);
                 }
-                
                 // For production - uncomment the line below after configuring API credentials:
                 // const result = await VEMarketplace.processOrder(formData);
                 // if (result.success) {
@@ -1275,6 +1402,34 @@
         // Update cart badge count
         if (typeof ShoppingCart !== 'undefined') {
             ShoppingCart.updateCartCount();
+        }
+
+        // Crypto modal logic
+        const cryptoModal = document.getElementById('crypto-modal');
+        const cryptoConfirmBtn = document.getElementById('crypto-confirm-btn');
+        const cryptoCancelBtn = document.getElementById('crypto-cancel-btn');
+        if (cryptoConfirmBtn) {
+            cryptoConfirmBtn.addEventListener('click', async function() {
+                cryptoModal.style.display = 'none';
+                // Process order through VE Marketplace (demo mode)
+                if (window.cryptoOrderData) {
+                    VEMarketplace.showLoading(true);
+                    const result = await VEMarketplace.demoTransaction(window.cryptoOrderData.customer);
+                    VEMarketplace.showLoading(false);
+                    if (result.success) {
+                        VEMarketplace.showCashierConfirmation(window.cryptoOrderData, result);
+                    } else {
+                        alert('There was a problem processing your crypto payment.');
+                    }
+                } else {
+                    alert('Order data missing. Please try again.');
+                }
+            });
+        }
+        if (cryptoCancelBtn) {
+            cryptoCancelBtn.addEventListener('click', function() {
+                cryptoModal.style.display = 'none';
+            });
         }
     </script>
 </body>
