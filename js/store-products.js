@@ -1,6 +1,6 @@
 /**
  * Store Page Product Management
- * Handles add-to-cart functionality for all products
+ * Modular system for cart and customization integration
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,42 +11,51 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             
+            // Don't process disabled buttons
+            if (this.disabled) return;
+            
             const productId = this.getAttribute('data-product');
             const productName = this.getAttribute('data-name');
             const productPrice = parseFloat(this.getAttribute('data-price'));
+            const productImage = this.getAttribute('data-image') || '../images/products/the_pierce_lens/the-pierce-lens.png';
             
-            // Special handling for camera configuration
+            // Camera products - redirect to customization with URL parameter
             if (productId === 'pl-camera') {
-                if (typeof CameraSelection !== 'undefined') {
-                    CameraSelection.goToCustomize('pl', productName);
-                } else {
-                    window.location.href = '../customize/index.html';
-                }
+                window.location.href = '../customize/index.html?camera=pl';
                 return;
             }
-            
             if (productId === 'pl-pro-camera') {
-                if (typeof CameraSelection !== 'undefined') {
-                    CameraSelection.goToCustomize('pl-pro', productName);
-                } else {
-                    window.location.href = '../customize/index.html';
-                }
+                window.location.href = '../customize/index.html?camera=pl-pro';
+                return;
+            }
+            if (productId === 'pl-lite-camera') {
+                window.location.href = '../customize/index.html?camera=pl-lite';
                 return;
             }
             
-            // Add other products to cart
+            // All other products - add to cart
             if (typeof ShoppingCart !== 'undefined') {
                 const cartItem = {
                     name: productName,
                     price: productPrice,
-                    quantity: 1
+                    quantity: 1,
+                    image: productImage
                 };
                 
                 ShoppingCart.addItem(cartItem);
                 ShoppingCart.showAddConfirmation(productName);
-                ShoppingCart.updateCartCount();
+                
+                // Visual feedback - button animation
+                this.classList.add('added-to-cart');
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+                
+                setTimeout(() => {
+                    this.classList.remove('added-to-cart');
+                    this.innerHTML = 'Add to Cart';
+                }, 2000);
             } else {
-                alert('Shopping cart not loaded. Please refresh the page.');
+                console.error('ShoppingCart module not loaded');
+                alert('Unable to add to cart. Please refresh the page.');
             }
         });
     });

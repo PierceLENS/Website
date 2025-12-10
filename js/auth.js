@@ -29,7 +29,6 @@
             const raw = localStorage.getItem(USERS_KEY);
             return raw ? JSON.parse(raw) : [];
         } catch (e) {
-            console.warn('Unable to load users', e);
             return [];
         }
     }
@@ -69,7 +68,6 @@
         try {
             return JSON.parse(raw);
         } catch (e) {
-            console.warn('Invalid session payload', e);
             return null;
         }
     }

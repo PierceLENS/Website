@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(s);
     }
     
-    console.log('Header.js loaded', { navToggle, navLinks });
-    console.log('Nav toggle element:', navToggle);
-    console.log('Nav links element:', navLinks);
-    console.log('Window width:', window.innerWidth);
-    
     function checkScroll() {
         if (!heroBanner) {
             header.classList.add('scrolled');
@@ -40,10 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Nav toggle clicked', {
-                hasNavOpen: navLinks.classList.contains('nav-open'),
-                classList: navLinks.className
-            });
             
             const isOpen = navLinks.classList.contains('nav-open');
             if (isOpen) {
@@ -51,13 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 navToggle.classList.remove('open');
                 navToggle.setAttribute('aria-expanded', 'false');
                 body.style.overflow = '';
-                console.log('Closing nav');
             } else {
                 navLinks.classList.add('nav-open');
                 navToggle.classList.add('open');
                 navToggle.setAttribute('aria-expanded', 'true');
                 body.style.overflow = 'hidden';
-                console.log('Opening nav', { classList: navLinks.className });
             }
         });
 
@@ -73,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 navToggle.classList.remove('open');
                 navToggle.setAttribute('aria-expanded', 'false');
                 body.style.overflow = '';
-                console.log('Closing nav on link click');
             });
         });
 
@@ -87,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.log('navToggle or navLinks not found!');
+        // navToggle or navLinks not found
     }
 
     // Mobile dropdown toggle
@@ -97,12 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const parent = dropdown.parentElement;
                 const isOpen = parent.classList.contains('open');
-                
-                console.log('Dropdown clicked', { 
-                    text: dropdown.textContent, 
-                    isOpen,
-                    willBe: !isOpen 
-                });
                 
                 document.querySelectorAll('.nav-dropdown').forEach(d => {
                     if (d !== parent) d.classList.remove('open');

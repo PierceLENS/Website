@@ -6,19 +6,33 @@
  */
 
 const VEMarketplace = {
-    // Configuration - Update these with your VE Marketplace credentials
-    config: {
-        apiEndpoint: 'https://hub.veinternational.org/api', // Update with actual API endpoint
-        firmId: 'YOUR_FIRM_ID', // Your VE firm ID
-        apiKey: 'YOUR_API_KEY', // Your VE Marketplace API key
-        environment: 'sandbox' // 'sandbox' or 'production'
+    // Configuration - Loaded from AppConfig (see js/config.js)
+    config: null,
+
+    /**
+     * Get configuration, loading from AppConfig if available
+     */
+    getConfig: function() {
+        if (this.config) return this.config;
+        
+        // Try to use AppConfig if available, otherwise use defaults
+        if (typeof AppConfig !== 'undefined') {
+            this.config = AppConfig.veMarketplace;
+        } else {
+            this.config = {
+                apiEndpoint: 'https://hub.veinternational.org/api',
+                firmId: 'production_firm_id',
+                apiKey: 'production_api_key',
+                environment: 'production'
+            };
+        }
+        return this.config;
     },
 
     /**
      * Initialize the VE Marketplace integration
      */
     init: function() {
-        console.log('VE Marketplace Integration initialized');
         this.loadOrderData();
     },
 
@@ -33,7 +47,7 @@ const VEMarketplace = {
                 const order = JSON.parse(orderData);
                 this.populateOrderSummary(order);
             } catch (e) {
-                console.error('Error parsing order data:', e);
+                // Error parsing order data
             }
         }
     },
@@ -43,8 +57,6 @@ const VEMarketplace = {
      */
     populateOrderSummary: function(order) {
         // Update order display with actual order data
-        console.log('Order data loaded:', order);
-        
         // You can update the DOM here with actual order details
         // Example: document.getElementById('item-details').innerHTML = ...
     },
@@ -53,8 +65,9 @@ const VEMarketplace = {
      * Create a transaction request to VE Marketplace
      */
     createTransaction: async function(orderData) {
+        const config = this.getConfig();
         const transactionPayload = {
-            firm_id: this.config.firmId,
+            firm_id: config.firmId,
             transaction_type: 'sale',
             amount: orderData.total,
             currency: 'USD',
@@ -86,12 +99,12 @@ const VEMarketplace = {
         };
 
         try {
-            const response = await fetch(`${this.config.apiEndpoint}/transactions`, {
+            const response = await fetch(`${config.apiEndpoint}/transactions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.config.apiKey}`,
-                    'X-Firm-ID': this.config.firmId
+                    'Authorization': `Bearer ${config.apiKey}`,
+                    'X-Firm-ID': config.firmId
                 },
                 body: JSON.stringify(transactionPayload)
             });
@@ -109,7 +122,6 @@ const VEMarketplace = {
             };
 
         } catch (error) {
-            console.error('VE Marketplace transaction error:', error);
             return {
                 success: false,
                 error: error.message

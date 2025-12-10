@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="PierceLENS | The Advanced P.L Camera System">
+    <meta name="theme-color" content="#000000">
     <title>PierceLENS | The P.L Camera System</title>
     <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVJkEZSMUkrQ6usznAction+yjctgyeuFiWxfptUjlEYfnt5T0uZTJqZ1ZH8j0mic1hadeTapMkIkrhqGzDAx5Z5Kq7LSv1Ij7awla8BMjCQAu9rmMHMMhEfT47snIHucmoKHWykleuqSmGpqFbcoKvlIizonkXsgCOxDuDvnohLy2passport+mode/manifest.json" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shopping-cart.css"> 
@@ -56,7 +60,7 @@
         <section class="promo-banner festive-banner">
             <div class="promo-content">
                 <div class="snow"></div>
-                <p>🎄 <span class="festive-text">Holiday Sale:</span> Save up to <span style="color:#d32f2f;font-weight:bold;">$200</span> on the entire Pierce Lens lineup. <a href="store/index.html">Shop now</a></p>
+                <p>🎄 <span class="festive-text">Holiday Sale:</span> Save up to <span class="sale-highlight">$200</span> on the entire Pierce Lens lineup. <a href="store/index.html">Shop now</a></p>
             </div>
         </section>
 
@@ -190,77 +194,13 @@
         </div>
     </div>
 
-    <script src="js/cookie_banner.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/shopping-cart.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/search.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Festive snow animation
-        var snowContainer = document.querySelector('.festive-banner .snow');
-        if (snowContainer) {
-            for (var i = 0; i < 24; i++) {
-                var snowflake = document.createElement('span');
-                snowflake.className = 'snowflake';
-                snowflake.textContent = '❄';
-                snowflake.style.left = (Math.random() * 100) + '%';
-                snowflake.style.fontSize = (0.8 + Math.random() * 1.2) + 'em';
-                snowflake.style.animationDelay = (Math.random() * 6) + 's';
-                snowContainer.appendChild(snowflake);
-            }
-        }
-
-        // Cart trigger
-        var cartTrigger = document.getElementById('cart-trigger');
-        if (cartTrigger && typeof ShoppingCart !== 'undefined') {
-            var newCartTrigger = cartTrigger.cloneNode(true);
-            cartTrigger.parentNode.replaceChild(newCartTrigger, cartTrigger);
-            newCartTrigger.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                ShoppingCart.showCartModal();
-            });
-            ShoppingCart.updateCartCount();
-        }
-
-        // Dropdown accessibility (keyboard + focus + escape)
-        var dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(function(dd) {
-            var trigger = dd.querySelector('a');
-            var menu = dd.querySelector('.dropdown-menu');
-            if (!trigger || !menu) return;
-            trigger.setAttribute('aria-haspopup', 'true');
-            trigger.setAttribute('aria-expanded', 'false');
-
-            function openMenu() {
-                dd.classList.add('open');
-                trigger.setAttribute('aria-expanded', 'true');
-            }
-            function closeMenu() {
-                dd.classList.remove('open');
-                trigger.setAttribute('aria-expanded', 'false');
-            }
-
-            trigger.addEventListener('focus', openMenu);
-            trigger.addEventListener('mouseenter', openMenu);
-            dd.addEventListener('mouseleave', closeMenu);
-
-            dd.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeMenu();
-                    trigger.focus();
-                }
-            });
-
-            dd.addEventListener('focusout', function(e) {
-                if (!dd.contains(e.relatedTarget)) {
-                    closeMenu();
-                }
-            });
-        });
-    });
-    </script>
+    <script src="js/config.js"></script>
+    <script defer src="js/cookie_banner.js"></script>
+        <script defer src="js/shopping-cart.js"></script>
+        <script defer src="js/carousel.js"></script>
+        <script defer src="js/search.js"></script>
+        <script defer src="js/header.js"></script>
+        <script defer src="js/ui-interactions.js"></script>
+        <script defer src="js/page-home.js"></script>
     </body>
 </html>

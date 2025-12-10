@@ -27,7 +27,6 @@ const CameraSelection = {
             try {
                 return JSON.parse(cameraCookie);
             } catch (e) {
-                console.error('Error parsing selected camera:', e);
                 return null;
             }
         }

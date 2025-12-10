@@ -38,22 +38,24 @@
 .cart-dropdown {
     position: fixed !important;
     width: 380px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
-    border: 2px solid #00BFFF;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     z-index: 99999 !important;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.2s ease;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
     display: block !important;
-    visibility: visible !important;
+    visibility: hidden;
 }
 
 .cart-dropdown.active {
     opacity: 1 !important;
-    transform: translateY(0);
+    visibility: visible !important;
+    transform: translateY(0) !important;
     pointer-events: all;
 }
 
@@ -63,18 +65,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cart-dropdown-header h3 {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.92);
     font-size: 18px;
     font-weight: 700;
     margin: 0;
 }
 
 .cart-dropdown-count {
-    color: #00BFFF;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
     font-weight: 600;
 }
@@ -110,23 +112,23 @@
     gap: 12px;
     align-items: center;
     padding: 12px;
-    background: rgba(0, 191, 255, 0.05);
-    border: 1px solid rgba(0, 191, 255, 0.1);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     margin-bottom: 10px;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
 }
 
 .cart-dropdown-item:hover {
-    background: rgba(0, 191, 255, 0.08);
-    border-color: rgba(0, 191, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 .cart-dropdown-item-image {
     width: 60px;
     height: 60px;
-    background: rgba(0, 191, 255, 0.05);
-    border: 1px solid rgba(0, 191, 255, 0.2);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -141,14 +143,14 @@
 }
 
 .cart-dropdown-item-details h4 {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.92);
     font-size: 14px;
     font-weight: 700;
     margin: 0 0 5px 0;
 }
 
 .cart-dropdown-item-price {
-    color: #00BFFF;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 16px;
     font-weight: 700;
     margin: 0;
@@ -176,10 +178,10 @@
 .cart-dropdown-more {
     text-align: center;
     padding: 12px;
-    color: #00BFFF;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
     font-weight: 600;
-    background: rgba(0, 191, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 6px;
     margin-top: 5px;
 }
@@ -187,7 +189,7 @@
 /* Cart Dropdown Footer */
 .cart-dropdown-footer {
     padding: 15px 20px;
-    border-top: 1px solid rgba(0, 191, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cart-dropdown-total {
@@ -198,13 +200,13 @@
 }
 
 .cart-dropdown-total span {
-    color: #aaa;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
     font-weight: 600;
 }
 
 .cart-dropdown-total strong {
-    color: #00BFFF;
+    color: rgba(255, 255, 255, 0.92);
     font-size: 20px;
     font-weight: 700;
 }
@@ -213,19 +215,20 @@
     display: block;
     width: 100%;
     padding: 12px 20px;
-    background: #00BFFF;
-    color: #111;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.92);
     text-align: center;
     text-decoration: none;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 700;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.15s ease;
 }
 
 .view-cart-btn:hover {
-    background: #00d7ff;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Cart Notification */
@@ -233,11 +236,13 @@
     position: fixed;
     top: 100px;
     right: -400px;
-    background: linear-gradient(135deg, #00BFFF 0%, #0099cc 100%);
-    color: #111;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.92);
     padding: 18px 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0, 191, 255, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -252,7 +257,7 @@
 
 .cart-notification i {
     font-size: 20px;
-    color: #00ff88;
+    color: rgba(0, 255, 136, 0.9);
 }
 
 /* Animations */

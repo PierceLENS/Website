@@ -360,6 +360,12 @@
     letter-spacing: 0.5px;
 }
 
+.product-badge.coming-soon-badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+}
+
 .product-details {
     padding: 20px;
     flex-grow: 1;
@@ -494,6 +500,28 @@
 
 .product-cta-button:active {
     transform: scale(0.98);
+}
+
+.product-cta-button:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.product-cta-button:disabled:hover {
+    transform: none;
+}
+
+.product-cta-button.added-to-cart {
+    background-color: #00ff88;
+    color: #111;
+    animation: cartPulse 0.5s ease;
+}
+
+@keyframes cartPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 /* --- ADJUSTMENT: Ensure the 'Configure System' link is styled correctly --- */

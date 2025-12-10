@@ -1,1 +1,28 @@
-For the most up-to-date website version, visit the organizations' GitHub page: [link](https://github.com/PierceLENS/Website)
+# PierceLENS Website
+
+Welcome to the PierceLENS website repository. This is the official source code for https://piercelens.com
+
+## Quick Links
+- **Live Site**: https://piercelens.com
+- **Repository**: https://github.com/PierceLENS/Website
+- **Deployment Guide**: See [DEPLOYMENT.md](DEPLOYMENT.md) for production deployment information
+
+## Project Structure
+- `index.html` - Homepage
+- `store/` - Product store
+- `customize/` - Camera customizer
+- `checkout/` - Checkout flow
+- `account/` - User account management
+- `css/` - Stylesheets
+- `js/` - JavaScript modules
+- `images/` - Product and brand images
+
+## Getting Started
+1. Clone the repository
+2. Open `index.html` in a browser or use a local server
+3. For development, see [DEPLOYMENT.md](DEPLOYMENT.md)
+
+## Production Status
+✅ **Production Ready** - All optimizations applied, debug code removed, security headers configured
+
+For deployment instructions and production setup, see [DEPLOYMENT.md](DEPLOYMENT.md)

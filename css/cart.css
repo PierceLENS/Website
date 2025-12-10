@@ -3,7 +3,26 @@
 .cart-page {
     min-height: 100vh;
     padding: 120px 20px 80px;
-    background: #0a0a0a;
+    background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+    position: relative;
+}
+
+.cart-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0, 191, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 191, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cart-page > * {
+    position: relative;
+    z-index: 1;
 }
 
 .cart-container {
@@ -104,21 +123,22 @@
 }
 
 .cart-item-card {
-    background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
-    border: 2px solid rgba(0, 191, 255, 0.1);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(34, 34, 34, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 191, 255, 0.15);
     border-radius: 16px;
     padding: 25px;
     display: grid;
     grid-template-columns: 140px 1fr auto;
     gap: 25px;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cart-item-card:hover {
-    border-color: rgba(0, 191, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 191, 255, 0.15);
+    border-color: rgba(0, 191, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 191, 255, 0.2), 0 0 40px rgba(0, 191, 255, 0.1);
 }
 
 .cart-item-image {
@@ -254,10 +274,12 @@
 }
 
 .cart-summary {
-    background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
-    border: 2px solid rgba(0, 191, 255, 0.2);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(34, 34, 34, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 191, 255, 0.25);
     border-radius: 16px;
     padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cart-summary h2 {
@@ -327,8 +349,8 @@
 
 .checkout-btn:hover {
     background: #00d7ff;
-    box-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-    transform: translateY(-2px);
+    box-shadow: 0 0 35px rgba(0, 191, 255, 0.6), 0 8px 25px rgba(0, 191, 255, 0.3);
+    transform: translateY(-2px) scale(1.01);
 }
 
 .checkout-btn:disabled {
@@ -348,7 +370,8 @@
 
 /* Promo Code Section */
 .promo-section {
-    background: rgba(0, 191, 255, 0.05);
+    background: rgba(0, 191, 255, 0.03);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 191, 255, 0.2);
     border-radius: 12px;
     padding: 20px;

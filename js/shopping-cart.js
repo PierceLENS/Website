@@ -17,7 +17,6 @@ const ShoppingCart = {
             try {
                 return JSON.parse(decodeURIComponent(cartCookie));
             } catch (e) {
-                console.error('Error parsing cart cookie:', e);
                 return { items: [] };
             }
         }
@@ -209,26 +208,21 @@ const ShoppingCart = {
         // Position dropdown with inline styles
         dropdown.style.cssText = `
             position: fixed !important;
-            top: ${triggerRect.bottom + 10}px !important;
+            top: ${triggerRect.bottom + 15}px !important;
             right: ${window.innerWidth - triggerRect.right}px !important;
             left: auto !important;
             z-index: 99999 !important;
             display: block !important;
             visibility: visible !important;
             width: 380px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
-            border: 2px solid #00BFFF;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
         `;
         
-        // Animate dropdown in
-        setTimeout(() => {
-            dropdown.classList.add('active');
-            dropdown.style.opacity = '1';
-            dropdown.style.transform = 'translateY(0)';
-            dropdown.style.pointerEvents = 'all';
-        }, 10);
+        // Animate dropdown in with smoother timing
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                dropdown.classList.add('active');
+            });
+        });
 
         // Close dropdown when clicking outside (delay to avoid catching the opening click)
         setTimeout(() => {
