@@ -192,6 +192,7 @@ function buildColorOptions(colors) {
         swatch.setAttribute('data-finish', color.finish);
         swatch.setAttribute('data-price', color.price);
         swatch.setAttribute('data-image', color.image);
+        swatch.setAttribute('data-color', color.color);
         
         container.appendChild(swatch);
     });
@@ -266,6 +267,9 @@ function attachEventListeners() {
         swatch.addEventListener('click', function() {
             document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
             this.classList.add('selected');
+            if (this.dataset.color) {
+                this.style.backgroundColor = this.dataset.color;
+            }
             updatePreviewImage(this.getAttribute('data-image'));
             updatePricing();
         });

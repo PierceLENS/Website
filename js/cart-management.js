@@ -31,8 +31,17 @@ function getCartFromCookie() {
     return [];
 }
 
+// Normalize cart item shape for consistent ID/quantity handling across modules
+function normalizeCartItem(raw) {
+    const item = { ...raw };
+    const qty = parseInt(item.quantity, 10);
+    item.quantity = Number.isFinite(qty) && qty > 0 ? qty : 1;
+    item.id = item.id ? String(item.id) : `${Date.now()}-${Math.random().toString(36).substr(2, 6)}`;
+    return item;
+}
+
 // Global Cart Array
-let cart = getCartFromCookie();
+let cart = getCartFromCookie().map(normalizeCartItem);
 
 // ============================================= */
 /* CART WIDGET / DROPDOWN REFERENCES */
@@ -72,7 +81,11 @@ function saveCart() {
 }
 
 function calculateCartTotal() {
-    const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    const total = cart.reduce((sum, item) => {
+        const qty = parseInt(item.quantity, 10);
+        const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
+        return sum + (item.price * safeQty);
+    }, 0);
     if (cartTotalDisplay) {
         cartTotalDisplay.textContent = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
@@ -80,7 +93,10 @@ function calculateCartTotal() {
 }
 
 function updateCartCount() {
-    const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const count = cart.reduce((sum, item) => {
+        const qty = parseInt(item.quantity, 10);
+        return sum + (Number.isFinite(qty) && qty > 0 ? qty : 1);
+    }, 0);
     
     // Update cart count bubble if present
     if (cartCountBubble) {
@@ -103,7 +119,8 @@ function updateCartCount() {
 /* ============================================= */
 
 function removeItem(itemId) {
-    cart = cart.filter(item => item.id !== itemId);
+    const targetId = String(itemId);
+    cart = cart.filter(item => String(item.id) !== targetId);
     saveCart();
     updateCartCount();
     
@@ -116,9 +133,7 @@ function removeItem(itemId) {
 }
 
 function addItemToCart(item) {
-    item.id = item.id || Date.now();
-    item.quantity = item.quantity || 1;
-    cart.push(item);
+    cart.push(normalizeCartItem(item));
     saveCart();
     updateCartCount();
     
@@ -131,12 +146,13 @@ function addItemToCart(item) {
 }
 
 function updateItemQuantity(itemId, newQuantity) {
-    const item = cart.find(i => i.id === itemId);
+    const item = cart.find(i => String(i.id) === String(itemId));
     if (item) {
-        if (newQuantity <= 0) {
+        const parsedQty = parseInt(newQuantity, 10);
+        if (!Number.isFinite(parsedQty) || parsedQty <= 0) {
             removeItem(itemId);
         } else {
-            item.quantity = newQuantity;
+            item.quantity = parsedQty;
             saveCart();
             updateCartCount();
             
@@ -165,6 +181,8 @@ function renderCartDropdown() {
         cart.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('cart-item');
+            const qty = parseInt(item.quantity, 10);
+            const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
             
             // Generate description
             let description = '';
@@ -181,7 +199,7 @@ function renderCartDropdown() {
                 <div class="item-details">
                     <p class="item-name">${item.name}</p>
                     ${description ? `<p class="item-config">${description}</p>` : ''}
-                    <p class="item-price">$${(item.price * (item.quantity || 1)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p class="item-price">$${(item.price * safeQty).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                 </div>
                 <button class="remove-btn" data-item-id="${item.id}">&times;</button>
             `;
@@ -192,7 +210,7 @@ function renderCartDropdown() {
         // Attach remove listeners
         document.querySelectorAll('.remove-btn').forEach(button => {
             button.addEventListener('click', (e) => {
-                const itemId = parseInt(e.currentTarget.dataset.itemId);
+                const itemId = e.currentTarget.dataset.itemId;
                 removeItem(itemId);
             });
         });
@@ -206,6 +224,8 @@ function renderCartDropdown() {
 /* ============================================= */
 
 function renderCartItem(item) {
+    const qty = parseInt(item.quantity, 10);
+    const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
     const customizationTags = item.customizations && typeof item.customizations === 'object'
         ? Object.entries(item.customizations).map(([key, value]) => 
             `<span class="customization-tag">${key}: ${value}</span>`
@@ -228,13 +248,13 @@ function renderCartItem(item) {
             </div>
             
             <div class="cart-item-controls">
-                <p class="cart-item-price">$${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+                <p class="cart-item-price">$${(item.price * safeQty).toFixed(2)}</p>
                 
                 <div class="quantity-controls">
-                    <button class="quantity-btn decrease-qty" data-item-id="${item.id}" ${(item.quantity || 1) <= 1 ? 'disabled' : ''}>
+                    <button class="quantity-btn decrease-qty" data-item-id="${item.id}" ${safeQty <= 1 ? 'disabled' : ''}>
                         <i class="fa-solid fa-minus"></i>
                     </button>
-                    <span class="quantity-display">${item.quantity || 1}</span>
+                    <span class="quantity-display">${safeQty}</span>
                     <button class="quantity-btn increase-qty" data-item-id="${item.id}">
                         <i class="fa-solid fa-plus"></i>
                     </button>
@@ -276,16 +296,16 @@ function loadCartPage() {
     // Attach event listeners
     document.querySelectorAll('.increase-qty').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const itemId = parseInt(e.currentTarget.dataset.itemId);
-            const item = cart.find(i => i.id === itemId);
+            const itemId = e.currentTarget.dataset.itemId;
+            const item = cart.find(i => String(i.id) === String(itemId));
             if (item) updateItemQuantity(itemId, (item.quantity || 1) + 1);
         });
     });
     
     document.querySelectorAll('.decrease-qty').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const itemId = parseInt(e.currentTarget.dataset.itemId);
-            const item = cart.find(i => i.id === itemId);
+            const itemId = e.currentTarget.dataset.itemId;
+            const item = cart.find(i => String(i.id) === String(itemId));
             if (item && (item.quantity || 1) > 1) updateItemQuantity(itemId, (item.quantity || 1) - 1);
         });
     });
@@ -293,7 +313,7 @@ function loadCartPage() {
     document.querySelectorAll('.remove-item-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const itemCard = e.currentTarget.closest('.cart-item-card');
-            const itemId = parseInt(e.currentTarget.dataset.itemId);
+            const itemId = e.currentTarget.dataset.itemId;
             
             itemCard.classList.add('cart-item-removing');
             setTimeout(() => removeItem(itemId), 300);
@@ -306,7 +326,11 @@ function loadCartPage() {
 function updateSummary() {
     if (!cartPageSummary.subtotal) return;
     
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    const subtotal = cart.reduce((sum, item) => {
+        const qty = parseInt(item.quantity, 10);
+        const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
+        return sum + (item.price * safeQty);
+    }, 0);
     const tax = subtotal * 0.0875;
     const total = subtotal + tax;
     
@@ -383,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cartPageSummary.checkout) {
             cartPageSummary.checkout.addEventListener('click', () => {
                 if (cart.length > 0) {
-                    sessionStorage.setItem('checkout_cart', JSON.stringify(cart));
+                    sessionStorage.setItem('checkout_cart', JSON.stringify({ items: cart }));
                     window.location.href = '../checkout/index.html';
                 }
             });

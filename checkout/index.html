@@ -568,7 +568,7 @@
                 0x1234abcd5678efgh9012ijkl3456mnop7890qrst
             </div>
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=0x1234abcd5678efgh9012ijkl3456mnop7890qrst" alt="Crypto QR" />
-            <p style="margin-bottom:18px; font-size:13px; color:#aaa;">Scan the QR code or copy the address to your wallet app.</p>
+            <p class="modal-subtext">Scan the QR code or copy the address to your wallet app.</p>
             <div class="modal-actions">
                 <button id="crypto-confirm-btn" class="btn-primary">I've Sent Payment</button>
                 <button id="crypto-cancel-btn" class="btn-secondary">Cancel</button>
@@ -596,35 +596,19 @@
                         </div>
 
                         <!-- User Info Preview (shown when logged in) -->
-                        <div id="user-info-preview" style="display: none;">
-                            <div style="
-                                padding: 20px;
-                                background: rgba(0, 191, 255, 0.05);
-                                border: 2px solid rgba(0, 191, 255, 0.2);
-                                border-radius: 10px;
-                                margin-bottom: 20px;
-                            ">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                        <div id="user-info-preview" class="info-preview" style="display: none;">
+                            <div class="info-preview-card">
+                                <div class="info-preview-header">
                                     <div>
-                                        <h3 style="font-size: 18px; margin: 0 0 8px 0; color: var(--color-text-primary);" id="preview-name">John Doe</h3>
-                                        <p style="font-size: 14px; margin: 0; color: var(--color-text-secondary);" id="preview-email">john.doe@example.com</p>
+                                        <h3 class="info-preview-name" id="preview-name">John Doe</h3>
+                                        <p class="info-preview-email" id="preview-email">john.doe@example.com</p>
                                     </div>
-                                    <button type="button" id="edit-user-info-btn" style="
-                                        padding: 8px 16px;
-                                        background: transparent;
-                                        border: 1px solid var(--color-main-accent);
-                                        border-radius: 8px;
-                                        color: var(--color-main-accent);
-                                        cursor: pointer;
-                                        font-size: 14px;
-                                        font-weight: 600;
-                                        transition: all 0.2s ease;
-                                    ">
+                                    <button type="button" id="edit-user-info-btn" class="btn-ghost-accent">
                                         <i class="fa-solid fa-pen"></i> Edit
                                     </button>
                                 </div>
-                                <div id="preview-phone" style="font-size: 14px; color: var(--color-text-secondary); display: none;">
-                                    <i class="fa-solid fa-phone" style="margin-right: 8px;"></i>
+                                <div id="preview-phone" class="info-preview-phone" style="display: none;">
+                                    <i class="fa-solid fa-phone"></i>
                                     <span></span>
                                 </div>
                             </div>

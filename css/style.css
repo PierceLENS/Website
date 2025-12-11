@@ -1150,6 +1150,18 @@ section {
     object-fit: cover;
 }
 
+.carousel-slide.slide-featured {
+    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+}
+
+.carousel-slide.slide-carbon {
+    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+}
+
+.carousel-slide.slide-pro {
+    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+}
+
 .carousel-track {
     display: flex;
     height: 100%;
@@ -2242,6 +2254,19 @@ sup {
     text-align: center;
 }
 
+.body-copy {
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.margin-top-md {
+    margin-top: 20px;
+}
+
+.margin-top-lg {
+    margin-top: 50px;
+}
+
 .margin-left-xs {
     margin-left: 8px;
 }
@@ -2287,6 +2312,72 @@ sup {
 
 .modal-content p {
     margin-bottom: 18px;
+}
+
+.modal-subtext {
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.info-preview {
+    display: none;
+}
+
+.info-preview-card {
+    padding: 20px;
+    background: rgba(0, 191, 255, 0.05);
+    border: 2px solid rgba(0, 191, 255, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.info-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 12px;
+}
+
+.info-preview-name {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    color: var(--color-text-primary);
+}
+
+.info-preview-email {
+    font-size: 14px;
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.info-preview-phone {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-ghost-accent {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--color-main-accent);
+    border-radius: 8px;
+    color: var(--color-main-accent);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-ghost-accent:hover {
+    background: rgba(0, 191, 255, 0.08);
+}
+
+.btn-ghost-accent:active {
+    transform: scale(0.98);
 }
 
 .modal-content img {
