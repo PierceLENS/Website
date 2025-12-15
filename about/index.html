@@ -185,6 +185,70 @@
         .cta-button.secondary:hover {
             background: rgba(0, 191, 255, 0.1);
         }
+
+        .gallery-section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.03) 0%, transparent 100%);
+            border-top: 1px solid rgba(0, 191, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+        }
+
+        .gallery-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-section h2 {
+            font-size: 36px;
+            color: var(--color-main-accent);
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 1;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: rgba(0, 191, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0) 0%, rgba(0, 191, 255, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -304,6 +368,42 @@
                         <i class="fa-solid fa-heart"></i>
                         <h3>Passion</h3>
                         <p>Driven by our love for imaging and commitment to our creator community</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2>From Concept to Creation</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/576568723_17846384637600057_3389497479652707595_n.jpg" alt="PierceLENS Event 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/576619529_17846384586600057_8941606844170761653_n.jpg" alt="PierceLENS Event 2" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/579560065_17846384685600057_5456195858644711862_n.jpg" alt="PierceLENS Event 3" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/580524646_17846384610600057_5012941322969674684_n.jpg" alt="PierceLENS Event 4" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/580844001_17846384655600057_1886766052932273672_n.jpg" alt="PierceLENS Event 5" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/580911278_17846384568600057_3553650388871394572_n.jpg" alt="PierceLENS Event 6" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/580978010_17846384595600057_7327682998023980720_n.jpg" alt="PierceLENS Event 7" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/581018778_17846384619600057_6851510901027674092_n.jpg" alt="PierceLENS Event 8" loading="lazy">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/mini_trade_show/581186349_17846384628600057_2299281440963391375_n.jpg" alt="PierceLENS Event 9" loading="lazy">
                     </div>
                 </div>
             </div>
