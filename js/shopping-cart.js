@@ -360,3 +360,4 @@ if (document.readyState === 'loading') {
 } else {
     ShoppingCart.init();
 }
+

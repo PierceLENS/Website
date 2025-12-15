@@ -192,3 +192,4 @@ function initProFeatureCards() {
     document.querySelectorAll('.feature-card').forEach(card => cardObserver.observe(card));
     document.querySelectorAll('.spec-item').forEach(spec => cardObserver.observe(spec));
 }
+

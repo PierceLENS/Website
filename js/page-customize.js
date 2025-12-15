@@ -299,7 +299,7 @@ function updatePreviewImage(imageName) {
     const img = document.getElementById('previewImage');
     if (!img) return;
     
-    const newSrc = `../images/products/the_pierce_lens/${imageName}`;
+    const newSrc = `../images/products/pierceLENS/${imageName}`;
     if (img.src.includes(imageName)) return;
     
     img.style.transition = 'opacity 0.4s ease';
@@ -373,7 +373,7 @@ function handleAddToCart() {
         name: config.name,
         price: currentPrice,
         quantity: 1,
-        image: '../images/products/the_pierce_lens/' + (selectedColor ? selectedColor.getAttribute('data-image') : 'the-pierce-lens.png'),
+        image: '../images/products/pierceLENS/' + (selectedColor ? selectedColor.getAttribute('data-image') : 'the-pierce-lens.png'),
         customizations: customizations
     };
     
@@ -399,3 +399,4 @@ function setupMobileNavToggle() {
 }
 
 // All obsolete functions removed - camera selection now handled via URL parameters
+

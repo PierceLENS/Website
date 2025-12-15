@@ -1108,15 +1108,15 @@ section {
 }
 
 .carousel-slide.slide-featured {
-    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+    background-image: url('../images/products/pierceLENS/the-pierce-lens.png');
 }
 
 .carousel-slide.slide-carbon {
-    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+    background-image: url('../images/products/pierceLENS/the-pierce-lens.png');
 }
 
 .carousel-slide.slide-pro {
-    background-image: url('../images/products/the_pierce_lens/the-pierce-lens.png');
+    background-image: url('../images/products/pierceLENS/the-pierce-lens.png');
 }
 
 .carousel-track {
@@ -2470,4 +2470,5 @@ sup {
 }
 
 /* Removed sale highlight utility used for holiday promos */
+
 

@@ -614,3 +614,4 @@ const VEMarketplace = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = VEMarketplace;
 }
+
