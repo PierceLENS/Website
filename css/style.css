@@ -388,6 +388,7 @@ header {
     padding: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .scrolled {
@@ -433,8 +434,10 @@ header .container {
     list-style: none;
     align-items: center;
     gap: 32px;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-links li {
@@ -1421,7 +1424,7 @@ section {
 }
 
 .hero-content {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
 }
 
 .hero-new {
@@ -1466,8 +1469,8 @@ section {
 
 .hero-cta {
     display: flex;
-    gap: 24px;
-    justify-content: center;
+    gap: 14px;
+    justify-content: flex-end;
     margin-bottom: 40px;
 }
 
@@ -1499,7 +1502,7 @@ section {
 .highlight-section {
     max-width: 1200px;
     margin: 30px auto 10px;
-    padding: 0 40px 20px;
+    padding: 30px 40px 20px; /* added top padding for animation headroom */
 }
 
 .highlight-grid {
@@ -1512,7 +1515,7 @@ section {
     position: relative;
     border: 1px solid rgba(0, 191, 255, 0.2);
     border-radius: 14px;
-    padding: 28px;
+    padding: 28px 260px 28px 28px; /* reserve space on right for render */
     overflow: visible; /* allow product renders to sit above without cropping */
     min-height: 260px;
     background: radial-gradient(circle at 20% 20%, rgba(0, 191, 255, 0.08), rgba(0, 191, 255, 0) 50%),
@@ -1558,9 +1561,10 @@ section {
 
 .highlight-actions {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
     margin-top: 18px;
+    justify-content: flex-end;
 }
 
 .highlight-actions a {
@@ -1577,9 +1581,9 @@ section {
 .highlight-image-wrap {
     position: absolute;
     right: 10px;
-    bottom: 6px;
+    bottom: 10px;
     width: 220px;
-    height: 170px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1611,6 +1615,76 @@ section {
     max-width: 1200px;
     margin: 20px auto 10px;
     padding: 0 40px 10px;
+}
+
+/* Pro/Lite Promo Banners */
+.promo-banners {
+    max-width: 1200px;
+    margin: 10px auto 0;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.promo-banner {
+    position: relative;
+    border-radius: 18px;
+    min-height: 280px;
+    padding: 28px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.promo-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.35));
+    z-index: 1;
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+}
+
+.promo-content h2 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.promo-content p {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+}
+
+.promo-content .btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--color-main-accent);
+    color: #0b0b0b;
+    font-weight: 800;
+}
+
+.promo-pro-bg {
+    background-image: url('../images/promo_images/pierceLENS_Pro_banner.png');
+}
+
+.promo-lite-bg {
+    background-image: url('../images/promo_images/pierceLENS_Lite_banner.png');
+}
+
+@media (max-width: 900px) {
+    .promo-content h2 { font-size: 28px; }
+    .promo-content p { font-size: 16px; }
+    .promo-banner { min-height: 240px; }
 }
 
 .creator-strip-inner {
@@ -1666,6 +1740,42 @@ section {
     gap: 12px;
 }
 
+.matte-black-bg {
+    background-image: url('../images/promo_images/promo_PierceLENS_Pro.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.pierce-lens-bg {
+    background-image: url('../images/promo_images/promo_PierceLENS_Lite.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.nightography-bg {
+    background-image: url('../images/promo_images/pierceLENS_nightography.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.accessories-bg {
+    background-image: url('../images/promo_images/pierceLENS_accessories.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.filter-engine-bg {
+    background-image: url('../images/promo_images/pierceLENS_15-filter_engine.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.studio-mic-bg {
+    background-image: url('../images/promo_images/pierceLENS_studio_microphone.png');
+    background-size: cover;
+    background-position: center;
+}
+
 .grid-item {
     background-size: cover;
     background-position: center;
@@ -1697,6 +1807,16 @@ section {
 .grid-item.large {
     grid-column: span 2;
     min-height: 600px;
+}
+
+/* Center badge and headline for large banners */
+.grid-item.large .grid-content {
+    text-align: center;
+}
+
+.grid-item.large .grid-badge {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .grid-item.small {
@@ -1746,7 +1866,8 @@ section {
 
 .grid-links {
     display: flex;
-    gap: 24px;
+    gap: 14px;
+    justify-content: flex-end;
 }
 
 .grid-links a,
@@ -1761,6 +1882,50 @@ section {
 .grid-item.small a:hover {
     color: #ffffff;
     text-decoration: underline;
+}
+
+/* Compact button size */
+.btn-sm {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+/* Override default link hover inside buttons */
+.btn:hover {
+    text-decoration: none;
+}
+
+/* Button styles for grid CTAs */
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: var(--color-main-accent);
+    color: #0b0b0b !important;
+    border-color: var(--color-main-accent);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    text-decoration: none !important;
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.18);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    text-decoration: none !important;
 }
 
 @media (max-width: 900px) {
