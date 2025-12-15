@@ -12,15 +12,18 @@
     <link rel="stylesheet" href="../css/shopping-cart.css">
     <style>
         .about-hero {
-            background: linear-gradient(135deg, #111111 0%, #0d0d0d 50%, #111111 100%);
-            padding: 120px 40px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.7) 100%), url('../images/mini_trade_show/576568723_17846384637600057_3389497479652707595_n.jpg') center/cover no-repeat;
+            padding: 180px 40px;
             text-align: center;
             border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+            position: relative;
         }
 
         .about-hero .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .about-hero h1 {
@@ -34,6 +37,52 @@
             font-size: 18px;
             color: var(--color-text-secondary);
             line-height: 1.6;
+        }
+
+        .section-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-section-with-image {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .about-section-with-image.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-section-content {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .about-section-with-image,
+            .about-section-with-image.reverse {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-image {
+                width: 100%;
+                height: 250px;
+            }
         }
 
         .about-section {
@@ -186,69 +235,7 @@
             background: rgba(0, 191, 255, 0.1);
         }
 
-        .gallery-section {
-            padding: 80px 40px;
-            background: linear-gradient(135deg, rgba(0, 191, 255, 0.03) 0%, transparent 100%);
-            border-top: 1px solid rgba(0, 191, 255, 0.1);
-            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
-        }
 
-        .gallery-section .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-section h2 {
-            font-size: 36px;
-            color: var(--color-main-accent);
-            margin-bottom: 50px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            aspect-ratio: 1;
-            border: 1px solid rgba(0, 191, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            border-color: rgba(0, 191, 255, 0.5);
-            transform: scale(1.02);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 191, 255, 0) 0%, rgba(0, 191, 255, 0.2) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
@@ -304,33 +291,47 @@
         <!-- Mission Section -->
         <section class="about-section">
             <div class="container">
-                <h2>Our Mission</h2>
-                <p>
-                    At PierceLENS, we're committed to creating the most advanced integrated camera system for modern creators and professionals. We believe that exceptional imaging technology should be intuitive, modular, and accessible to everyone—from filmmakers and photographers to content creators and enthusiasts.
-                </p>
-                <p>
-                    Our mission is to empower your vision by providing tools that bridge the gap between imagination and reality, enabling you to capture moments with unprecedented clarity and creative control.
-                </p>
+                <div class="about-section-with-image">
+                    <div class="about-section-content">
+                        <h2>Our Mission</h2>
+                        <p>
+                            At PierceLENS, we're committed to creating the most advanced integrated camera system for modern creators and professionals. We believe that exceptional imaging technology should be intuitive, modular, and accessible to everyone—from filmmakers and photographers to content creators and enthusiasts.
+                        </p>
+                        <p>
+                            Our mission is to empower your vision by providing tools that bridge the gap between imagination and reality, enabling you to capture moments with unprecedented clarity and creative control.
+                        </p>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/576619529_17846384586600057_8941606844170761653_n.jpg" alt="PierceLENS Team" loading="lazy">
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Vision Section -->
         <section class="about-section">
             <div class="container">
-                <h2>Our Vision</h2>
-                <p>
-                    We envision a world where advanced imaging technology is no longer a barrier to creativity. By combining modular design, intelligent engineering, and user-focused innovation, we're building the next generation of camera systems that adapt to your needs, not the other way around.
-                </p>
-                <p>
-                    The P.L System represents our commitment to:
-                </p>
-                <ul>
-                    <li><strong>Modularity</strong> - Customize your camera configuration to match your creative vision</li>
-                    <li><strong>Integration</strong> - Seamless connectivity between components and accessories</li>
-                    <li><strong>Innovation</strong> - Continuous advancement in imaging technology and user experience</li>
-                    <li><strong>Quality</strong> - Aerospace-grade materials and precision engineering in every component</li>
-                    <li><strong>Accessibility</strong> - Professional-grade tools at compelling price points</li>
-                </ul>
+                <div class="about-section-with-image reverse">
+                    <div class="about-section-content">
+                        <h2>Our Vision</h2>
+                        <p>
+                            We envision a world where advanced imaging technology is no longer a barrier to creativity. By combining modular design, intelligent engineering, and user-focused innovation, we're building the next generation of camera systems that adapt to your needs, not the other way around.
+                        </p>
+                        <p>
+                            The P.L System represents our commitment to:
+                        </p>
+                        <ul>
+                            <li><strong>Modularity</strong> - Customize your camera configuration to match your creative vision</li>
+                            <li><strong>Integration</strong> - Seamless connectivity between components and accessories</li>
+                            <li><strong>Innovation</strong> - Continuous advancement in imaging technology and user experience</li>
+                            <li><strong>Quality</strong> - Aerospace-grade materials and precision engineering in every component</li>
+                            <li><strong>Accessibility</strong> - Professional-grade tools at compelling price points</li>
+                        </ul>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/579560065_17846384685600057_5456195858644711862_n.jpg" alt="PierceLENS Technology" loading="lazy">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -370,40 +371,67 @@
                         <p>Driven by our love for imaging and commitment to our creator community</p>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top: 60px;">
+                    <div class="section-image" style="margin: 30px auto;">
+                        <img src="../images/mini_trade_show/580524646_17846384610600057_5012941322969674684_n.jpg" alt="PierceLENS Community" loading="lazy">
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Gallery Section -->
-        <section class="gallery-section">
+        <!-- From Concept Section -->
+        <section class="about-section">
             <div class="container">
-                <h2>From Concept to Creation</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/576568723_17846384637600057_3389497479652707595_n.jpg" alt="PierceLENS Event 1" loading="lazy">
+                <div class="about-section-with-image">
+                    <div class="about-section-content">
+                        <h2>From Concept to Creation</h2>
+                        <p>
+                            Every PierceLENS product is born from a passion for innovation and a deep understanding of what creators need. Our development process brings together the brightest minds in imaging technology, design, and user experience to craft tools that inspire and empower.
+                        </p>
+                        <p>
+                            We believe in transparency, collaboration, and the creative process. From initial concept through final product launch, we listen to our community, iterate on feedback, and push the boundaries of what's possible.
+                        </p>
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/576619529_17846384586600057_8941606844170761653_n.jpg" alt="PierceLENS Event 2" loading="lazy">
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/580844001_17846384655600057_1886766052932273672_n.jpg" alt="PierceLENS Innovation" loading="lazy">
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/579560065_17846384685600057_5456195858644711862_n.jpg" alt="PierceLENS Event 3" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section-with-image reverse">
+                    <div class="about-section-content">
+                        <h2>Global Impact</h2>
+                        <p>
+                            PierceLENS has grown into a global community of creators, artists, and visionaries. From independent creators to professional production studios, our systems are used to capture stories that matter, inspire change, and push creative boundaries worldwide.
+                        </p>
+                        <p>
+                            We're committed to supporting our community through continuous innovation, world-class customer support, and a vibrant ecosystem of partners and collaborators.
+                        </p>
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/580524646_17846384610600057_5012941322969674684_n.jpg" alt="PierceLENS Event 4" loading="lazy">
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/580911278_17846384568600057_3553650388871394572_n.jpg" alt="Global Community" loading="lazy">
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/580844001_17846384655600057_1886766052932273672_n.jpg" alt="PierceLENS Event 5" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section with Images -->
+        <section class="about-section" style="background: rgba(0, 191, 255, 0.02);">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 60px;">Meet the Team</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/580978010_17846384595600057_7327682998023980720_n.jpg" alt="Team Member 1" loading="lazy">
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/580911278_17846384568600057_3553650388871394572_n.jpg" alt="PierceLENS Event 6" loading="lazy">
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/581018778_17846384619600057_6851510901027674092_n.jpg" alt="Team Member 2" loading="lazy">
                     </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/580978010_17846384595600057_7327682998023980720_n.jpg" alt="PierceLENS Event 7" loading="lazy">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/581018778_17846384619600057_6851510901027674092_n.jpg" alt="PierceLENS Event 8" loading="lazy">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="../images/mini_trade_show/581186349_17846384628600057_2299281440963391375_n.jpg" alt="PierceLENS Event 9" loading="lazy">
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/581186349_17846384628600057_2299281440963391375_n.jpg" alt="Team Member 3" loading="lazy">
                     </div>
                 </div>
             </div>
