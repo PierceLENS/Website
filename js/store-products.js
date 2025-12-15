@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const productId = this.getAttribute('data-product');
             const productName = this.getAttribute('data-name');
             const productPrice = parseFloat(this.getAttribute('data-price'));
-            const productImage = this.getAttribute('data-image') || '../images/products/pierceLENS/the-pierce-lens.png';
+            const productImage = this.getAttribute('data-image') || '../images/products/Cameras/pierceLENS/the-pierce-lens.png';
             
             // Camera products - redirect to customization with URL parameter
             if (productId === 'pl-camera') {
@@ -60,4 +60,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
 

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (selectedFinish) {
         const finishValue = selectedFinish.value; 
-        const newSrc = finishValue === 'black' ? `../images/products/pierceLENS/the-pierce-lens.png` : `../images/products/pierceLENS/the-pierce-lens_${finishValue}.png`; 
+        const newSrc = finishValue === 'black' ? `../images/products/Cameras/pierceLENS/the-pierce-lens.png` : `../images/products/Cameras/pierceLENS/the-pierce-lens_${finishValue}.png`; 
         
         // --- 1. Avoid redundant transition if same color is selected ---
         if (currentActiveImage.src.includes(newSrc)) {
@@ -116,3 +116,4 @@ document.addEventListener('DOMContentLoaded', () => {
     updateImage(); 
     updateAccessoryPreviews(); // CRITICAL: Initial accessory state
 });
+
