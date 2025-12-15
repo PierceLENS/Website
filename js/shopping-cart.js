@@ -216,18 +216,35 @@ const ShoppingCart = {
         if (!dropdown) return;
         
         const triggerRect = cartTrigger.getBoundingClientRect();
+        const isMobile = window.innerWidth <= 768;
         
         // Position dropdown with inline styles
-        dropdown.style.cssText = `
-            position: fixed !important;
-            top: ${triggerRect.bottom + 15}px !important;
-            right: ${window.innerWidth - triggerRect.right}px !important;
-            left: auto !important;
-            z-index: 99999 !important;
-            display: block !important;
-            visibility: visible !important;
-            width: 380px;
-        `;
+        if (isMobile) {
+            dropdown.style.cssText = `
+                position: fixed !important;
+                top: ${triggerRect.bottom + 12}px !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) translateY(-8px) !important;
+                z-index: 99999 !important;
+                display: block !important;
+                visibility: visible !important;
+                width: calc(100vw - ${window.innerWidth <= 480 ? '24' : '32'}px);
+                max-width: ${window.innerWidth <= 480 ? 'calc(100vw - 24px)' : '380px'};
+            `;
+        } else {
+            dropdown.style.cssText = `
+                position: fixed !important;
+                top: ${triggerRect.bottom + 15}px !important;
+                right: ${window.innerWidth - triggerRect.right}px !important;
+                left: auto !important;
+                z-index: 99999 !important;
+                display: block !important;
+                visibility: visible !important;
+                width: 380px;
+                max-width: calc(100vw - 24px);
+            `;
+        }
         
         // Animate dropdown in with smoother timing
         requestAnimationFrame(() => {
