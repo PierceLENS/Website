@@ -36,9 +36,11 @@ const ShoppingCart = {
      */
     addItem: function(item) {
         const cart = this.getCart();
-        
-        // Generate unique ID for the item
-        item.id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        const qty = parseInt(item.quantity, 10);
+
+        // Normalize item identity and quantity so cart-management can interoperate
+        item.quantity = Number.isFinite(qty) && qty > 0 ? qty : 1;
+        item.id = item.id ? String(item.id) : `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         cart.items.push(item);
         this.saveCart(cart);
@@ -64,7 +66,12 @@ const ShoppingCart = {
         const cart = this.getCart();
         const item = cart.items.find(item => item.id === itemId);
         if (item) {
-            item.quantity = parseInt(quantity);
+            const parsedQty = parseInt(quantity, 10);
+            if (!Number.isFinite(parsedQty) || parsedQty <= 0) {
+                this.removeItem(itemId);
+                return;
+            }
+            item.quantity = parsedQty;
             this.saveCart(cart);
         }
     },
@@ -82,7 +89,10 @@ const ShoppingCart = {
      */
     getItemCount: function() {
         const cart = this.getCart();
-        return cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+        return cart.items.reduce((total, item) => {
+            const qty = parseInt(item.quantity, 10);
+            return total + (Number.isFinite(qty) && qty > 0 ? qty : 1);
+        }, 0);
     },
 
     /**
@@ -91,7 +101,9 @@ const ShoppingCart = {
     getTotal: function() {
         const cart = this.getCart();
         return cart.items.reduce((total, item) => {
-            return total + (item.price * (item.quantity || 1));
+            const qty = parseInt(item.quantity, 10);
+            const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
+            return total + (item.price * safeQty);
         }, 0);
     },
 
@@ -204,18 +216,35 @@ const ShoppingCart = {
         if (!dropdown) return;
         
         const triggerRect = cartTrigger.getBoundingClientRect();
+        const isMobile = window.innerWidth <= 768;
         
         // Position dropdown with inline styles
-        dropdown.style.cssText = `
-            position: fixed !important;
-            top: ${triggerRect.bottom + 15}px !important;
-            right: ${window.innerWidth - triggerRect.right}px !important;
-            left: auto !important;
-            z-index: 99999 !important;
-            display: block !important;
-            visibility: visible !important;
-            width: 380px;
-        `;
+        if (isMobile) {
+            dropdown.style.cssText = `
+                position: fixed !important;
+                top: ${triggerRect.bottom + 12}px !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) translateY(-8px) !important;
+                z-index: 99999 !important;
+                display: block !important;
+                visibility: visible !important;
+                width: calc(100vw - ${window.innerWidth <= 480 ? '24' : '32'}px);
+                max-width: ${window.innerWidth <= 480 ? 'calc(100vw - 24px)' : '380px'};
+            `;
+        } else {
+            dropdown.style.cssText = `
+                position: fixed !important;
+                top: ${triggerRect.bottom + 15}px !important;
+                right: ${window.innerWidth - triggerRect.right}px !important;
+                left: auto !important;
+                z-index: 99999 !important;
+                display: block !important;
+                visibility: visible !important;
+                width: 380px;
+                max-width: calc(100vw - 24px);
+            `;
+        }
         
         // Animate dropdown in with smoother timing
         requestAnimationFrame(() => {
@@ -331,3 +360,5 @@ if (document.readyState === 'loading') {
 } else {
     ShoppingCart.init();
 }
+
+

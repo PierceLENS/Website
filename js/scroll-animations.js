@@ -156,3 +156,5 @@ if (typeof module !== 'undefined' && module.exports) {
         initPriceStripScroll
     };
 }
+
+

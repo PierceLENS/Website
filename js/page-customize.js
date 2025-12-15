@@ -192,6 +192,7 @@ function buildColorOptions(colors) {
         swatch.setAttribute('data-finish', color.finish);
         swatch.setAttribute('data-price', color.price);
         swatch.setAttribute('data-image', color.image);
+        swatch.setAttribute('data-color', color.color);
         
         container.appendChild(swatch);
     });
@@ -266,6 +267,9 @@ function attachEventListeners() {
         swatch.addEventListener('click', function() {
             document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
             this.classList.add('selected');
+            if (this.dataset.color) {
+                this.style.backgroundColor = this.dataset.color;
+            }
             updatePreviewImage(this.getAttribute('data-image'));
             updatePricing();
         });
@@ -295,7 +299,7 @@ function updatePreviewImage(imageName) {
     const img = document.getElementById('previewImage');
     if (!img) return;
     
-    const newSrc = `../images/products/the_pierce_lens/${imageName}`;
+    const newSrc = `../images/products/Cameras/pierceLENS/${imageName}`;
     if (img.src.includes(imageName)) return;
     
     img.style.transition = 'opacity 0.4s ease';
@@ -369,7 +373,7 @@ function handleAddToCart() {
         name: config.name,
         price: currentPrice,
         quantity: 1,
-        image: '../images/products/the_pierce_lens/' + (selectedColor ? selectedColor.getAttribute('data-image') : 'the-pierce-lens.png'),
+        image: '../images/products/Cameras/pierceLENS/' + (selectedColor ? selectedColor.getAttribute('data-image') : 'the-pierce-lens.png'),
         customizations: customizations
     };
     
@@ -395,3 +399,5 @@ function setupMobileNavToggle() {
 }
 
 // All obsolete functions removed - camera selection now handled via URL parameters
+
+

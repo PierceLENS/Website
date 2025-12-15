@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about PierceLENS - Our mission, vision, and the team behind the advanced P.L Camera System">
+    <title>PierceLENS | About Us</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shopping-cart.css">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.7) 100%), url('../images/mini_trade_show/580911278_17846384568600057_3553650388871394572_n.jpg') center/cover no-repeat;
+            padding: 180px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+            position: relative;
+        }
+
+        .about-hero .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            color: var(--color-text-primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-hero p {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .section-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .section-image.landscape {
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-section-with-image {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .about-section-with-image.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-section-content {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .about-section-with-image,
+            .about-section-with-image.reverse {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-image {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        .about-section {
+            padding: 80px 40px;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+        }
+
+        .about-section .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            color: var(--color-main-accent);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .about-section ul li {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .about-section ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-main-accent);
+            font-weight: bold;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .value-card {
+            padding: 30px;
+            background: rgba(0, 191, 255, 0.05);
+            border: 1px solid rgba(0, 191, 255, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            background: rgba(0, 191, 255, 0.1);
+            border-color: rgba(0, 191, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .value-card i {
+            font-size: 40px;
+            color: var(--color-main-accent);
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            font-size: 20px;
+            color: var(--color-text-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .cta-section {
+            padding: 80px 40px;
+            text-align: center;
+            background: rgba(0, 191, 255, 0.05);
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            color: var(--color-main-accent);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .cta-button.primary {
+            background: var(--color-main-accent);
+            color: #000;
+        }
+
+        .cta-button.primary:hover {
+            background: #00d4ff;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--color-main-accent);
+            border: 2px solid var(--color-main-accent);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-logo">
+                <img src="../images/logo.png" alt="PierceLENS" class="logo-img" loading="eager" decoding="async">
+            </a>
+            <ul class="nav-links">
+                <li><a href="../store/index.html">Store</a></li>
+                <li class="nav-dropdown">
+                    <a href="../cameras/pierce-lens/index.html">PierceLENS</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../cameras/pierce-lens/index.html">Overview</a></li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">Pierce Lens Pro</a></li>
+                        <li><a href="../cameras/the-pierce-lens-lite/index.html">Pierce Lens Lite</a></li>
+                        <li><a href="../customize/index.html">Customize</a></li>
+                    </ul>
+                </li>
+                <li><a href="../about/index.html">About</a></li>
+                <li class="nav-dropdown">
+                    <a href="../support/index.html">Support</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="../support/index.html">Support Center</a></li>
+                        <li><a href="../press/index.html">Newsroom</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" id="search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+                <a href="#" id="cart-trigger" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1>About PierceLENS</h1>
+                <p>Redefining the future of imaging through innovation, precision, and creative technology</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section-with-image">
+                    <div class="about-section-content">
+                        <h2>Our Mission</h2>
+                        <p>
+                            At PierceLENS, we're committed to creating the most advanced integrated camera system for modern creators and professionals. We believe that exceptional imaging technology should be intuitive, modular, and accessible to everyone—from filmmakers and photographers to content creators and enthusiasts.
+                        </p>
+                        <p>
+                            Our mission is to empower your vision by providing tools that bridge the gap between imagination and reality, enabling you to capture moments with unprecedented clarity and creative control.
+                        </p>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/576619529_17846384586600057_8941606844170761653_n.jpg" alt="PierceLENS Team" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section-with-image reverse">
+                    <div class="about-section-content">
+                        <h2>Our Vision</h2>
+                        <p>
+                            We envision a world where advanced imaging technology is no longer a barrier to creativity. By combining modular design, intelligent engineering, and user-focused innovation, we're building the next generation of camera systems that adapt to your needs, not the other way around.
+                        </p>
+                        <p>
+                            The P.L System represents our commitment to:
+                        </p>
+                        <ul>
+                            <li><strong>Modularity</strong> - Customize your camera configuration to match your creative vision</li>
+                            <li><strong>Integration</strong> - Seamless connectivity between components and accessories</li>
+                            <li><strong>Innovation</strong> - Continuous advancement in imaging technology and user experience</li>
+                            <li><strong>Quality</strong> - Aerospace-grade materials and precision engineering in every component</li>
+                            <li><strong>Accessibility</strong> - Professional-grade tools at compelling price points</li>
+                        </ul>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/579560065_17846384685600057_5456195858644711862_n.jpg" alt="PierceLENS Technology" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="about-section">
+            <div class="container">
+                <h2 style="margin-bottom: 50px;">Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <h3>Innovation</h3>
+                        <p>Pushing the boundaries of what's possible in imaging technology and design</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>Community</h3>
+                        <p>Building a vibrant ecosystem of creators who inspire and support each other</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-cog"></i>
+                        <h3>Precision</h3>
+                        <p>Meticulous attention to detail in every component and feature we create</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-shield"></i>
+                        <h3>Reliability</h3>
+                        <p>Engineering products you can trust for years of creative exploration</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-globe"></i>
+                        <h3>Sustainability</h3>
+                        <p>Responsible manufacturing and design practices for a better future</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-heart"></i>
+                        <h3>Passion</h3>
+                        <p>Driven by our love for imaging and commitment to our creator community</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 60px;">
+                    <div class="section-image landscape" style="margin: 30px auto;">
+                        <img src="../images/mini_trade_show/580524646_17846384610600057_5012941322969674684_n.jpg" alt="PierceLENS Community" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- From Concept Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section-with-image">
+                    <div class="about-section-content">
+                        <h2>From Concept to Creation</h2>
+                        <p>
+                            Every PierceLENS product is born from a passion for innovation and a deep understanding of what creators need. Our development process brings together the brightest minds in imaging technology, design, and user experience to craft tools that inspire and empower.
+                        </p>
+                        <p>
+                            We believe in transparency, collaboration, and the creative process. From initial concept through final product launch, we listen to our community, iterate on feedback, and push the boundaries of what's possible.
+                        </p>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/581018778_17846384619600057_6851510901027674092_n.jpg" alt="PierceLENS Innovation" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section-with-image reverse">
+                    <div class="about-section-content">
+                        <h2>Global Impact</h2>
+                        <p>
+                            PierceLENS has grown into a global community of creators, artists, and visionaries. From independent creators to professional production studios, our systems are used to capture stories that matter, inspire change, and push creative boundaries worldwide.
+                        </p>
+                        <p>
+                            We're committed to supporting our community through continuous innovation, world-class customer support, and a vibrant ecosystem of partners and collaborators.
+                        </p>
+                    </div>
+                    <div class="section-image">
+                        <img src="../images/mini_trade_show/580911278_17846384568600057_3553650388871394572_n.jpg" alt="Global Community" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section with Images -->
+        <section class="about-section" style="background: rgba(0, 191, 255, 0.02);">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 60px;">Meet the Team</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/580978010_17846384595600057_7327682998023980720_n.jpg" alt="Team Member 1" loading="lazy">
+                    </div>
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/580524646_17846384610600057_5012941322969674684_n.jpg" alt="Team Member 2" loading="lazy">
+                    </div>
+                    <div class="section-image" style="margin: 0; width: 100%;">
+                        <img src="../images/mini_trade_show/576568723_17846384637600057_3389497479652707595_n.jpg" alt="Team Member 3" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Join the P.L Revolution?</h2>
+                <p>Explore our complete lineup of cameras, accessories, and creative tools designed to elevate your imaging experience.</p>
+                <div class="cta-buttons">
+                    <a href="../store/index.html" class="cta-button primary">Browse Store</a>
+                    <a href="../cameras/pierce-lens/index.html" class="cta-button secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/pierceLENS_logo.png" alt="PierceLENS Logo" class="logo-img footer-logo">
+                </a>
+                <div class="footer-columns">
+                    <ul>
+                        <li class="footer-heading">Explore</li>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../customize/index.html">Customize</a></li>
+                        <li><a href="../store/index.html">Store</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Products</li>
+                        <li><a href="../cameras/pierce-lens/index.html">Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens/index.html">The Pierce Lens</a></li>
+                        <li><a href="../cameras/the-pierce-lens-pro/index.html">The Pierce Lens Pro</a></li>
+                        <li><a href="../cameras/the-pierce-lens-lite/index.html">Pierce Lens Lite</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Support</li>
+                        <li><a href="../support/index.html">Support</a></li>
+                        <li><a href="../press/index.html">Press</a></li>
+                    </ul>
+                    <ul>
+                        <li class="footer-heading">Legal</li>
+                        <li><a href="../privacy/index.html">Privacy Policy</a></li>
+                        <li><a href="../policy/index.html">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/cart-management.js"></script>
+    <script src="../js/shopping-cart.js"></script>
+
+</body>
+</html>

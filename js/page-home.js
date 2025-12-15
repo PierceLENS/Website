@@ -3,19 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Festive snow animation
-    var snowContainer = document.querySelector('.festive-banner .snow');
-    if (snowContainer) {
-        for (var i = 0; i < 24; i++) {
-            var snowflake = document.createElement('span');
-            snowflake.className = 'snowflake';
-            snowflake.textContent = '❄';
-            snowflake.style.left = (Math.random() * 100) + '%';
-            snowflake.style.fontSize = (0.8 + Math.random() * 1.2) + 'em';
-            snowflake.style.animationDelay = (Math.random() * 6) + 's';
-            snowContainer.appendChild(snowflake);
-        }
-    }
+    
 
     // Cart trigger with ShoppingCart
     var cartTrigger = document.getElementById('cart-trigger');
@@ -36,3 +24,5 @@ document.addEventListener('DOMContentLoaded', function() {
         setupDropdownAccessibility();
     }
 });
+
+

@@ -334,3 +334,5 @@ async function handlePaypalConfirm() {
         alert('Order data missing. Please try again.');
     }
 }
+
+
