@@ -571,7 +571,7 @@ const VEMarketplace = {
                 <h2 style="color: white; margin: 20px 0;">Order Placed Successfully!</h2>
                 <p style="color: #aaa; margin: 15px 0;">Transaction ID: ${result.transaction_id}</p>
                 <p style="color: #aaa; margin: 15px 0;">A confirmation email has been sent to your address.</p>
-                <button onclick="window.location.href='../index.html'" 
+                <button onclick="ShoppingCart.clearCart(); window.location.href='../index.html'" 
                         style="margin-top: 30px; padding: 15px 40px; background: #00BFFF; 
                                color: black; border: none; border-radius: 8px; font-weight: 700; 
                                cursor: pointer;">Return to Home</button>

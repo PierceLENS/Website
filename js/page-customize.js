@@ -7,7 +7,7 @@
 // Camera configuration data
 const CAMERA_CONFIGS = {
     'pl': {
-        name: 'The Pierce Lens',
+        name: 'PierceLENS',
         basePrice: 999,
         specs: {
             sensor: '48MP',
@@ -41,7 +41,7 @@ const CAMERA_CONFIGS = {
         ]
     },
     'pl-pro': {
-        name: 'The Pierce Lens Pro',
+        name: 'PierceLENS Pro',
         basePrice: 1199,
         specs: {
             sensor: '61MP',

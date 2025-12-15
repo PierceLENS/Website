@@ -166,6 +166,19 @@ function updateItemQuantity(itemId, newQuantity) {
     }
 }
 
+function clearCart() {
+    cart = [];
+    saveCart();
+    updateCartCount();
+    
+    // Render appropriate view
+    if (cartPageContainer) {
+        loadCartPage();
+    } else if (cartItemsContainer) {
+        renderCartDropdown();
+    }
+}
+
 // ============================================= */
 /* CART WIDGET / DROPDOWN RENDERING */
 /* ============================================= */
